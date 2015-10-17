@@ -8,23 +8,26 @@ import java.util.Random;
 import javase02.t02.lib.core.Employee;
 import javase02.t02.lib.core.EmployeesManager;
 import javase02.t02.lib.core.Item;
+import javase02.t02.lib.core.Paper;
+import javase02.t02.lib.core.Pen;
+import javase02.t02.lib.core.Penñil;
+import javase02.t02.lib.core.Ruler;
 
 public class ConsoleClient {
 
-	public static List<Employee> generateData(int employeesCount, int maxItemsCount, int maxItemsPrice) {
+	public static List<Employee> generateData(int employeesCount, int maxItemsPrice) {
 		List<Employee> employees = new ArrayList<>();
 		List<Item> items;
 		Random rand = new Random();
-		int itemsCount;
 		int itemsWeight = 15;
 
 		for (int i = 0; i < employeesCount; i++) {
-			itemsCount = rand.nextInt(maxItemsCount);
-			items = new ArrayList<>();
+			items = new ArrayList<Item>();
 
-			for (int j = 0; j < itemsCount; j++) {
-				items.add(new Item("Item" + j, "Producer" + j, rand.nextInt(maxItemsPrice), itemsWeight));
-			}
+			items.add(new Paper("Paper", "Belarus paper", rand.nextInt(maxItemsPrice), itemsWeight, 1000, 0.5));
+			items.add(new Pen("Pen", "Parker", rand.nextInt(maxItemsPrice), itemsWeight, "Green", "Metal"));
+			items.add(new Penñil("Pencil", "Pencils corp", rand.nextInt(maxItemsPrice), itemsWeight, "Gray", "Hard"));
+			items.add(new Ruler("Ruler", "Ruler corp", rand.nextInt(maxItemsPrice), itemsWeight, 30, "Wood"));
 
 			employees.add(new Employee("Employee" + i, "Ivanov", items));
 		}
@@ -34,10 +37,9 @@ public class ConsoleClient {
 
 	public static void main(String[] args) throws IOException {
 		int employeesCount = 5;
-		int maxItemsCount = 20;
 		int maxItemsPrice = 600;
 
-		List<Employee> employees = generateData(employeesCount, maxItemsCount, maxItemsPrice);
+		List<Employee> employees = generateData(employeesCount, maxItemsPrice);
 		String dbPath = "employees.json";
 		EmployeesManager manager = new EmployeesManager();
 

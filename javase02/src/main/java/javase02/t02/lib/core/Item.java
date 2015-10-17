@@ -1,6 +1,6 @@
 package javase02.t02.lib.core;
 
-public class Item implements Comparable<Item> {
+public abstract class Item implements Comparable<Item> {
 	private String productName;
 	private String producerName;
 	private int price;
