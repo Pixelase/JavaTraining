@@ -65,6 +65,7 @@ public class Pen extends Item {
 
 	@Override
 	public String toString() {
-		return "Pen [color=" + color + ", materials=" + materials + "]";
+		return "Pen [producName=" + productName + ", color=" + color + ", materials=" + materials + ", price=" + price
+				+ "]";
 	}
 }

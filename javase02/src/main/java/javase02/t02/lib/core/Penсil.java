@@ -65,6 +65,7 @@ public class Penñil extends Item {
 
 	@Override
 	public String toString() {
-		return "Penñil [color=" + color + ", hardness=" + hardness + "]";
+		return "Penñil [producName=" + productName + ", color=" + color + ", hardness=" + hardness + ", price=" + price
+				+ "]";
 	}
 }

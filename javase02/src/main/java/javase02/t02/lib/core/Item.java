@@ -1,10 +1,10 @@
 package javase02.t02.lib.core;
 
 public abstract class Item implements Comparable<Item> {
-	private String productName;
-	private String producerName;
-	private int price;
-	private int weight;
+	protected String productName;
+	protected String producerName;
+	protected int price;
+	protected int weight;
 
 	public Item() {
 		super();

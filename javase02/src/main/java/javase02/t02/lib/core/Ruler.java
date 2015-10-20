@@ -62,6 +62,7 @@ public class Ruler extends Item {
 
 	@Override
 	public String toString() {
-		return "Ruler [length=" + length + ", material=" + material + "]";
+		return "Ruler [producName=" + productName + ", length=" + length + ", material=" + material + ", price=" + price
+				+ "]";
 	}
 }

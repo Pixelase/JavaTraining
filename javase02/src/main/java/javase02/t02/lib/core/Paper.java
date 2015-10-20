@@ -61,6 +61,6 @@ public class Paper extends Item {
 
 	@Override
 	public String toString() {
-		return "Paper [numberOfPages=" + numberOfPages + ", thickness=" + thickness + "]";
+		return "Paper [producName=" + productName + ", numberOfPages=" + numberOfPages + ", thickness=" + thickness + ", price=" + price + "]";
 	}
 }
