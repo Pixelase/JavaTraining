@@ -52,26 +52,6 @@ public class Employee implements Comparable<Employee> {
 		this.items = items;
 	}
 
-	public boolean addItem(Item item) {
-		return items.add(item);
-	}
-
-	public boolean removeItem(Item item) {
-		return items.remove(item);
-	}
-
-	public Item removeItem(int index) {
-		return items.remove(index);
-	}
-
-	public Item setItem(int index, Item item) {
-		return items.set(index, item);
-	}
-
-	public Item getItem(int index) {
-		return items.get(index);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

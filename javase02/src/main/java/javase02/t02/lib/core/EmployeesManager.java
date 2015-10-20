@@ -60,25 +60,4 @@ public class EmployeesManager {
 	public void setDbPath(String dbPath) {
 		this.dbPath = dbPath;
 	}
-
-	public boolean addEmployee(Employee employee) {
-		return employees.add(employee);
-	}
-
-	public boolean removeEmployee(Employee employee) {
-		return employees.remove(employee);
-	}
-
-	public Employee removeEmployee(int index) {
-		return employees.remove(index);
-	}
-
-	public Employee setEmployee(int index, Employee employee) {
-		return employees.set(index, employee);
-	}
-
-	public Employee getEmployee(int index) {
-		return employees.get(index);
-	}
-
 }
