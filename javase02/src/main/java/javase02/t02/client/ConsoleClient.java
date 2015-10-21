@@ -10,7 +10,7 @@ import javase02.t02.lib.core.EmployeesManager;
 import javase02.t02.lib.core.Item;
 import javase02.t02.lib.core.Paper;
 import javase02.t02.lib.core.Pen;
-import javase02.t02.lib.core.Penñil;
+import javase02.t02.lib.core.Pencil;
 import javase02.t02.lib.core.Ruler;
 
 public class ConsoleClient {
@@ -26,7 +26,7 @@ public class ConsoleClient {
 
 			items.add(new Paper("Paper", "Belarus paper", rand.nextInt(maxItemsPrice), itemsWeight, 1000, 0.5));
 			items.add(new Pen("Pen", "Parker", rand.nextInt(maxItemsPrice), itemsWeight, "Green", "Metal"));
-			items.add(new Penñil("Pencil", "Pencils corp", rand.nextInt(maxItemsPrice), itemsWeight, "Gray", "Hard"));
+			items.add(new Pencil("Pencil", "Pencils corp", rand.nextInt(maxItemsPrice), itemsWeight, "Gray", "Hard"));
 			items.add(new Ruler("Ruler", "Ruler corp", rand.nextInt(maxItemsPrice), itemsWeight, 30, "Wood"));
 
 			employees.add(new Employee("Employee" + i, "Ivanov", items));

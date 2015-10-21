@@ -10,7 +10,7 @@ import java.util.Random;
 import javase02.t02.lib.core.Item;
 import javase02.t02.lib.core.Paper;
 import javase02.t02.lib.core.Pen;
-import javase02.t02.lib.core.Penñil;
+import javase02.t02.lib.core.Pencil;
 import javase02.t02.lib.core.Ruler;
 
 public class Main {
@@ -31,8 +31,8 @@ public class Main {
 
 		items.add(new Paper("Paper", "Belarus paper", rand.nextInt(maxItemsPrice), itemsWeight, 1000, 0.5));
 		items.add(new Pen("BluePen", "Parker", 16, itemsWeight, "Blue", "Metal"));
-		items.add(new Penñil("BPencil", "Pencils corp", 6, itemsWeight, "Gray", "Hard"));
-		items.add(new Penñil("APencil", "Pencils corp", 6, itemsWeight, "Gray", "Light"));
+		items.add(new Pencil("BPencil", "Pencils corp", 6, itemsWeight, "Gray", "Hard"));
+		items.add(new Pencil("APencil", "Pencils corp", 6, itemsWeight, "Gray", "Light"));
 		items.add(new Ruler("Ruler", "Ruler corp", rand.nextInt(maxItemsPrice), itemsWeight, 30, "Wood"));
 		items.add(new Pen("RedPen", "Parker", 16, itemsWeight, "Red", "Metal"));
 		items.add(new Paper("Paper", "Belarus paper", 6, itemsWeight, 1000, 0.5));

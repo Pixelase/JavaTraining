@@ -1,16 +1,16 @@
 package javase02.t02.lib.core;
 
-public class PenÒil extends Item {
+public class Pencil extends Item {
 	private String color;
 	private String hardness;
 
-	public PenÒil() {
+	public Pencil() {
 		super();
 		color = "Color";
 		hardness = "Hardness";
 	}
 
-	public PenÒil(String productName, String producerName, int price, int weight, String color, String hardness) {
+	public Pencil(String productName, String producerName, int price, int weight, String color, String hardness) {
 		super(productName, producerName, price, weight);
 		this.color = color;
 		this.hardness = hardness;
@@ -49,7 +49,7 @@ public class PenÒil extends Item {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PenÒil other = (PenÒil) obj;
+		Pencil other = (Pencil) obj;
 		if (color == null) {
 			if (other.color != null)
 				return false;
@@ -65,7 +65,7 @@ public class PenÒil extends Item {
 
 	@Override
 	public String toString() {
-		return "PenÒil [producName=" + productName + ", color=" + color + ", hardness=" + hardness + ", price=" + price
+		return "Pen—Åil [producName=" + productName + ", color=" + color + ", hardness=" + hardness + ", price=" + price
 				+ "]";
 	}
 }
