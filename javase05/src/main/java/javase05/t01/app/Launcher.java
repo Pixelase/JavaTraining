@@ -10,7 +10,7 @@ import javase05.t01.commands.utils.input.CommandParseResult;
 public class Launcher {
 	public static void main(String[] args) {
 		try {
-			FileManager fileManager = new FileManager();
+			final FileManager fileManager = new FileManager();
 
 			while (true) {
 				System.out.print(fileManager.getCurrentPath() + ">");
@@ -18,7 +18,7 @@ public class Launcher {
 				try {
 					CommandParseResult parseResult = CommandInputParser.parse(CommandInputReader.readLine(System.in));
 
-					if (!fileManager.tryPerform(parseResult)) {
+					if (!fileManager.tryPerform(parseResult.getCommandName(), parseResult.getArgs())) {
 						System.out.println("Команда не найдена.");
 					}
 				} catch (FileNotFoundException e) {

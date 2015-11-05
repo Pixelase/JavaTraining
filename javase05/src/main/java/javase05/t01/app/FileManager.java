@@ -13,9 +13,9 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 import javase05.t01.commands.core.Command;
-import javase05.t01.commands.core.CommandsPerformer;
+import javase05.t01.commands.core.CommandsManager;
 
-public class FileManager extends CommandsPerformer {
+public class FileManager extends CommandsManager {
 	private String currentPath;
 
 	public FileManager() {
@@ -33,9 +33,8 @@ public class FileManager extends CommandsPerformer {
 			@Override
 			public void execute() {
 
-				if (!isArgsEmpty() && new File(args.get(0)).exists()) {
-					String path = (Paths.get(args.get(0)).isAbsolute()) ? args.get(0)
-							: getCurrentPath() + "\\" + args.get(0);
+				if (!isArgsEmpty() && new File(args[0]).exists()) {
+					String path = (Paths.get(args[0]).isAbsolute()) ? args[0] : getCurrentPath() + "\\" + args[0];
 
 					setCurrentPath(path);
 				}
@@ -106,8 +105,8 @@ public class FileManager extends CommandsPerformer {
 			public void execute() {
 				if (!isArgsEmpty()) {
 					try {
-						File file = (Paths.get(args.get(0)).isAbsolute()) ? new File(args.get(0))
-								: new File(getCurrentPath() + "\\" + args.get(0));
+						File file = (Paths.get(args[0]).isAbsolute()) ? new File(args[0])
+								: new File(getCurrentPath() + "\\" + args[0]);
 
 						FileUtils.forceMkdir(file);
 					} catch (IOException e) {
@@ -125,8 +124,8 @@ public class FileManager extends CommandsPerformer {
 			public void execute() {
 				if (!isArgsEmpty()) {
 					try {
-						File file = (Paths.get(args.get(0)).isAbsolute()) ? new File(args.get(0))
-								: new File(getCurrentPath() + "\\" + args.get(0));
+						File file = (Paths.get(args[0]).isAbsolute()) ? new File(args[0])
+								: new File(getCurrentPath() + "\\" + args[0]);
 
 						if (file.exists()) {
 							FileUtils.forceDelete(file);
@@ -150,8 +149,8 @@ public class FileManager extends CommandsPerformer {
 			public void execute() {
 				if (!isArgsEmpty()) {
 					try {
-						File file = (Paths.get(args.get(0)).isAbsolute()) ? new File(args.get(0))
-								: new File(getCurrentPath() + "\\" + args.get(0));
+						File file = (Paths.get(args[0]).isAbsolute()) ? new File(args[0])
+								: new File(getCurrentPath() + "\\" + args[0]);
 
 						if (file.createNewFile()) {
 							System.out.println("Файл " + file.getName() + " успешно создан.");
@@ -171,13 +170,12 @@ public class FileManager extends CommandsPerformer {
 		commands.add(new Command("append", "Записывает информацию в текстовый файл.") {
 			@Override
 			public void execute() {
-				if (args.size() == 2) {
+				if (args.length == 2) {
 					try {
-						String path = (Paths.get(args.get(0)).isAbsolute()) ? args.get(0)
-								: getCurrentPath() + "\\" + args.get(0);
+						String path = (Paths.get(args[0]).isAbsolute()) ? args[0] : getCurrentPath() + "\\" + args[0];
 
 						BufferedWriter bw = Files.newBufferedWriter(Paths.get(path), StandardOpenOption.APPEND);
-						bw.write(args.get(1));
+						bw.write(args[1]);
 						bw.close();
 
 						System.out.println("Операция записи успешно завершена.");
