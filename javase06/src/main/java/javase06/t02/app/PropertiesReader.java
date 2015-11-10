@@ -1,4 +1,4 @@
-package javase06.t01.app;
+package javase06.t02.app;
 
 import java.io.BufferedInputStream;
 import java.io.File;
