@@ -1,33 +1,24 @@
 package com.github.pixelase.dataaccess.model;
 
 public class Address extends DbObject{
-	private String streetName;
-	private String houseNumber;
-	private String building;
+	private String street;
+	private String house;
 	private String apartment;
 
-	public String getStreetName() {
-		return streetName;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public String getHouseNumber() {
-		return houseNumber;
+	public String getHouse() {
+		return house;
 	}
 
-	public void setHouseNumber(String houseNumber) {
-		this.houseNumber = houseNumber;
-	}
-
-	public String getBuilding() {
-		return building;
-	}
-
-	public void setBuilding(String building) {
-		this.building = building;
+	public void setHouse(String house) {
+		this.house = house;
 	}
 
 	public String getApartment() {
