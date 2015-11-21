@@ -19,4 +19,9 @@ public class WorkScope extends DbObject {
 	public void setEmployeesCount(Integer employeesCount) {
 		this.employeesCount = employeesCount;
 	}
+
+	@Override
+	public String toString() {
+		return "WorkScope [id=" + id + ", name=" + name + ", employeesCount=" + employeesCount + "]";
+	}
 }

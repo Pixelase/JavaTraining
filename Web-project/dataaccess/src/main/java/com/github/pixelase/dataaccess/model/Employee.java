@@ -19,4 +19,10 @@ public class Employee extends Person {
 	public void setSalary(Long salary) {
 		this.salary = salary;
 	}
+
+	@Override
+	public String toString() {
+		return "Tenant [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", workType=" + workType
+				+ " salary=" + salary + "]";
+	}
 }

@@ -1,6 +1,6 @@
 package com.github.pixelase.dataaccess.model;
 
-public class Address extends DbObject{
+public class Address extends DbObject {
 	private String street;
 	private String house;
 	private String apartment;
@@ -28,4 +28,10 @@ public class Address extends DbObject{
 	public void setApartment(String apartment) {
 		this.apartment = apartment;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", house=" + house + ", apartment=" + apartment + "]";
+	}
+
 }

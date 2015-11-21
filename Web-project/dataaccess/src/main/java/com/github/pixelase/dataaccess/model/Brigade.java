@@ -49,4 +49,10 @@ public class Brigade extends DbObject {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+
+	@Override
+	public String toString() {
+		return "Brigade [id=" + id + ", workType=" + workType + ", workScope=" + workScope + ", realDate=" + realDate
+				+ ", client=" + client + ", employees=" + employees + "]";
+	}
 }
