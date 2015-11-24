@@ -1,7 +1,5 @@
 package com.github.pixelase.services.impl;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,33 +11,51 @@ import com.github.pixelase.services.TenantService;
 public class TenantServiceImpl implements TenantService {
 
 	@Autowired
-	private TenantDao tenantDao;
+	private TenantDao dao;
 
-	@PostConstruct
-	private void init() {
 
+	@Override
+	public Tenant save(Tenant tenant) {
+		return dao.save(tenant);
 	}
 
 	@Override
-	public void insertOrUpdate(Tenant tenant) {
-		if (tenant.getId() == null) {
-			tenantDao.insert(tenant);
-		} else {
-			tenantDao.update(tenant);
-		}
+	public Tenant findOne(Integer id) {
+		return dao.findOne(id);
 	}
 
 	@Override
-	public void registerTenant(String firstName, String lastName) {
-		Tenant tenant = new Tenant();
-		tenant.setFirstName(firstName);
-		tenant.setLastName(lastName);
-		tenantDao.insert(tenant);
+	public boolean exists(Integer id) {
+		return dao.exists(id);
 	}
 
 	@Override
-	public Tenant getById(Long id) {
-		return tenantDao.getById(id);
+	public Iterable<Tenant> findAll() {
+		return dao.findAll();
 	}
 
+	@Override
+	public long count() {
+		return dao.count();
+	}
+
+	@Override
+	public void delete(Integer id) {
+		dao.delete(id);
+	}
+
+	@Override
+	public void delete(Tenant tenant) {
+		dao.delete(tenant);
+	}
+
+	@Override
+	public void delete(Iterable<Tenant> tenants) {
+		dao.delete(tenants);
+	}
+
+	@Override
+	public void deleteAll() {
+		dao.deleteAll();
+	}
 }

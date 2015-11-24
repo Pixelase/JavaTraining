@@ -3,25 +3,43 @@ package com.github.pixelase.dataaccess.model;
 import java.util.Date;
 
 public class WorkRequest extends DbObject {
-	private WorkType workType;
-	private WorkScope workScope;
+	private static final long serialVersionUID = 1L;
+	private Integer workTypeId;
+	private Integer workScopeId;
 	private Date desiredDate;
-	private Tenant tenant;
+	private Integer tenantId;
 
-	public WorkType getWorkType() {
-		return workType;
+	public WorkRequest() {
+		super();
 	}
 
-	public void setWorkType(WorkType workType) {
-		this.workType = workType;
+	public WorkRequest(Integer workTypeId, Integer workScopeId, Date desiredDate, Integer tenantId) {
+		super();
+		this.workTypeId = workTypeId;
+		this.workScopeId = workScopeId;
+		this.desiredDate = desiredDate;
+		this.tenantId = tenantId;
 	}
 
-	public WorkScope getWorkScope() {
-		return workScope;
+	public WorkRequest(Integer id, Integer workTypeId, Integer workScopeId, Date desiredDate, Integer tenantId) {
+		this(workTypeId, workScopeId, desiredDate, tenantId);
+		this.id = id;
 	}
 
-	public void setWorkScope(WorkScope workScope) {
-		this.workScope = workScope;
+	public Integer getWorkTypeId() {
+		return workTypeId;
+	}
+
+	public void setWorkTypeId(Integer workTypeId) {
+		this.workTypeId = workTypeId;
+	}
+
+	public Integer getWorkScopeId() {
+		return workScopeId;
+	}
+
+	public void setWorkScopeId(Integer workScopeId) {
+		this.workScopeId = workScopeId;
 	}
 
 	public Date getDesiredDate() {
@@ -32,17 +50,64 @@ public class WorkRequest extends DbObject {
 		this.desiredDate = desiredDate;
 	}
 
-	public Tenant getTenant() {
-		return tenant;
+	public Integer getTenantId() {
+		return tenantId;
 	}
 
-	public void setTenant(Tenant tenant) {
-		this.tenant = tenant;
+	public void setTenantId(Integer tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((desiredDate == null) ? 0 : desiredDate.hashCode());
+		result = prime * result + ((tenantId == null) ? 0 : tenantId.hashCode());
+		result = prime * result + ((workScopeId == null) ? 0 : workScopeId.hashCode());
+		result = prime * result + ((workTypeId == null) ? 0 : workTypeId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WorkRequest other = (WorkRequest) obj;
+		if (desiredDate == null) {
+			if (other.desiredDate != null)
+				return false;
+		} else if (!desiredDate.equals(other.desiredDate))
+			return false;
+		if (tenantId == null) {
+			if (other.tenantId != null)
+				return false;
+		} else if (!tenantId.equals(other.tenantId))
+			return false;
+		if (workScopeId == null) {
+			if (other.workScopeId != null)
+				return false;
+		} else if (!workScopeId.equals(other.workScopeId))
+			return false;
+		if (workTypeId == null) {
+			if (other.workTypeId != null)
+				return false;
+		} else if (!workTypeId.equals(other.workTypeId))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "WorkRequest [id=" + id + ", workType=" + workType + ", workScope=" + workScope + ", desiredDate="
-				+ desiredDate + ", tenant=" + tenant + "]";
+		return "WorkRequest [id=" + id + ", workTypeId=" + workTypeId + ", workScopeId=" + workScopeId
+				+ ", desiredDate=" + desiredDate + ", tenantId=" + tenantId + "]";
 	}
 }

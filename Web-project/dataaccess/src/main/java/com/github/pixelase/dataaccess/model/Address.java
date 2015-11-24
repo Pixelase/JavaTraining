@@ -1,9 +1,26 @@
 package com.github.pixelase.dataaccess.model;
 
 public class Address extends DbObject {
+	private static final long serialVersionUID = 1L;
 	private String street;
 	private String house;
 	private String apartment;
+
+	public Address() {
+		super();
+	}
+
+	public Address(String street, String house, String apartment) {
+		super();
+		this.street = street;
+		this.house = house;
+		this.apartment = apartment;
+	}
+
+	public Address(Integer id, String street, String house, String apartment) {
+		this(street, house, apartment);
+		this.id = id;
+	}
 
 	public String getStreet() {
 		return street;
