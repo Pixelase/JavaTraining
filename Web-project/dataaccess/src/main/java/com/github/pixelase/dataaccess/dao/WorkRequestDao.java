@@ -4,6 +4,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.github.pixelase.dataaccess.model.WorkRequest;
 
-public interface WorkRequestDao extends PagingAndSortingRepository<WorkRequest, Long> {
+public interface WorkRequestDao extends PagingAndSortingRepository<WorkRequest, Integer> {
 
 }

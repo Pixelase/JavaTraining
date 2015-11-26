@@ -40,7 +40,7 @@ public class Tenant extends Person {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Tenant))
 			return false;
 		Tenant other = (Tenant) obj;
 		if (addressId == null) {

@@ -55,7 +55,7 @@ public class WorkScope extends DbObject {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof WorkScope))
 			return false;
 		WorkScope other = (WorkScope) obj;
 		if (employeesCount == null) {

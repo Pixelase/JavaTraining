@@ -16,14 +16,10 @@ import com.nurkiewicz.jdbcrepository.TableDescription;
 
 @Repository
 public class BrigadeMemberDaoImpl extends JdbcRepository<BrigadeMember, Object[]> implements BrigadeMemberDao {
-	private final static String tableName = "brigade_member";
+	private static final String tableName = "brigade_member";
 
 	public BrigadeMemberDaoImpl() {
-		this(tableName);
-	}
-
-	public BrigadeMemberDaoImpl(String pTableName) {
-		super(rowMapper, rowUnmapper, new TableDescription(pTableName, null, "flight_no", "seq_no"));
+		super(rowMapper, rowUnmapper, new TableDescription(tableName, null, "flight_no", "seq_no"));
 	}
 
 	public static final RowMapper<BrigadeMember> rowMapper = new RowMapper<BrigadeMember>() {

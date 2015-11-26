@@ -49,7 +49,7 @@ public class BrigadeMember implements Persistable<Object[]> {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof BrigadeMember))
 			return false;
 		BrigadeMember other = (BrigadeMember) obj;
 		if (brigadeId == null) {

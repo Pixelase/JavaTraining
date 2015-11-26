@@ -15,11 +15,12 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
 public class TenantDaoImpl extends JdbcRepository<Tenant, Integer> implements TenantDao {
+	private static final String tableName = "tenant";
 
 	public TenantDaoImpl() {
-		super(rowMapper, rowUnmapper, "tenant");
+		super(rowMapper, rowUnmapper, tableName);
 	}
-	
+
 	public static final RowMapper<Tenant> rowMapper = new RowMapper<Tenant>() {
 		@Override
 		public Tenant mapRow(ResultSet rs, int rowNum) throws SQLException {

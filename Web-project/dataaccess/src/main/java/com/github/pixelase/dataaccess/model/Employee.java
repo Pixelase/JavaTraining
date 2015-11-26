@@ -56,7 +56,7 @@ public class Employee extends Person {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Employee))
 			return false;
 		Employee other = (Employee) obj;
 		if (salary == null) {

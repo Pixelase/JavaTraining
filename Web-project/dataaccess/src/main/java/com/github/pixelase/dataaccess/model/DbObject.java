@@ -43,7 +43,7 @@ public abstract class DbObject implements Persistable<Integer> {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof DbObject))
 			return false;
 		DbObject other = (DbObject) obj;
 		if (id == null) {
@@ -53,4 +53,5 @@ public abstract class DbObject implements Persistable<Integer> {
 			return false;
 		return true;
 	}
+
 }

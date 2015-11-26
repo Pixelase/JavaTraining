@@ -15,9 +15,10 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
 public class AddressDaoImpl extends JdbcRepository<Address, Integer> implements AddressDao {
+	private static final String tableName = "address";
 
 	public AddressDaoImpl() {
-		super(rowMapper, rowUnmapper, "address");
+		super(rowMapper, rowUnmapper, tableName);
 	}
 
 	public static final RowMapper<Address> rowMapper = new RowMapper<Address>() {
@@ -40,4 +41,9 @@ public class AddressDaoImpl extends JdbcRepository<Address, Integer> implements 
 		}
 	};
 
+	@Override
+	protected <S extends Address> S postCreate(S entity, Number generatedId) {
+		entity.setId(generatedId.intValue());
+		return entity;
+	}
 }

@@ -47,6 +47,43 @@ public class Address extends DbObject {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((apartment == null) ? 0 : apartment.hashCode());
+		result = prime * result + ((house == null) ? 0 : house.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Address))
+			return false;
+		Address other = (Address) obj;
+		if (apartment == null) {
+			if (other.apartment != null)
+				return false;
+		} else if (!apartment.equals(other.apartment))
+			return false;
+		if (house == null) {
+			if (other.house != null)
+				return false;
+		} else if (!house.equals(other.house))
+			return false;
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "Address [id=" + id + ", street=" + street + ", house=" + house + ", apartment=" + apartment + "]";
 	}

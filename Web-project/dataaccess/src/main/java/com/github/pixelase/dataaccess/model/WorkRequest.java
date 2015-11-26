@@ -79,7 +79,7 @@ public class WorkRequest extends DbObject {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof WorkRequest))
 			return false;
 		WorkRequest other = (WorkRequest) obj;
 		if (desiredDate == null) {

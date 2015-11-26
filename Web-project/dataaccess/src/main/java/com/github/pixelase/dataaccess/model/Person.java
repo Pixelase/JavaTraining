@@ -55,7 +55,7 @@ public abstract class Person extends DbObject {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Person))
 			return false;
 		Person other = (Person) obj;
 		if (firstName == null) {
