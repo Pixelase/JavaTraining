@@ -1,10 +1,9 @@
 package com.github.pixelase.dataaccess.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,13 +20,7 @@ public class TenantDaoImpl extends JdbcRepository<Tenant, Integer> implements Te
 		super(rowMapper, rowUnmapper, tableName);
 	}
 
-	public static final RowMapper<Tenant> rowMapper = new RowMapper<Tenant>() {
-		@Override
-		public Tenant mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new Tenant(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"),
-					rs.getInt("address_id"));
-		}
-	};
+	private static final RowMapper<Tenant> rowMapper = new BeanPropertyRowMapper<Tenant>(Tenant.class);
 
 	private static final RowUnmapper<Tenant> rowUnmapper = new RowUnmapper<Tenant>() {
 		@Override

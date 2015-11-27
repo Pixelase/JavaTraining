@@ -1,10 +1,9 @@
 package com.github.pixelase.dataaccess.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,12 +20,7 @@ public class WorkScopeDaoImpl extends JdbcRepository<WorkScope, Integer> impleme
 		super(rowMapper, rowUnmapper, tableName);
 	}
 
-	public static final RowMapper<WorkScope> rowMapper = new RowMapper<WorkScope>() {
-		@Override
-		public WorkScope mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new WorkScope(rs.getInt("id"), rs.getString("name"), rs.getInt("employees_count"));
-		}
-	};
+	private static final RowMapper<WorkScope> rowMapper = new BeanPropertyRowMapper<WorkScope>(WorkScope.class);
 
 	private static final RowUnmapper<WorkScope> rowUnmapper = new RowUnmapper<WorkScope>() {
 		@Override

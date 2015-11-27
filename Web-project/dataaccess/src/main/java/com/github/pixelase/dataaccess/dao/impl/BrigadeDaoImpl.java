@@ -1,10 +1,9 @@
 package com.github.pixelase.dataaccess.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,13 +20,7 @@ public class BrigadeDaoImpl extends JdbcRepository<Brigade, Integer> implements 
 		super(rowMapper, rowUnmapper, tableName);
 	}
 
-	public static final RowMapper<Brigade> rowMapper = new RowMapper<Brigade>() {
-		@Override
-		public Brigade mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new Brigade(rs.getInt("id"), rs.getInt("work_type_id"), rs.getInt("work_scope_id"),
-					rs.getDate("real_date"), rs.getInt("tenant_id"));
-		}
-	};
+	private static final RowMapper<Brigade> rowMapper = new BeanPropertyRowMapper<Brigade>(Brigade.class);
 
 	private static final RowUnmapper<Brigade> rowUnmapper = new RowUnmapper<Brigade>() {
 		@Override
