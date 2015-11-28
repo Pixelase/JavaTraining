@@ -6,12 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface GenericService<T extends Persistable<ID>, ID extends Serializable, DAO extends PagingAndSortingRepository<T, ID>> {
-	T save(T entity);
+public interface GenericService<T extends Persistable<ID>, ID extends Serializable> {
+	<S extends T> S save(S entity);
 
-	Iterable<T> save(Iterable<? extends T> entities);
+	<S extends T> Iterable<S> save(Iterable<S> entities);
 
 	T findOne(ID id);
 

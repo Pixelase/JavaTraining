@@ -1,28 +1,19 @@
 package com.github.pixelase.services.impl;
 
-import static com.nurkiewicz.jdbcrepository.JdbcRepository.pk;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.dataaccess.dao.BrigadeMemberDao;
 import com.github.pixelase.dataaccess.model.BrigadeMember;
 import com.github.pixelase.services.BrigadeMemberService;
+import com.github.pixelase.services.common.AbstractGenericService;
 
 @Service
-public class BrigadeMemberServiceImpl implements BrigadeMemberService {
+@Transactional
+public class BrigadeMemberServiceImpl extends AbstractGenericService<BrigadeMember, Object[], BrigadeMemberDao> implements BrigadeMemberService {
 
-	@Autowired
-	private BrigadeMemberDao dao;
-
-	@Override
-	public BrigadeMember save(BrigadeMember brigadeMember) {
-		return dao.save(brigadeMember);
-	}
-
-	@Override
-	public BrigadeMember findOne(String brigadeId, String employeeId) {
-		return dao.findOne(pk(brigadeId, employeeId));
-	}
+	private static final Logger LOGGER = LoggerFactory.getLogger(BrigadeMemberServiceImpl.class);
 
 }

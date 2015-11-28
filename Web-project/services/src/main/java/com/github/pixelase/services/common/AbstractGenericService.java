@@ -18,7 +18,7 @@ import com.github.pixelase.dataaccess.dao.common.GenericDao;
 @Service
 @Transactional
 public abstract class AbstractGenericService<T extends Persistable<ID>, ID extends Serializable, DAO extends GenericDao<T, ID>>
-		implements GenericService<T, ID, DAO> {
+		implements GenericService<T, ID> {
 
 	@Autowired
 	protected DAO dao;
@@ -26,18 +26,18 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractGenericService.class);
 
 	@Override
-	public T save(T entity) {
-		T save = dao.save(entity);
+	public <S extends T> S save(S entity) {
+		S save = dao.save(entity);
 		LOGGER.debug("{} successfully saved", entity);
 		return save;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<T> save(Iterable<? extends T> entities) {
-		Iterable<T> save = (Iterable<T>) dao.save(entities);
+	public <S extends T> Iterable<S> save(Iterable<S> entities) {
+		Iterable<S> save = (Iterable<S>) dao.save(entities);
 		LOGGER.debug("{} sequence successfully saved",
-				((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0])
+				((Class<S>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0])
 						.getSimpleName());
 		return save;
 	}

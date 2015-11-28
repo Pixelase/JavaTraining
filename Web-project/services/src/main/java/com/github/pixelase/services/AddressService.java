@@ -1,13 +1,7 @@
 package com.github.pixelase.services;
 
 import com.github.pixelase.dataaccess.model.Address;
+import com.github.pixelase.services.common.GenericService;
 
-public interface AddressService {
-	Address save(Address address);
-
-	Address findOne(Integer id);
-
-	boolean exists(Integer id);
-	
-	Iterable<Address> findAll();
+public interface AddressService extends GenericService<Address, Integer> {
 }

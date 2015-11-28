@@ -1,9 +1,7 @@
 package com.github.pixelase.services;
 
 import com.github.pixelase.dataaccess.model.BrigadeMember;
+import com.github.pixelase.services.common.GenericService;
 
-public interface BrigadeMemberService {
-	BrigadeMember save(BrigadeMember brigadeMember);
-
-	BrigadeMember findOne(String brigadeId, String employeeId);
+public interface BrigadeMemberService extends GenericService<BrigadeMember, Object[]>{
 }
