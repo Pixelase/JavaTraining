@@ -1,18 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.github.pixelase</groupId>
-    <artifactId>parent-project</artifactId>
-    <version>${projectVersion}</version>
-  </parent>
-  <artifactId>services</artifactId>
-  <name>services</name>
-  	<packaging>jar</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.pixelase</groupId>
+		<artifactId>parent-project</artifactId>
+		<version>${projectVersion}</version>
+	</parent>
+	<artifactId>services</artifactId>
+	<name>services</name>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.github.pixelase</groupId>
 			<artifactId>dataaccess</artifactId>
+		</dependency>
+
+		<!-- Testing -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
 </project>
