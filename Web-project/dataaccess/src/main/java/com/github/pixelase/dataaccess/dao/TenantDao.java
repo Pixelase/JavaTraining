@@ -1,9 +1,8 @@
 package com.github.pixelase.dataaccess.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-
+import com.github.pixelase.dataaccess.dao.common.GenericDao;
 import com.github.pixelase.dataaccess.model.Tenant;
 
-public interface TenantDao extends PagingAndSortingRepository<Tenant, Integer> {
+public interface TenantDao extends GenericDao<Tenant, Integer> {
 
 }

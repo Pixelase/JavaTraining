@@ -8,12 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.github.pixelase.dataaccess.dao.EmployeeDao;
+import com.github.pixelase.dataaccess.dao.common.AbstractGenericDao;
 import com.github.pixelase.dataaccess.model.Employee;
-import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
-public class EmployeeDaoImpl extends JdbcRepository<Employee, Integer> implements EmployeeDao {
+public class EmployeeDaoImpl extends AbstractGenericDao<Employee, Integer> implements EmployeeDao {
 	private static final String tableName = "employee";
 
 	public EmployeeDaoImpl() {

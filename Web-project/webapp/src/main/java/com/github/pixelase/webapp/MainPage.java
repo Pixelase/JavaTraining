@@ -23,8 +23,11 @@ public class MainPage {
 		addressService.save(address1);
 		addressService.save(address2);
 
-		Tenant save = tenantService.save(new Tenant("Vanko", "Bzevich", null));
-		System.out.println(save.getId());
+//		Tenant save = tenantService.save(new Tenant("23sdfs", "Bzevich", null));
+//		tenantService.registerTenant("Ivan", "Noviy", 123);
+//		System.out.println(save.getId());
+		tenantService.delete(new Tenant(33, "Vanko1", "Bzevich", null));
+		
 
 		System.out.println(tenantService.findAll());
 		System.out.println(addressService.findAll());

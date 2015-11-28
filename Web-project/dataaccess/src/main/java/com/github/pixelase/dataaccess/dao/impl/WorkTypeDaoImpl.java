@@ -8,12 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.github.pixelase.dataaccess.dao.WorkTypeDao;
+import com.github.pixelase.dataaccess.dao.common.AbstractGenericDao;
 import com.github.pixelase.dataaccess.model.WorkType;
-import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
-public class WorkTypeDaoImpl extends JdbcRepository<WorkType, Integer> implements WorkTypeDao {
+public class WorkTypeDaoImpl extends AbstractGenericDao<WorkType, Integer> implements WorkTypeDao {
 	private static final String tableName = "work_type";
 
 	public WorkTypeDaoImpl() {

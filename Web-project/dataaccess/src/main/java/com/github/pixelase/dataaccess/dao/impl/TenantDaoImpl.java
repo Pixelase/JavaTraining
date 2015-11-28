@@ -8,12 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.github.pixelase.dataaccess.dao.TenantDao;
+import com.github.pixelase.dataaccess.dao.common.AbstractGenericDao;
 import com.github.pixelase.dataaccess.model.Tenant;
-import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
-public class TenantDaoImpl extends JdbcRepository<Tenant, Integer> implements TenantDao {
+public class TenantDaoImpl extends AbstractGenericDao<Tenant, Integer> implements TenantDao {
 	private static final String tableName = "tenant";
 
 	public TenantDaoImpl() {

@@ -8,12 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.github.pixelase.dataaccess.dao.BrigadeDao;
+import com.github.pixelase.dataaccess.dao.common.AbstractGenericDao;
 import com.github.pixelase.dataaccess.model.Brigade;
-import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
-public class BrigadeDaoImpl extends JdbcRepository<Brigade, Integer> implements BrigadeDao {
+public class BrigadeDaoImpl extends AbstractGenericDao<Brigade, Integer> implements BrigadeDao {
 	private static final String tableName = "brigade";
 
 	public BrigadeDaoImpl() {

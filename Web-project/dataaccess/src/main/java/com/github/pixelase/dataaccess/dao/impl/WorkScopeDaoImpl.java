@@ -8,12 +8,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.github.pixelase.dataaccess.dao.WorkScopeDao;
+import com.github.pixelase.dataaccess.dao.common.AbstractGenericDao;
 import com.github.pixelase.dataaccess.model.WorkScope;
-import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
 @Repository
-public class WorkScopeDaoImpl extends JdbcRepository<WorkScope, Integer> implements WorkScopeDao {
+public class WorkScopeDaoImpl extends AbstractGenericDao<WorkScope, Integer> implements WorkScopeDao {
 	private static final String tableName = "work_scope";
 
 	public WorkScopeDaoImpl() {
