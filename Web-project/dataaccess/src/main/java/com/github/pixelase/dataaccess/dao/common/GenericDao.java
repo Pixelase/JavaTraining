@@ -6,5 +6,7 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface GenericDao<T extends Persistable<ID>, ID extends Serializable> extends PagingAndSortingRepository<T, ID>{
-
+	Iterable<T> findAll(Filter filter);
+	
+	Iterable<T> deleteAll(Filter filter);
 }

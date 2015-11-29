@@ -19,21 +19,28 @@ public abstract class AbstractGenericDao<T extends Persistable<ID>, ID extends S
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
+	protected static final ExtendedSqlGenerator extendedSqlGenerator = new ExtendedSqlGenerator();
+	private RowMapper<T> newRowMapper;
+
 	public AbstractGenericDao(RowMapper<T> rowMapper, RowUnmapper<T> rowUnmapper, SqlGenerator sqlGenerator,
 			TableDescription table) {
 		super(rowMapper, rowUnmapper, sqlGenerator, table);
+		setNewRowMapper(rowMapper);
 	}
 
 	public AbstractGenericDao(RowMapper<T> rowMapper, RowUnmapper<T> rowUnmapper, String tableName, String idColumn) {
 		super(rowMapper, rowUnmapper, tableName, idColumn);
+		setNewRowMapper(rowMapper);
 	}
 
 	public AbstractGenericDao(RowMapper<T> rowMapper, RowUnmapper<T> rowUnmapper, String tableName) {
 		super(rowMapper, rowUnmapper, tableName);
+		setNewRowMapper(rowMapper);
 	}
 
 	public AbstractGenericDao(RowMapper<T> rowMapper, RowUnmapper<T> rowUnmapper, TableDescription table) {
 		super(rowMapper, rowUnmapper, table);
+		setNewRowMapper(rowMapper);
 	}
 
 	public AbstractGenericDao(RowMapper<T> rowMapper, String tableName, String idColumn) {
@@ -42,10 +49,26 @@ public abstract class AbstractGenericDao<T extends Persistable<ID>, ID extends S
 
 	public AbstractGenericDao(RowMapper<T> rowMapper, String tableName) {
 		super(rowMapper, tableName);
+		setNewRowMapper(rowMapper);
 	}
 
 	public AbstractGenericDao(RowMapper<T> rowMapper, TableDescription table) {
 		super(rowMapper, table);
+		setNewRowMapper(rowMapper);
+	}
+
+	private void setNewRowMapper(RowMapper<T> rowMapper) {
+		this.newRowMapper = rowMapper;
+	}
+
+	@Override
+	public Iterable<T> findAll(Filter filter) {
+		return jdbcTemplate.query(extendedSqlGenerator.selectAll(getTable(), filter), newRowMapper);
+	}
+
+	@Override
+	public Iterable<T> deleteAll(Filter filter) {
+		return jdbcTemplate.query(extendedSqlGenerator.deleteAll(getTable(), filter), newRowMapper);
 	}
 
 }

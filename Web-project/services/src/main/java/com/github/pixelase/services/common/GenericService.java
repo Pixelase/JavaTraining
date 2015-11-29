@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
 
+import com.github.pixelase.dataaccess.dao.common.Filter;
+
 public interface GenericService<T extends Persistable<ID>, ID extends Serializable> {
 	<S extends T> S save(S entity);
 
@@ -28,9 +30,13 @@ public interface GenericService<T extends Persistable<ID>, ID extends Serializab
 
 	void deleteAll();
 
+	Iterable<T> deleteAll(Filter filter);
+
 	Iterable<T> findAll(Sort sort);
 
 	Page<T> findAll(Pageable pageable);
 
 	Iterable<T> findAll(Iterable<ID> ids);
+
+	Iterable<T> findAll(Filter filter);
 }

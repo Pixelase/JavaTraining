@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pixelase.dataaccess.dao.common.Filter;
 import com.github.pixelase.dataaccess.dao.common.GenericDao;
 
 @Service
@@ -109,5 +110,15 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 	@Override
 	public Iterable<T> findAll(Iterable<ID> ids) {
 		return dao.findAll(ids);
+	}
+
+	@Override
+	public Iterable<T> findAll(Filter filter) {
+		return dao.findAll(filter);
+	}
+
+	@Override
+	public Iterable<T> deleteAll(Filter filter) {
+		return dao.deleteAll(filter);
 	}
 }
