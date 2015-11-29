@@ -6,14 +6,9 @@ import java.util.Set;
 public class Filter {
 	private Set<FilterProperty> properties;
 
-	public Filter(FilterProperty... props) {
-		properties = new HashSet<>();
-
-		if (props.length != 0) {
-			for (FilterProperty property : props) {
-				properties.add(property);
-			}
-		}
+	private Filter(Set<FilterProperty> properties) {
+		super();
+		this.properties = properties;
 	}
 
 	public Set<FilterProperty> getProperties() {
@@ -24,13 +19,17 @@ public class Filter {
 		this.properties = properties;
 	}
 
+	public boolean isEmpty() {
+		return properties.isEmpty();
+	}
+
 	public String toSqlFormat() {
 		StringBuilder result = new StringBuilder();
-		
+
 		for (FilterProperty property : properties) {
 			result.append(property.toSqlFormat() + " ");
 		}
-		
+
 		return result.toString();
 	}
 
@@ -39,4 +38,33 @@ public class Filter {
 		return "Filter [properties=" + properties + "]";
 	}
 
+	public static class Builder {
+		private final Set<FilterProperty> properties;
+
+		public Builder() {
+			this(new HashSet<FilterProperty>());
+		}
+
+		private Builder(Set<FilterProperty> properties) {
+			this.properties = properties;
+		}
+
+		public Builder add(String columnName, String value) {
+			properties.add(new FilterProperty(columnName, value));
+			return this;
+		}
+
+		public Builder add(FilterProperty property) {
+			properties.add(property);
+			return this;
+		}
+
+		public Set<FilterProperty> getProperties() {
+			return properties;
+		}
+
+		public Filter build() {
+			return new Filter(properties);
+		}
+	}
 }

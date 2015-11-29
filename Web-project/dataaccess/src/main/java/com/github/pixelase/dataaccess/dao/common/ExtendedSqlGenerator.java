@@ -7,7 +7,8 @@ public class ExtendedSqlGenerator extends SqlGenerator {
 	public static final String RETURNING = "RETURNING";
 
 	private String generateSqlByFilterParams(TableDescription table, Filter filter) {
-		return FROM + table.getFromClause() + WHERE + filter.toSqlFormat();
+		final String base = FROM + table.getFromClause();
+		return (filter.isEmpty()) ? base : base + WHERE + filter.toSqlFormat();
 	}
 
 	public String selectAll(TableDescription table, Filter filter) {
