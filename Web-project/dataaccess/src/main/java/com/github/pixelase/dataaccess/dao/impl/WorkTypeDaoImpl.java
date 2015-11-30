@@ -25,7 +25,12 @@ public class WorkTypeDaoImpl extends AbstractGenericDao<WorkType, Integer> imple
 	private static final RowUnmapper<WorkType> rowUnmapper = new RowUnmapper<WorkType>() {
 		@Override
 		public Map<String, Object> mapColumns(WorkType workType) {
-			Map<String, Object> mapping = new LinkedHashMap<String,Object>();mapping.put("id",workType.getId());mapping.put("name",workType.getName());return mapping;}};
+			Map<String, Object> mapping = new LinkedHashMap<String, Object>();
+			mapping.put("id", workType.getId());
+			mapping.put("name", workType.getName());
+			return mapping;
+		}
+	};
 
 	@Override
 	protected <S extends WorkType> S postCreate(S entity, Number generatedId) {

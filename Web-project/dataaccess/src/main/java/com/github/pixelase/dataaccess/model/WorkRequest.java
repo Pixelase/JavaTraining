@@ -1,6 +1,6 @@
 package com.github.pixelase.dataaccess.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class WorkRequest extends DbObject {
 	private static final long serialVersionUID = 1L;
@@ -66,7 +66,6 @@ public class WorkRequest extends DbObject {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((desiredDate == null) ? 0 : desiredDate.hashCode());
 		result = prime * result + ((tenantId == null) ? 0 : tenantId.hashCode());
 		result = prime * result + ((workScopeId == null) ? 0 : workScopeId.hashCode());
 		result = prime * result + ((workTypeId == null) ? 0 : workTypeId.hashCode());
@@ -82,11 +81,6 @@ public class WorkRequest extends DbObject {
 		if (!(obj instanceof WorkRequest))
 			return false;
 		WorkRequest other = (WorkRequest) obj;
-		if (desiredDate == null) {
-			if (other.desiredDate != null)
-				return false;
-		} else if (!desiredDate.equals(other.desiredDate))
-			return false;
 		if (tenantId == null) {
 			if (other.tenantId != null)
 				return false;

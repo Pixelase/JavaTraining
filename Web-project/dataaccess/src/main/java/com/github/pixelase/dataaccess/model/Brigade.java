@@ -1,6 +1,6 @@
 package com.github.pixelase.dataaccess.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Brigade extends DbObject {
 	private static final long serialVersionUID = 1L;
@@ -66,7 +66,6 @@ public class Brigade extends DbObject {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((realDate == null) ? 0 : realDate.hashCode());
 		result = prime * result + ((tenantId == null) ? 0 : tenantId.hashCode());
 		result = prime * result + ((workScopeId == null) ? 0 : workScopeId.hashCode());
 		result = prime * result + ((workTypeId == null) ? 0 : workTypeId.hashCode());
@@ -82,11 +81,6 @@ public class Brigade extends DbObject {
 		if (!(obj instanceof Brigade))
 			return false;
 		Brigade other = (Brigade) obj;
-		if (realDate == null) {
-			if (other.realDate != null)
-				return false;
-		} else if (!realDate.equals(other.realDate))
-			return false;
 		if (tenantId == null) {
 			if (other.tenantId != null)
 				return false;
