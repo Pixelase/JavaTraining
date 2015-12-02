@@ -5,7 +5,6 @@
 	version="2.0">
 	<persistence-unit name="jpa-persistence-unit"
 		transaction-type="RESOURCE_LOCAL">
-
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
 		</properties>
