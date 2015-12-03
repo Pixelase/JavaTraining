@@ -25,17 +25,25 @@ public class WorkScope implements java.io.Serializable {
 	private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
 
 	public WorkScope() {
+		super();
 	}
 
 	public WorkScope(int id) {
+		super();
 		this.id = id;
 	}
 
-	public WorkScope(int id, String name, Integer employeesCount, Set<WorkRequest> workRequests) {
+	public WorkScope(String name, Integer employeesCount) {
+		super();
+		this.name = name;
+		this.employeesCount = employeesCount;
+	}
+
+	public WorkScope(int id, String name, Integer employeesCount) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.employeesCount = employeesCount;
-		this.workRequests = workRequests;
 	}
 
 	@Id
@@ -100,8 +108,7 @@ public class WorkScope implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "WorkScope [id=" + id + ", name=" + name + ", employeesCount=" + employeesCount + ", workRequests="
-				+ workRequests + "]";
+		return "WorkScope [id=" + id + ", name=" + name + ", employeesCount=" + employeesCount + "]";
 	}
 
 }

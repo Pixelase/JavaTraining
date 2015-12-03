@@ -32,20 +32,29 @@ public class WorkRequest implements java.io.Serializable {
 	private Set<Brigade> brigades = new HashSet<Brigade>(0);
 
 	public WorkRequest() {
+		super();
 	}
 
 	public WorkRequest(int id) {
+		super();
 		this.id = id;
 	}
 
-	public WorkRequest(int id, Tenant tenant, WorkScope workScope, WorkType workType, Date desiredDate,
-			Set<Brigade> brigades) {
+	public WorkRequest(Tenant tenant, WorkScope workScope, WorkType workType, Date desiredDate) {
+		super();
+		this.tenant = tenant;
+		this.workScope = workScope;
+		this.workType = workType;
+		this.desiredDate = desiredDate;
+	}
+
+	public WorkRequest(int id, Tenant tenant, WorkScope workScope, WorkType workType, Date desiredDate) {
+		super();
 		this.id = id;
 		this.tenant = tenant;
 		this.workScope = workScope;
 		this.workType = workType;
 		this.desiredDate = desiredDate;
-		this.brigades = brigades;
 	}
 
 	@Id
@@ -133,7 +142,7 @@ public class WorkRequest implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "WorkRequest [id=" + id + ", tenant=" + tenant + ", workScope=" + workScope + ", workType=" + workType
-				+ ", desiredDate=" + desiredDate + ", brigades=" + brigades + "]";
+				+ ", desiredDate=" + desiredDate + "]";
 	}
 
 }

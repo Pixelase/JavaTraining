@@ -1,4 +1,4 @@
-package com.github.pixelase.webproject.dataaccess.dao;
+package com.github.pixelase.webproject.dataaccess.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

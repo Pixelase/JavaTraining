@@ -26,18 +26,27 @@ public class Address implements java.io.Serializable {
 	private Set<Tenant> tenants = new HashSet<Tenant>(0);
 
 	public Address() {
+		super();
 	}
 
 	public Address(int id) {
+		super();
 		this.id = id;
 	}
 
-	public Address(int id, String street, String house, String apartment, Set<Tenant> tenants) {
+	public Address(String street, String house, String apartment) {
+		super();
+		this.street = street;
+		this.house = house;
+		this.apartment = apartment;
+	}
+
+	public Address(int id, String street, String house, String apartment) {
+		super();
 		this.id = id;
 		this.street = street;
 		this.house = house;
 		this.apartment = apartment;
-		this.tenants = tenants;
 	}
 
 	@Id
@@ -111,8 +120,7 @@ public class Address implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", house=" + house + ", apartment=" + apartment
-				+ ", tenants=" + tenants + "]";
+		return "Address [id=" + id + ", street=" + street + ", house=" + house + ", apartment=" + apartment + "]";
 	}
 
 }

@@ -4,8 +4,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.github.pixelase.webproject.dataaccess.dao.WorkRequestRepository;
 import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
+import com.github.pixelase.webproject.dataaccess.repository.WorkRequestRepository;
 import com.github.pixelase.webproject.services.WorkRequestService;
 import com.github.pixelase.webproject.services.common.AbstractGenericService;
 

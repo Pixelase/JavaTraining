@@ -4,8 +4,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.github.pixelase.webproject.dataaccess.dao.AddressRepository;
 import com.github.pixelase.webproject.dataaccess.model.Address;
+import com.github.pixelase.webproject.dataaccess.repository.AddressRepository;
 import com.github.pixelase.webproject.services.AddressService;
 import com.github.pixelase.webproject.services.common.AbstractGenericService;
 

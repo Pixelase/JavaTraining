@@ -29,18 +29,27 @@ public class Tenant implements java.io.Serializable {
 	private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
 
 	public Tenant() {
+		super();
 	}
 
 	public Tenant(int id) {
+		super();
 		this.id = id;
 	}
 
-	public Tenant(int id, Address address, String firstName, String lastName, Set<WorkRequest> workRequests) {
+	public Tenant(Address address, String firstName, String lastName) {
+		super();
+		this.address = address;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public Tenant(int id, Address address, String firstName, String lastName) {
+		super();
 		this.id = id;
 		this.address = address;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.workRequests = workRequests;
 	}
 
 	@Id
@@ -116,7 +125,7 @@ public class Tenant implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Tenant [id=" + id + ", address=" + address + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", workRequests=" + workRequests + "]";
+				+ "]";
 	}
 
 }

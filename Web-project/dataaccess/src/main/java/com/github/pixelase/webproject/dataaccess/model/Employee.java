@@ -30,19 +30,29 @@ public class Employee implements java.io.Serializable {
 	private Set<Brigade> brigades = new HashSet<Brigade>(0);
 
 	public Employee() {
+		super();
 	}
 
 	public Employee(int id) {
+		super();
 		this.id = id;
 	}
 
-	public Employee(int id, WorkType workType, String firstName, String lastName, Long salary, Set<Brigade> brigades) {
+	public Employee(WorkType workType, String firstName, String lastName, Long salary) {
+		super();
+		this.workType = workType;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.salary = salary;
+	}
+
+	public Employee(int id, WorkType workType, String firstName, String lastName, Long salary) {
+		super();
 		this.id = id;
 		this.workType = workType;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.salary = salary;
-		this.brigades = brigades;
 	}
 
 	@Id
@@ -130,7 +140,7 @@ public class Employee implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", workType=" + workType + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", salary=" + salary + ", brigades=" + brigades + "]";
+				+ ", salary=" + salary + "]";
 	}
 
 }

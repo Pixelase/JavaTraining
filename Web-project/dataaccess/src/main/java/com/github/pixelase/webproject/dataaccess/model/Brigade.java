@@ -31,17 +31,25 @@ public class Brigade implements java.io.Serializable {
 	private Set<Employee> employees = new HashSet<Employee>(0);
 
 	public Brigade() {
+		super();
 	}
 
 	public Brigade(int id) {
+		super();
 		this.id = id;
 	}
 
-	public Brigade(int id, WorkRequest workRequest, Date realDate, Set<Employee> employees) {
+	public Brigade(WorkRequest workRequest, Date realDate) {
+		super();
+		this.workRequest = workRequest;
+		this.realDate = realDate;
+	}
+
+	public Brigade(int id, WorkRequest workRequest, Date realDate) {
+		super();
 		this.id = id;
 		this.workRequest = workRequest;
 		this.realDate = realDate;
-		this.employees = employees;
 	}
 
 	@Id

@@ -26,17 +26,23 @@ public class WorkType implements java.io.Serializable {
 	private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
 
 	public WorkType() {
+		super();
 	}
 
 	public WorkType(int id) {
+		super();
 		this.id = id;
 	}
 
-	public WorkType(int id, String name, Set<Employee> employees, Set<WorkRequest> workRequests) {
+	public WorkType(String name) {
+		super();
+		this.name = name;
+	}
+
+	public WorkType(int id, String name) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.employees = employees;
-		this.workRequests = workRequests;
 	}
 
 	@Id
@@ -101,7 +107,7 @@ public class WorkType implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "WorkType [id=" + id + ", name=" + name + ", employees=" + employees + ", workRequests=" + workRequests
-				+ "]";
+		return "WorkType [id=" + id + ", name=" + name + "]";
 	}
+
 }
