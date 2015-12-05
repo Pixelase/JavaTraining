@@ -123,7 +123,7 @@
 				<version>3.2.1</version>
 			</dependency>
 
-			<!-- Log4j -->
+			<!-- Logging -->
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-api</artifactId>
@@ -143,6 +143,11 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-jcl</artifactId>
 				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging</artifactId>
+				<version>3.2.1.Final</version>
 			</dependency>
 
 			<!-- Other Libs -->
