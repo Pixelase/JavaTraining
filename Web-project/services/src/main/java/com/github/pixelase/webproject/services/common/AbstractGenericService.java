@@ -22,46 +22,6 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 	REPO repository;
 
 	@Override
-	public List<T> findAll() {
-		return repository.findAll();
-	}
-
-	@Override
-	public List<T> findAll(Sort sort) {
-		return repository.findAll(sort);
-	}
-
-	@Override
-	public <S extends T> List<S> save(Iterable<S> entities) {
-		return repository.save(entities);
-	}
-
-	@Override
-	public void flush() {
-		repository.flush();
-	}
-
-	@Override
-	public T saveAndFlush(T entity) {
-		return repository.saveAndFlush(entity);
-	}
-
-	@Override
-	public void deleteInBatch(Iterable<T> entities) {
-		repository.deleteInBatch(entities);
-	}
-
-	@Override
-	public void deleteAllInBatch() {
-		repository.deleteAllInBatch();
-	}
-
-	@Override
-	public Page<T> findAll(Pageable pageble) {
-		return repository.findAll(pageble);
-	}
-
-	@Override
 	public long count() {
 		return repository.count();
 	}
@@ -72,13 +32,13 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 	}
 
 	@Override
-	public void delete(T entity) {
-		repository.delete(entity);
+	public void delete(Iterable<? extends T> entities) {
+		repository.delete(entities);
 	}
 
 	@Override
-	public void delete(Iterable<? extends T> entities) {
-		repository.delete(entities);
+	public void delete(T entity) {
+		repository.delete(entity);
 	}
 
 	@Override
@@ -87,8 +47,23 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 	}
 
 	@Override
+	public void deleteAllInBatch() {
+		repository.deleteAllInBatch();
+	}
+
+	@Override
+	public void deleteInBatch(Iterable<T> entities) {
+		repository.deleteInBatch(entities);
+	}
+
+	@Override
 	public boolean exists(ID id) {
 		return repository.exists(id);
+	}
+
+	@Override
+	public List<T> findAll() {
+		return repository.findAll();
 	}
 
 	@Override
@@ -97,12 +72,37 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 	}
 
 	@Override
+	public Page<T> findAll(Pageable pageble) {
+		return repository.findAll(pageble);
+	}
+
+	@Override
+	public List<T> findAll(Sort sort) {
+		return repository.findAll(sort);
+	}
+
+	@Override
 	public T findOne(ID id) {
 		return repository.findOne(id);
 	}
 
 	@Override
+	public void flush() {
+		repository.flush();
+	}
+
+	@Override
+	public <S extends T> List<S> save(Iterable<S> entities) {
+		return repository.save(entities);
+	}
+
+	@Override
 	public <S extends T> S save(S entity) {
 		return repository.save(entity);
+	}
+
+	@Override
+	public T saveAndFlush(T entity) {
+		return repository.saveAndFlush(entity);
 	}
 }
