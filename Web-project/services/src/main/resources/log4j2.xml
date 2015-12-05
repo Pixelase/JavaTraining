@@ -11,11 +11,11 @@
 				<Charset>UTF-8</Charset>
 				<Pattern>%d %-5p [%t] %C{2} (%F:%L) - %m%n</Pattern>
 			</PatternLayout>
-			
+
 			<Policies>
 				<SizeBasedTriggeringPolicy size="20 MB" />
 			</Policies>
-			
+
 			<DefaultRolloverStrategy max="20" />
 		</RollingFile>
 	</Appenders>
@@ -25,5 +25,29 @@
 			<AppenderRef ref="CONSOLE" />
 			<AppenderRef ref="SERVER_LOGFILE" />
 		</Root>
+
+
+		<Logger name="org.hibernate" level="INFO" additivity="false">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Logger>
+
+		<Logger name="com.github.pixelase.webproject.services" level="INFO"
+			additivity="false">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Logger>
+
+		<Logger name="org.springframework.context" level="INFO"
+			additivity="false">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Logger>
+
+		<Logger name="org.springframework.test.context" level="WARN"
+			additivity="false">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Logger>
 	</Loggers>
 </Configuration>

@@ -30,7 +30,7 @@ public interface GenericService<T extends Persistable<ID>, ID extends Serializab
 
 	public Iterable<T> findAll(Iterable<ID> ids);
 
-	public Page<T> findAll(Pageable pageble);
+	public Page<T> findAll(Pageable pageable);
 
 	public List<T> findAll(Sort sort);
 
