@@ -8,13 +8,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public abstract class AbstractGenericService<T, ID extends Serializable, REPO extends JpaRepository<T, ID>>
+public abstract class AbstractGenericService<T extends Persistable<ID>, ID extends Serializable, REPO extends JpaRepository<T, ID>>
 		implements GenericService<T, ID> {
 
 	@Autowired

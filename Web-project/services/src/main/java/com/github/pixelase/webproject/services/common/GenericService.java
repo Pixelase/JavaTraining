@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
 
-public interface GenericService<T, ID extends Serializable> {
+public interface GenericService<T extends Persistable<ID>, ID extends Serializable> {
 
 	public List<T> findAll();
 
