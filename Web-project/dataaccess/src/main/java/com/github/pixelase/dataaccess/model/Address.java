@@ -1,13 +1,21 @@
 package com.github.pixelase.dataaccess.model;
 
-public class Address extends DbObject {
+import org.springframework.data.domain.Persistable;
+
+public class Address implements Persistable<Integer> {
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String street;
 	private String house;
 	private String apartment;
 
 	public Address() {
 		super();
+	}
+
+	public Address(Integer id) {
+		super();
+		this.id = id;
 	}
 
 	public Address(String street, String house, String apartment) {
@@ -19,6 +27,15 @@ public class Address extends DbObject {
 
 	public Address(Integer id, String street, String house, String apartment) {
 		this(street, house, apartment);
+		this.id = id;
+	}
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -47,12 +64,15 @@ public class Address extends DbObject {
 	}
 
 	@Override
+	public boolean isNew() {
+		return id == null;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((apartment == null) ? 0 : apartment.hashCode());
-		result = prime * result + ((house == null) ? 0 : house.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -60,25 +80,15 @@ public class Address extends DbObject {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (!(obj instanceof Address))
 			return false;
 		Address other = (Address) obj;
-		if (apartment == null) {
-			if (other.apartment != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!apartment.equals(other.apartment))
-			return false;
-		if (house == null) {
-			if (other.house != null)
-				return false;
-		} else if (!house.equals(other.house))
-			return false;
-		if (street == null) {
-			if (other.street != null)
-				return false;
-		} else if (!street.equals(other.street))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

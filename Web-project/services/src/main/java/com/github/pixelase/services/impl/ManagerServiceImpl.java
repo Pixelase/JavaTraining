@@ -52,8 +52,7 @@ public class ManagerServiceImpl extends AbstractGenericService<BrigadeMember, Ob
 			List<BrigadeMember> brigadeMembers = new ArrayList<>();
 
 			if (employees.size() >= workScope.getEmployeesCount()) {
-				savedBrigade = brigadeService.save(new Brigade(request.getWorkTypeId(),
-						request.getWorkScopeId(), request.getDesiredDate(), request.getTenantId()));
+				savedBrigade = brigadeService.save(new Brigade(request.getDesiredDate(), request.getId()));
 
 				for (int i = 0; i < workScope.getEmployeesCount(); i++) {
 					brigadeMembers.add(new BrigadeMember(savedBrigade.getId(), employees.get(i).getId()));
@@ -71,7 +70,7 @@ public class ManagerServiceImpl extends AbstractGenericService<BrigadeMember, Ob
 
 	@Override
 	public boolean deleteBrigade(Brigade brigade) {
-		if(brigadeService.exists(brigade.getId())) {
+		if (brigadeService.exists(brigade.getId())) {
 			dao.deleteAll(new Filter.Builder().add("brigade_id", brigade.getId().toString()).build());
 			brigadeService.delete(brigade);
 			return true;

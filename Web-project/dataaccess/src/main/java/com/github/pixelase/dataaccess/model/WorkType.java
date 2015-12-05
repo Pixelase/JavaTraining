@@ -1,11 +1,19 @@
 package com.github.pixelase.dataaccess.model;
 
-public class WorkType extends DbObject {
+import org.springframework.data.domain.Persistable;
+
+public class WorkType implements Persistable<Integer> {
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String name;
 
 	public WorkType() {
 		super();
+	}
+
+	public WorkType(Integer id) {
+		super();
+		this.id = id;
 	}
 
 	public WorkType(String name) {
@@ -18,6 +26,15 @@ public class WorkType extends DbObject {
 		this.id = id;
 	}
 
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -27,10 +44,15 @@ public class WorkType extends DbObject {
 	}
 
 	@Override
+	public boolean isNew() {
+		return id == null;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -38,15 +60,15 @@ public class WorkType extends DbObject {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (!(obj instanceof WorkType))
 			return false;
 		WorkType other = (WorkType) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

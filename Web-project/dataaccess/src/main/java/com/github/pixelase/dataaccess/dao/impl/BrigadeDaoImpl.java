@@ -27,10 +27,8 @@ public class BrigadeDaoImpl extends AbstractGenericDao<Brigade, Integer> impleme
 		public Map<String, Object> mapColumns(Brigade brigade) {
 			Map<String, Object> mapping = new LinkedHashMap<String, Object>();
 			mapping.put("id", brigade.getId());
-			mapping.put("work_type_id", brigade.getWorkTypeId());
-			mapping.put("work_scope_id", brigade.getWorkScopeId());
 			mapping.put("real_date", brigade.getRealDate());
-			mapping.put("tenant_id", brigade.getTenantId());
+			mapping.put("work_request_id", brigade.getWorkRequestId());
 			return mapping;
 		}
 	};

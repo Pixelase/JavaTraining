@@ -1,12 +1,20 @@
 package com.github.pixelase.dataaccess.model;
 
-public class WorkScope extends DbObject {
+import org.springframework.data.domain.Persistable;
+
+public class WorkScope implements Persistable<Integer> {
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String name;
 	private Integer employeesCount;
 
 	public WorkScope() {
 		super();
+	}
+
+	public WorkScope(Integer id) {
+		super();
+		this.id = id;
 	}
 
 	public WorkScope(String name, Integer employeesCount) {
@@ -17,6 +25,15 @@ public class WorkScope extends DbObject {
 
 	public WorkScope(Integer id, String name, Integer employeesCount) {
 		this(name, employeesCount);
+		this.id = id;
+	}
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -41,11 +58,15 @@ public class WorkScope extends DbObject {
 	}
 
 	@Override
+	public boolean isNew() {
+		return id == null;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((employeesCount == null) ? 0 : employeesCount.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -53,20 +74,15 @@ public class WorkScope extends DbObject {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (!(obj instanceof WorkScope))
 			return false;
 		WorkScope other = (WorkScope) obj;
-		if (employeesCount == null) {
-			if (other.employeesCount != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!employeesCount.equals(other.employeesCount))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

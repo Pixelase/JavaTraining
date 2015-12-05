@@ -8,6 +8,10 @@ public class Tenant extends Person {
 		super();
 	}
 
+	public Tenant(Integer id) {
+		super(id);
+	}
+
 	public Tenant(String firstName, String lastName, Integer addressId) {
 		super(firstName, lastName);
 		this.addressId = addressId;

@@ -2,8 +2,11 @@ package com.github.pixelase.dataaccess.model;
 
 import java.sql.Date;
 
-public class WorkRequest extends DbObject {
+import org.springframework.data.domain.Persistable;
+
+public class WorkRequest implements Persistable<Integer> {
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private Integer workTypeId;
 	private Integer workScopeId;
 	private Date desiredDate;
@@ -11,6 +14,11 @@ public class WorkRequest extends DbObject {
 
 	public WorkRequest() {
 		super();
+	}
+
+	public WorkRequest(Integer id) {
+		super();
+		this.id = id;
 	}
 
 	public WorkRequest(Integer workTypeId, Integer workScopeId, Date desiredDate, Integer tenantId) {
@@ -23,6 +31,15 @@ public class WorkRequest extends DbObject {
 
 	public WorkRequest(Integer id, Integer workTypeId, Integer workScopeId, Date desiredDate, Integer tenantId) {
 		this(workTypeId, workScopeId, desiredDate, tenantId);
+		this.id = id;
+	}
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,12 +80,15 @@ public class WorkRequest extends DbObject {
 	}
 
 	@Override
+	public boolean isNew() {
+		return id == null;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((tenantId == null) ? 0 : tenantId.hashCode());
-		result = prime * result + ((workScopeId == null) ? 0 : workScopeId.hashCode());
-		result = prime * result + ((workTypeId == null) ? 0 : workTypeId.hashCode());
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -76,25 +96,15 @@ public class WorkRequest extends DbObject {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (!(obj instanceof WorkRequest))
 			return false;
 		WorkRequest other = (WorkRequest) obj;
-		if (tenantId == null) {
-			if (other.tenantId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!tenantId.equals(other.tenantId))
-			return false;
-		if (workScopeId == null) {
-			if (other.workScopeId != null)
-				return false;
-		} else if (!workScopeId.equals(other.workScopeId))
-			return false;
-		if (workTypeId == null) {
-			if (other.workTypeId != null)
-				return false;
-		} else if (!workTypeId.equals(other.workTypeId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
@@ -104,4 +114,5 @@ public class WorkRequest extends DbObject {
 		return "WorkRequest [id=" + id + ", workTypeId=" + workTypeId + ", workScopeId=" + workScopeId
 				+ ", desiredDate=" + desiredDate + ", tenantId=" + tenantId + "]";
 	}
+
 }

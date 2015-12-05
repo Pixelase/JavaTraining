@@ -11,44 +11,29 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.dataaccess.dao.common.Filter;
 import com.github.pixelase.dataaccess.model.Brigade;
-import com.github.pixelase.dataaccess.model.Tenant;
-import com.github.pixelase.dataaccess.model.WorkScope;
-import com.github.pixelase.dataaccess.model.WorkType;
+import com.github.pixelase.dataaccess.model.WorkRequest;
 import com.github.pixelase.services.common.AbstractServiceTest;
 
 @Transactional
 public class BrigadeServiceTest extends AbstractServiceTest<Brigade, Integer, BrigadeService> {
 
 	@Autowired
-	TenantService tenantService;
-
-	@Autowired
-	WorkScopeService workScopeService;
-
-	@Autowired
-	WorkTypeService workTypeService;
+	WorkRequestService requestService;
 
 	@Before
 	public void before() {
-		final Integer tenantId = tenantService.save(new Tenant("TestTenant", "Test", null)).getId();
-		final Integer workScopeId = workScopeService
-				.save(new WorkScope("TestScope", RandomUtils.nextInt(1, MAX_NUMBER + 1))).getId();
-		final Integer workTypeId = workTypeService.save(new WorkType("TestType")).getId();
+		final Integer workRequestId = requestService.save(new WorkRequest()).getId();
 
-		entity.setTenantId(tenantId);
-		entity.setWorkScopeId(workScopeId);
-		entity.setWorkTypeId(workTypeId);
+		entity.setWorkRequestId(workRequestId);
 
 		for (Brigade brigade : entities) {
-			brigade.setTenantId(tenantId);
-			brigade.setWorkScopeId(workScopeId);
-			brigade.setWorkTypeId(workTypeId);
+			brigade.setWorkRequestId(workRequestId);
 		}
 	}
 
 	@Override
 	protected Brigade generateEntity() {
-		return new Brigade(0, 0, new Date(System.currentTimeMillis()), 0);
+		return new Brigade(new Date(System.currentTimeMillis()), 0);
 	}
 
 	@Override
@@ -69,11 +54,11 @@ public class BrigadeServiceTest extends AbstractServiceTest<Brigade, Integer, Br
 
 	@Override
 	protected Filter generateFilter() {
-		return new Filter.Builder().add("tenant_id", entity.getTenantId().toString()).build();
+		return new Filter.Builder().add("work_request_id", entity.getWorkRequestId().toString()).build();
 	}
 
 	@Override
 	protected String[] getColumnsNames() {
-		return new String[] { "id", "work_type_id", "work_scope_id", "real_date", "tenant_id" };
+		return new String[] { "id", "real_date", "work_request_id" };
 	}
 }

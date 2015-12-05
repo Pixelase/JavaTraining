@@ -2,44 +2,41 @@ package com.github.pixelase.dataaccess.model;
 
 import java.sql.Date;
 
-public class Brigade extends DbObject {
+import org.springframework.data.domain.Persistable;
+
+public class Brigade implements Persistable<Integer> {
 	private static final long serialVersionUID = 1L;
-	private Integer workTypeId;
-	private Integer workScopeId;
+	private Integer id;
 	private Date realDate;
-	private Integer tenantId;
+	private Integer workRequestId;
 
 	public Brigade() {
 		super();
 	}
 
-	public Brigade(Integer workTypeId, Integer workScopeId, Date realDate, Integer tenantId) {
+	public Brigade(Integer id) {
 		super();
-		this.workTypeId = workTypeId;
-		this.workScopeId = workScopeId;
-		this.realDate = realDate;
-		this.tenantId = tenantId;
-	}
-
-	public Brigade(Integer id, Integer workTypeId, Integer workScopeId, Date realDate, Integer tenantId) {
-		this(id, id, realDate, id);
 		this.id = id;
 	}
 
-	public Integer getWorkTypeId() {
-		return workTypeId;
+	public Brigade(Date realDate, Integer workRequestId) {
+		super();
+		this.realDate = realDate;
+		this.workRequestId = workRequestId;
 	}
 
-	public void setWorkTypeId(Integer workTypeId) {
-		this.workTypeId = workTypeId;
+	public Brigade(Integer id, Date realDate, Integer workRequestId) {
+		this(realDate, workRequestId);
+		this.id = id;
 	}
 
-	public Integer getWorkScopeId() {
-		return workScopeId;
+	@Override
+	public Integer getId() {
+		return id;
 	}
 
-	public void setWorkScopeId(Integer workScopeId) {
-		this.workScopeId = workScopeId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Date getRealDate() {
@@ -50,25 +47,24 @@ public class Brigade extends DbObject {
 		this.realDate = realDate;
 	}
 
-	public Integer getTenantId() {
-		return tenantId;
+	public Integer getWorkRequestId() {
+		return workRequestId;
 	}
 
-	public void setTenantId(Integer tenantId) {
-		this.tenantId = tenantId;
+	public void setWorkRequestId(Integer workRequestId) {
+		this.workRequestId = workRequestId;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public boolean isNew() {
+		return id == null;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((tenantId == null) ? 0 : tenantId.hashCode());
-		result = prime * result + ((workScopeId == null) ? 0 : workScopeId.hashCode());
-		result = prime * result + ((workTypeId == null) ? 0 : workTypeId.hashCode());
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -76,32 +72,22 @@ public class Brigade extends DbObject {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (!(obj instanceof Brigade))
 			return false;
 		Brigade other = (Brigade) obj;
-		if (tenantId == null) {
-			if (other.tenantId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!tenantId.equals(other.tenantId))
-			return false;
-		if (workScopeId == null) {
-			if (other.workScopeId != null)
-				return false;
-		} else if (!workScopeId.equals(other.workScopeId))
-			return false;
-		if (workTypeId == null) {
-			if (other.workTypeId != null)
-				return false;
-		} else if (!workTypeId.equals(other.workTypeId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Brigade [id=" + id + ", workTypeId=" + workTypeId + ", workScopeId=" + workScopeId + ", realDate="
-				+ realDate + ", clientId=" + tenantId + "]";
+		return "Brigade [id=" + id + ", realDate=" + realDate + ", workRequestId=" + workRequestId + "]";
 	}
+
 }

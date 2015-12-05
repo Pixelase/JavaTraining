@@ -9,6 +9,10 @@ public class Employee extends Person {
 		super();
 	}
 
+	public Employee(Integer id) {
+		super(id);
+	}
+
 	public Employee(String firstName, String lastName, Integer workTypeId, Long salary) {
 		super(firstName, lastName);
 		this.workTypeId = workTypeId;
