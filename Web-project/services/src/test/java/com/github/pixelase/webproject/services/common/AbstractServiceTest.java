@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,11 +16,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-services-context.xml")
 @Transactional
+@TestExecutionListeners(listeners = { DirtiesContextBeforeModesTestExecutionListener.class,
+		DirtiesContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class,
+		TransactionalTestExecutionListener.class, SqlScriptsTestExecutionListener.class })
 public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>> {
 	@Autowired
 	protected SERVICE service;
@@ -53,15 +61,15 @@ public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends 
 
 	protected abstract ID generateId();
 
-	protected final Sort generateSort() {
+	protected Sort generateSort() {
 		return new Sort(getRandomFieldName());
 	}
 
-	protected final Pageable generatePageable() {
+	protected Pageable generatePageable() {
 		return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
 	}
 
-	protected final List<String> getFieldsNames() {
+	protected List<String> getFieldsNames() {
 		List<String> result = new ArrayList<>();
 
 		for (Field field : entity.getClass().getDeclaredFields()) {
@@ -73,7 +81,7 @@ public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends 
 		return result;
 	}
 
-	protected final String getRandomFieldName() {
+	protected String getRandomFieldName() {
 		return getFieldsNames().get(RandomUtils.nextInt(0, getFieldsNames().size()));
 	}
 

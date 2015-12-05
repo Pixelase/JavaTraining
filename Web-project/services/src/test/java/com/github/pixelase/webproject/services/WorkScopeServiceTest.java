@@ -3,10 +3,9 @@ package com.github.pixelase.webproject.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.webproject.dataaccess.model.WorkScope;
 import com.github.pixelase.webproject.services.common.AbstractServiceTest;

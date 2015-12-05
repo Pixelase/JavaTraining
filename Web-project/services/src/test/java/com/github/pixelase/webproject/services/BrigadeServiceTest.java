@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.webproject.dataaccess.model.Brigade;
 import com.github.pixelase.webproject.dataaccess.model.WorkRequest;

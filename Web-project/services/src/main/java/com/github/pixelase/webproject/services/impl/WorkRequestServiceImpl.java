@@ -1,8 +1,7 @@
 package com.github.pixelase.webproject.services.impl;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
 import com.github.pixelase.webproject.dataaccess.repository.WorkRequestRepository;

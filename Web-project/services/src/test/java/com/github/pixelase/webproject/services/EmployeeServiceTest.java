@@ -3,12 +3,11 @@ package com.github.pixelase.webproject.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.webproject.dataaccess.model.Employee;
 import com.github.pixelase.webproject.dataaccess.model.WorkType;
