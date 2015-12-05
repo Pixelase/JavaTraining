@@ -26,8 +26,15 @@ public class Filter {
 	public String toSqlFormat() {
 		StringBuilder result = new StringBuilder();
 
+		int count = 0;
 		for (FilterProperty property : properties) {
+			count++;
 			result.append(property.toSqlFormat() + " ");
+
+			if (count == properties.size()) {
+				continue;
+			}
+			result.append("AND ");
 		}
 
 		return result.toString();

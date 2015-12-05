@@ -22,12 +22,12 @@ public class MainPage {
 		// addressService.save(address1);
 		// addressService.save(address2);
 
-		Tenant save = tenantService.save(new Tenant("Ivan", "Ivanov", null));
+		// Tenant save = tenantService.save(new Tenant("Ivan", "Ivanov", null));
 		// tenantService.registerTenant("Ivan", "Noviy", 123);
 		// System.out.println(save.getId());
 
-//		tenantService.deleteAll();
-		System.out.println(tenantService.findAll(new Filter.Builder().add("last_name", "Ivanov").build()));
+		// tenantService.deleteAll();
+		System.out.println(tenantService.findAll(new Filter.Builder().add("last_name", "Ivanov").add("first_name", "Ivan").build()));
 		// System.out.println(tenantService.findAll());
 		// System.out.println(addressService.findAll());
 	}
