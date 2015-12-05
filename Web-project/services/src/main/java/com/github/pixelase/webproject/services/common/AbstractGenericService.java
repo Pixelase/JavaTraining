@@ -55,13 +55,13 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 
 	@Override
 	public void deleteAll() {
-		LOGGER.debug("Deleting all {} entities", simpleTypeName);
+		LOGGER.info("Deleting all {} entities", simpleTypeName);
 		repository.deleteAll();
 	}
 
 	@Override
 	public void deleteAllInBatch() {
-		LOGGER.debug("Deleting all {} entities in batch", simpleTypeName);
+		LOGGER.info("Deleting all {} entities in batch", simpleTypeName);
 		repository.deleteAllInBatch();
 	}
 
@@ -129,27 +129,27 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 
 	@Override
 	public <S extends T> List<S> save(Iterable<S> entities) {
-		LOGGER.debug("Saving {} sequence into database", simpleTypeName);
+		LOGGER.info("Saving {} sequence into database", simpleTypeName);
 		List<S> saved = repository.save(entities);
-		LOGGER.trace("Successfully saved: {}", saved);
+		LOGGER.debug("Successfully saved: {}", saved);
 
 		return saved;
 	}
 
 	@Override
 	public <S extends T> S save(S entity) {
-		LOGGER.debug("Saving {} into database", entity);
+		LOGGER.info("Saving {} into database", entity);
 		S saved = repository.save(entity);
-		LOGGER.debug("Successfully saved: {}", entity);
+		LOGGER.debug("Successfully saved: {}", saved);
 
 		return saved;
 	}
 
 	@Override
 	public T saveAndFlush(T entity) {
-		LOGGER.debug("Saving {} into database and flushing", entity);
+		LOGGER.info("Saving {} into database and flushing", entity);
 		T saved = repository.saveAndFlush(entity);
-		LOGGER.debug("Successfully saved: {}", entity);
+		LOGGER.debug("Successfully saved: {}", saved);
 
 		return saved;
 	}

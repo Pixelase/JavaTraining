@@ -26,7 +26,6 @@
 			<AppenderRef ref="SERVER_LOGFILE" />
 		</Root>
 
-
 		<Logger name="org.hibernate" level="INFO" additivity="false">
 			<AppenderRef ref="CONSOLE" />
 			<AppenderRef ref="SERVER_LOGFILE" />
