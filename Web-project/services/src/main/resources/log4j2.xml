@@ -5,33 +5,43 @@
 			<PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
 		</Console>
 
-		<RollingFile name="SERVER_LOGFILE" fileName="logs/server.log"
-			filePattern="logs/server-%d{MM-dd-yyyy}.log.gz">
+		<RollingFile name="SERVER_LOGFILE" fileName="/logs/server.log"
+			filePattern="/logs/server-%d{MM-dd-yyyy}.log.gz">
 			<PatternLayout>
 				<Charset>UTF-8</Charset>
 				<Pattern>%d %-5p [%t] %C{2} (%F:%L) - %m%n</Pattern>
 			</PatternLayout>
+
 			<Policies>
 				<SizeBasedTriggeringPolicy size="20 MB" />
 			</Policies>
+
 			<DefaultRolloverStrategy max="20" />
 		</RollingFile>
 	</Appenders>
+
 	<Loggers>
-
-		<Logger name="com.github.pixelase.dao" level="DEBUG">
+		<Root level="INFO">
 			<AppenderRef ref="CONSOLE" />
-		</Logger>
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Root>
 
-		<Logger name="org.springframework.context.support" level="DEBUG"
+		<Logger name="com.github.pixelase.webproject.services" level="INFO"
 			additivity="false">
 			<AppenderRef ref="CONSOLE" />
 			<AppenderRef ref="SERVER_LOGFILE" />
 		</Logger>
 
-
-		<Root level="INFO">
+		<Logger name="org.springframework.context" level="INFO"
+			additivity="false">
 			<AppenderRef ref="CONSOLE" />
-		</Root>
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Logger>
+
+		<Logger name="org.springframework.test.context" level="WARN"
+			additivity="false">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="SERVER_LOGFILE" />
+		</Logger>
 	</Loggers>
 </Configuration>
