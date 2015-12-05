@@ -62,13 +62,13 @@ public abstract class AbstractGenericDao<T extends Persistable<ID>, ID extends S
 	}
 
 	@Override
-	public Iterable<T> findAll(Filter filter) {
-		return jdbcTemplate.query(extendedSqlGenerator.selectAll(getTable(), filter), newRowMapper);
-	}
-
-	@Override
 	public Iterable<T> deleteAll(Filter filter) {
 		return jdbcTemplate.query(extendedSqlGenerator.deleteAll(getTable(), filter), newRowMapper);
+	}
+	
+	@Override
+	public Iterable<T> findAll(Filter filter) {
+		return jdbcTemplate.query(extendedSqlGenerator.selectAll(getTable(), filter), newRowMapper);
 	}
 
 }

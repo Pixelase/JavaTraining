@@ -7,9 +7,6 @@ import java.util.List;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.dataaccess.dao.common.Filter;
@@ -30,8 +27,8 @@ public class BrigadeServiceTest extends AbstractServiceTest<Brigade, Integer, Br
 
 	@Autowired
 	WorkTypeService workTypeService;
-	
-	@Before 
+
+	@Before
 	public void before() {
 		final Integer tenantId = tenantService.save(new Tenant("TestTenant", "Test", null)).getId();
 		final Integer workScopeId = workScopeService
@@ -73,16 +70,6 @@ public class BrigadeServiceTest extends AbstractServiceTest<Brigade, Integer, Br
 	@Override
 	protected Filter generateFilter() {
 		return new Filter.Builder().add("tenant_id", entity.getTenantId().toString()).build();
-	}
-
-	@Override
-	protected Sort generateSort() {
-		return new Sort(getRandomColumnName());
-	}
-
-	@Override
-	protected Pageable generatePageable() {
-		return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
 	}
 
 	@Override

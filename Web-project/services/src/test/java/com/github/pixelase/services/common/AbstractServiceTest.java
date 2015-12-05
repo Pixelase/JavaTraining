@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
@@ -56,14 +57,18 @@ public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends 
 
 	protected abstract Filter generateFilter();
 
-	protected abstract Sort generateSort();
-
-	protected abstract Pageable generatePageable();
-
 	protected abstract String[] getColumnsNames();
 
 	protected String getRandomColumnName() {
 		return getColumnsNames()[RandomUtils.nextInt(0, getColumnsNames().length - 1)];
+	}
+
+	protected final Sort generateSort() {
+		return new Sort(getRandomColumnName());
+	}
+
+	protected final Pageable generatePageable() {
+		return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
 	}
 
 	@Test

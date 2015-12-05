@@ -7,9 +7,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pixelase.dataaccess.dao.common.Filter;
@@ -27,8 +24,8 @@ public class TenantServiceTest extends AbstractServiceTest<Tenant, Integer, Tena
 		final Integer addressId = addressService.save(new Address("Test", "Test", "Test")).getId();
 		entity.setAddressId(addressId);
 
-		for (Tenant brigade : entities) {
-			brigade.setAddressId(addressId);
+		for (Tenant tenant : entities) {
+			tenant.setAddressId(addressId);
 		}
 	}
 
@@ -56,16 +53,6 @@ public class TenantServiceTest extends AbstractServiceTest<Tenant, Integer, Tena
 	@Override
 	protected Filter generateFilter() {
 		return new Filter.Builder().add("first_name", entity.getFirstName()).build();
-	}
-
-	@Override
-	protected Sort generateSort() {
-		return new Sort(getRandomColumnName());
-	}
-
-	@Override
-	protected Pageable generatePageable() {
-		return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
 	}
 
 	@Override

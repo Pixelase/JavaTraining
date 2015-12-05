@@ -10,33 +10,33 @@ import org.springframework.data.domain.Sort;
 import com.github.pixelase.dataaccess.dao.common.Filter;
 
 public interface GenericService<T extends Persistable<ID>, ID extends Serializable> {
-	<S extends T> S save(S entity);
-
-	<S extends T> Iterable<S> save(Iterable<S> entities);
-
-	T findOne(ID id);
-
-	boolean exists(ID id);
-
-	Iterable<T> findAll();
-
 	long count();
 
 	void delete(ID id);
 
-	void delete(T entity);
-
 	void delete(Iterable<? extends T> entities);
+
+	void delete(T entity);
 
 	void deleteAll();
 
 	Iterable<T> deleteAll(Filter filter);
 
-	Iterable<T> findAll(Sort sort);
+	boolean exists(ID id);
 
-	Page<T> findAll(Pageable pageable);
+	Iterable<T> findAll();
+
+	Iterable<T> findAll(Filter filter);
 
 	Iterable<T> findAll(Iterable<ID> ids);
 
-	Iterable<T> findAll(Filter filter);
+	Page<T> findAll(Pageable pageable);
+
+	Iterable<T> findAll(Sort sort);
+
+	T findOne(ID id);
+
+	<S extends T> Iterable<S> save(Iterable<S> entities);
+
+	<S extends T> S save(S entity);
 }
