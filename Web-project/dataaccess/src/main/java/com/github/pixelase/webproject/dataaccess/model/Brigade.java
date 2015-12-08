@@ -87,7 +87,7 @@ public class Brigade implements Persistable<Integer> {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "brigade_member", schema = "public", joinColumns = {
+	@JoinTable(name = "brigade_member", joinColumns = {
 			@JoinColumn(name = "brigade_id", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "employee_id", nullable = false, updatable = false) })
 	public Set<Employee> getEmployees() {

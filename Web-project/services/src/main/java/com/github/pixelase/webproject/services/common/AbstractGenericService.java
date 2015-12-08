@@ -21,7 +21,7 @@ public abstract class AbstractGenericService<T extends Persistable<ID>, ID exten
 		implements GenericService<T, ID> {
 
 	@Autowired
-	REPO repository;
+	protected REPO repository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractGenericService.class);
 

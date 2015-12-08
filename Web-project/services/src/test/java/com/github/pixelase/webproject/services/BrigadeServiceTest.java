@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,50 @@ public class BrigadeServiceTest extends AbstractServiceTest<Brigade, Integer, Br
 
 	@Override
 	protected Integer generateId() {
-		return RandomUtils.nextInt(0, MAX_NUMBER);
+		return RandomUtils.nextInt(1, MAX_NUMBER);
+	}
+
+	@Test
+	public void deleteBrigadeByWorkRequestTest() {
+		Brigade saved = service.save(entity);
+		Brigade deleted = service.delete(entity.getWorkRequest());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void deleteAllBrigadesByRealDateTest() {
+		List<Brigade> brigades = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			brigades.add(new Brigade(entity.getWorkRequest(), entity.getRealDate()));
+		}
+
+		List<Brigade> saved = service.save(brigades);
+		List<Brigade> deleted = service.deleteAll(entity.getRealDate());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void findAllBrigadesByRealDateTest() {
+		List<Brigade> brigades = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			brigades.add(new Brigade(entity.getWorkRequest(), entity.getRealDate()));
+		}
+
+		List<Brigade> saved = service.save(brigades);
+		List<Brigade> found = service.findAll(entity.getRealDate());
+
+		Assert.assertEquals(saved, found);
+	}
+
+	@Test
+	public void findOneBrigadeByWorkRequestTest() {
+		Brigade saved = service.save(entity);
+		Brigade found = service.findOne(entity.getWorkRequest());
+
+		Assert.assertEquals(saved, found);
 	}
 }

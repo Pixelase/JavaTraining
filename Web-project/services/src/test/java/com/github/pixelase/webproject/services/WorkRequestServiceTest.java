@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,6 +64,126 @@ public class WorkRequestServiceTest extends AbstractServiceTest<WorkRequest, Int
 
 	@Override
 	protected Integer generateId() {
-		return RandomUtils.nextInt(0, MAX_NUMBER);
+		return RandomUtils.nextInt(1, MAX_NUMBER);
+	}
+
+	@Test
+	public void deleteAllWorkRequestsByDesiredDateTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> deleted = service.deleteAll(entity.getDesiredDate());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void deleteAllWorkRequestsByTenantTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> deleted = service.deleteAll(entity.getTenant());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void deleteAllWorkRequestsByWorkScopeTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> deleted = service.deleteAll(entity.getWorkScope());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void deleteAllWorkRequestsByWorkTypeTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> deleted = service.deleteAll(entity.getWorkType());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void findAllWorkRequestsByDesiredDateTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> found = service.findAll(entity.getDesiredDate());
+
+		Assert.assertEquals(saved, found);
+	}
+
+	@Test
+	public void findAllWorkRequestsByTenantTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> found = service.findAll(entity.getTenant());
+
+		Assert.assertEquals(saved, found);
+	}
+
+	@Test
+	public void findAllWorkRequestsByWorkScopeTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> found = service.findAll(entity.getWorkScope());
+
+		Assert.assertEquals(saved, found);
+	}
+
+	@Test
+	public void findAllWorkRequestsByWorkTypeTest() {
+		List<WorkRequest> requests = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			requests.add(new WorkRequest(entity.getTenant(), entity.getWorkScope(), entity.getWorkType(),
+					entity.getDesiredDate()));
+		}
+
+		List<WorkRequest> saved = service.save(requests);
+		List<WorkRequest> found = service.findAll(entity.getWorkType());
+
+		Assert.assertEquals(saved, found);
 	}
 }

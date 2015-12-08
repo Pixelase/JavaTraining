@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,82 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
 
 	@Override
 	protected Integer generateId() {
-		return RandomUtils.nextInt(0, MAX_NUMBER);
+		return RandomUtils.nextInt(1, MAX_NUMBER);
+	}
+
+	@Test
+	public void deleteAllEmployeesBySalary() {
+		List<Employee> employees = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			employees.add(new Employee(entity.getWorkType(), entity.getFirstName(), entity.getLastName(),
+					entity.getSalary()));
+		}
+
+		List<Employee> savedEmployees = service.save(employees);
+		List<Employee> deletedEmployees = service.deleteAll(entity.getSalary());
+
+		Assert.assertEquals(savedEmployees, deletedEmployees);
+	}
+
+	@Test
+	public void deleteAllEmployeesByWorkType() {
+		List<Employee> employees = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			employees.add(new Employee(entity.getWorkType(), entity.getFirstName(), entity.getLastName(),
+					entity.getSalary()));
+		}
+
+		List<Employee> savedEmployees = service.save(employees);
+		List<Employee> deletedEmployees = service.deleteAll(entity.getWorkType());
+
+		Assert.assertEquals(savedEmployees, deletedEmployees);
+	}
+
+	@Test
+	public void deleteEmployeeByFirstNameAndLastNameTest() {
+		Employee saved = service.save(entity);
+		Employee deleted = service.delete(entity.getFirstName(), entity.getLastName());
+
+		Assert.assertEquals(saved, deleted);
+	}
+
+	@Test
+	public void findAllEmployeesByPartialMatchingTest() {
+		List<Employee> employees = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			employees.add(new Employee(null, entity.getFirstName() + RandomStringUtils.random(5),
+					entity.getLastName() + RandomStringUtils.random(5), entity.getSalary()));
+		}
+
+		List<Employee> saved = service.save(employees);
+		List<Employee> found = service.findAllByPartialMatching(entity.getFirstName(), entity.getLastName());
+
+		Assert.assertEquals(saved, found);
+	}
+
+	@Test
+	public void findAllEmployeesByWorkTypeTest() {
+		List<Employee> employees = new ArrayList<>();
+
+		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+			employees.add(new Employee(entity.getWorkType(), entity.getFirstName() + RandomStringUtils.random(5),
+					entity.getLastName() + RandomStringUtils.random(5), entity.getSalary()));
+		}
+
+		List<Employee> saved = service.save(employees);
+		List<Employee> found = service.findAll(entity.getWorkType());
+
+		Assert.assertEquals(saved, found);
+	}
+
+	@Test
+	public void findOneEmployeeByFirstNameAndLastNameTest() {
+		Employee saved = service.save(entity);
+		Employee found = service.findOne(entity.getFirstName(), entity.getLastName());
+
+		Assert.assertEquals(saved, found);
 	}
 }
