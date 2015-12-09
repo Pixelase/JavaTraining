@@ -54,7 +54,7 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
 	}
 
 	@Test
-	public void deleteAllEmployeesBySalary() {
+	public void deleteAllEmployeesBySalaryTest() {
 		List<Employee> employees = new ArrayList<>();
 
 		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
@@ -69,7 +69,7 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
 	}
 
 	@Test
-	public void deleteAllEmployeesByWorkType() {
+	public void deleteAllEmployeesByWorkTypeTest() {
 		List<Employee> employees = new ArrayList<>();
 
 		for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {

@@ -9,29 +9,13 @@ import java.util.List;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring-services-context.xml")
-@Transactional
-@TestExecutionListeners(listeners = { DirtiesContextBeforeModesTestExecutionListener.class,
-		DirtiesContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class,
-		TransactionalTestExecutionListener.class, SqlScriptsTestExecutionListener.class })
-public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>> {
+public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>> extends AbstractSpringTest {
 	@Autowired
 	protected SERVICE service;
 
@@ -41,10 +25,6 @@ public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends 
 	protected final Sort sort;
 	protected final Pageable pageable;
 	protected final List<String> columnNames;
-
-	protected static final int MAX_ENTITIES_COUNT = 20;
-	protected static final int MAX_STRING_LENGTH = 10;
-	protected static final int MAX_NUMBER = 1000;
 
 	public AbstractServiceTest() {
 		this.entity = generateEntity();
