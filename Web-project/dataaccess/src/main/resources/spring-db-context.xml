@@ -46,7 +46,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
-		<property name="persistenceUnitName" value="jpa-persistence-unit" />
+		<property name="persistenceUnitName" value="hib-jpa-persistence-unit" />
 		<property name="packagesToScan"
 			value="com.github.pixelase.webproject.dataaccess.model" />
 		<property name="dataSource" ref="dataSource" />
