@@ -35,7 +35,8 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public void init() {
 		super.init();
+
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, context));
-		// add your configuration here
+		getMarkupSettings().setStripWicketTags(true);
 	}
 }
