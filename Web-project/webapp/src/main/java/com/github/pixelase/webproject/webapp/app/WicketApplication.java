@@ -1,6 +1,6 @@
 package com.github.pixelase.webproject.webapp.app;
 
-import com.github.pixelase.webproject.webapp.page.HomePage;
+import com.github.pixelase.webproject.webapp.page.home.HomePage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;

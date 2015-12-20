@@ -1,7 +1,7 @@
 package com.github.pixelase.webproject.webapp;
 
 import com.github.pixelase.webproject.webapp.app.WicketApplication;
-import com.github.pixelase.webproject.webapp.page.HomePage;
+import com.github.pixelase.webproject.webapp.page.home.HomePage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
