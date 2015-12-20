@@ -1,8 +1,10 @@
 package com.github.pixelase.webproject.webapp.app;
 
 import com.github.pixelase.webproject.webapp.page.home.HomePage;
+import com.github.pixelase.webproject.webapp.page.signin.SignInPage;
+import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -12,10 +14,10 @@ import org.springframework.stereotype.Component;
  * Application object for your web application. If you want to run this
  * application without deploying, run the Start class.
  *
- * @see сom.github.pixelase.webproject.webapp.Start#main(String[])
+ * @see src/test/java/сom.github.pixelase.webproject.webapp.Start#main(String[] args)
  */
 @Component("MyWebApplication")
-public class WicketApplication extends WebApplication {
+public class WicketApplication extends AuthenticatedWebApplication {
 
     @Autowired
     private ApplicationContext context;
@@ -37,5 +39,15 @@ public class WicketApplication extends WebApplication {
 
         getComponentInstantiationListeners().add(new SpringComponentInjector(this, context));
         getMarkupSettings().setStripWicketTags(true);
+    }
+
+    @Override
+    protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
+        return BasicAuthenticationSession.class;
+    }
+
+    @Override
+    protected Class<? extends WebPage> getSignInPageClass() {
+        return SignInPage.class;
     }
 }
