@@ -14,13 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-services-context.xml")
 @Transactional
-@TestExecutionListeners(listeners = { DirtiesContextBeforeModesTestExecutionListener.class,
-		DirtiesContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class,
-		TransactionalTestExecutionListener.class, SqlScriptsTestExecutionListener.class })
+@TestExecutionListeners(listeners = {DirtiesContextBeforeModesTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class, DependencyInjectionTestExecutionListener.class,
+        TransactionalTestExecutionListener.class, SqlScriptsTestExecutionListener.class})
 public abstract class AbstractSpringTest {
-	
-	protected static final int MAX_ENTITIES_COUNT = 20;
-	protected static final int MAX_STRING_LENGTH = 10;
-	protected static final int MAX_NUMBER = 1000;
+
+    protected static final int MAX_ENTITIES_COUNT = 20;
+    protected static final int MAX_STRING_LENGTH = 10;
+    protected static final int MAX_NUMBER = 1000;
 
 }

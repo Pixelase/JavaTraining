@@ -1,20 +1,20 @@
 package com.github.pixelase.webproject.services;
 
-import java.util.List;
-
 import com.github.pixelase.webproject.dataaccess.model.WorkScope;
 import com.github.pixelase.webproject.services.common.GenericService;
 
+import java.util.List;
+
 public interface WorkScopeService extends GenericService<WorkScope, Integer> {
-	WorkScope delete(String name);
+    WorkScope delete(String name);
 
-	List<WorkScope> findAllByEmployeesCountGreaterThanEqual(Integer employeesCount);
+    List<WorkScope> findAllByEmployeesCountGreaterThanEqual(Integer employeesCount);
 
-	List<WorkScope> findAllByEmployeesCountLessThanEqual(Integer employeesCount);
+    List<WorkScope> findAllByEmployeesCountLessThanEqual(Integer employeesCount);
 
-	List<WorkScope> findAllByPartialMatching(String name);
+    List<WorkScope> findAllByPartialMatching(String name);
 
-	WorkScope findOne(String name);
+    WorkScope findOne(String name);
 
-	WorkScope findOneByEmployeesCount(Integer employeesCount);
+    WorkScope findOneByEmployeesCount(Integer employeesCount);
 }

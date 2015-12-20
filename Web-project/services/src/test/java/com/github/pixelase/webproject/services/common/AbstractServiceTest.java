@@ -1,11 +1,5 @@
 package com.github.pixelase.webproject.services.common;
 
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,195 +9,200 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
 
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>> extends AbstractSpringTest {
-	@Autowired
-	protected SERVICE service;
+    protected final T entity;
+    protected final Iterable<? extends T> entities;
+    protected final ID id;
+    protected final Sort sort;
+    protected final Pageable pageable;
+    protected final List<String> columnNames;
+    @Autowired
+    protected SERVICE service;
 
-	protected final T entity;
-	protected final Iterable<? extends T> entities;
-	protected final ID id;
-	protected final Sort sort;
-	protected final Pageable pageable;
-	protected final List<String> columnNames;
+    public AbstractServiceTest() {
+        this.entity = generateEntity();
+        this.entities = generateEntities(MAX_ENTITIES_COUNT);
+        this.id = generateId();
+        this.sort = generateSort();
+        this.pageable = generatePageable();
+        this.columnNames = getFieldsNames();
+    }
 
-	public AbstractServiceTest() {
-		this.entity = generateEntity();
-		this.entities = generateEntities(MAX_ENTITIES_COUNT);
-		this.id = generateId();
-		this.sort = generateSort();
-		this.pageable = generatePageable();
-		this.columnNames = getFieldsNames();
-	}
+    protected abstract T generateEntity();
 
-	protected abstract T generateEntity();
+    protected abstract Iterable<? extends T> generateEntities(int maxEntitiesCount);
 
-	protected abstract Iterable<? extends T> generateEntities(int maxEntitiesCount);
+    protected abstract ID generateId();
 
-	protected abstract ID generateId();
+    protected Sort generateSort() {
+        return new Sort(getRandomFieldName());
+    }
 
-	protected Sort generateSort() {
-		return new Sort(getRandomFieldName());
-	}
+    protected Pageable generatePageable() {
+        return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
+    }
 
-	protected Pageable generatePageable() {
-		return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
-	}
+    protected List<String> getFieldsNames() {
+        List<String> result = new ArrayList<>();
 
-	protected List<String> getFieldsNames() {
-		List<String> result = new ArrayList<>();
+        for (Field field : entity.getClass().getDeclaredFields()) {
+            if (field.getName().equals("serialVersionUID")) {
+                continue;
+            }
+            result.add(field.getName());
+        }
+        return result;
+    }
 
-		for (Field field : entity.getClass().getDeclaredFields()) {
-			if (field.getName().equals("serialVersionUID")) {
-				continue;
-			}
-			result.add(field.getName());
-		}
-		return result;
-	}
+    protected String getRandomFieldName() {
+        return getFieldsNames().get(RandomUtils.nextInt(0, getFieldsNames().size()));
+    }
 
-	protected String getRandomFieldName() {
-		return getFieldsNames().get(RandomUtils.nextInt(0, getFieldsNames().size()));
-	}
+    @Test
+    public void countEntitiesTest() {
+        long before = service.count();
+        service.save(entity);
+        long after = service.count();
+        Assert.assertEquals(before + 1, after);
+    }
 
-	@Test
-	public void countEntitiesTest() {
-		long before = service.count();
-		service.save(entity);
-		long after = service.count();
-		Assert.assertEquals(before + 1, after);
-	}
+    @Test
+    public void deleteEntityByIdTest() {
+        ID savedId = service.save(entity).getId();
+        service.delete(savedId);
+        Assert.assertFalse(service.exists(savedId));
+    }
 
-	@Test
-	public void deleteEntityByIdTest() {
-		ID savedId = service.save(entity).getId();
-		service.delete(savedId);
-		Assert.assertFalse(service.exists(savedId));
-	}
+    @Test
+    public void deleteSequenceOfEntitiesTest() {
+        Iterable<? extends T> saved = service.save(entities);
+        List<ID> ids = new ArrayList<>();
 
-	@Test
-	public void deleteSequenceOfEntitiesTest() {
-		Iterable<? extends T> saved = service.save(entities);
-		List<ID> ids = new ArrayList<>();
+        for (T t : saved) {
+            ids.add(t.getId());
+        }
 
-		for (T t : saved) {
-			ids.add(t.getId());
-		}
+        service.delete(saved);
+        Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(ids));
+    }
 
-		service.delete(saved);
-		Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(ids));
-	}
+    @Test
+    public void deleteEntityTest() {
+        T saved = service.save(entity);
+        service.delete(saved);
+        Assert.assertFalse(service.exists(saved.getId()));
+    }
 
-	@Test
-	public void deleteEntityTest() {
-		T saved = service.save(entity);
-		service.delete(saved);
-		Assert.assertFalse(service.exists(saved.getId()));
-	}
+    @Test
+    public void deleteAllEntitiesTest() {
+        service.save(entity);
+        service.deleteAll();
+        Assert.assertTrue(service.count() == 0);
+    }
 
-	@Test
-	public void deleteAllEntitiesTest() {
-		service.save(entity);
-		service.deleteAll();
-		Assert.assertTrue(service.count() == 0);
-	}
+    @Test
+    public void deleteAllEntitiesInBatchTest() {
+        service.save(entity);
+        service.deleteAllInBatch();
+        Assert.assertTrue(service.count() == 0);
+    }
 
-	@Test
-	public void deleteAllEntitiesInBatchTest() {
-		service.save(entity);
-		service.deleteAllInBatch();
-		Assert.assertTrue(service.count() == 0);
-	}
+    @Test
+    public void deleteSequenceOfEntitiesInBatchTest() {
+        @SuppressWarnings("unchecked")
+        Iterable<T> saved = (Iterable<T>) service.save(entities);
+        List<ID> ids = new ArrayList<>();
 
-	@Test
-	public void deleteSequenceOfEntitiesInBatchTest() {
-		@SuppressWarnings("unchecked")
-		Iterable<T> saved = (Iterable<T>) service.save(entities);
-		List<ID> ids = new ArrayList<>();
+        for (T t : saved) {
+            ids.add(t.getId());
+        }
 
-		for (T t : saved) {
-			ids.add(t.getId());
-		}
+        service.deleteInBatch(saved);
+        Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(ids));
+    }
 
-		service.deleteInBatch(saved);
-		Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(ids));
-	}
+    @Test
+    public void entityExistenceByIdTest() {
+        T saved = service.save(entity);
+        Assert.assertTrue(service.exists(saved.getId()));
+    }
 
-	@Test
-	public void entityExistenceByIdTest() {
-		T saved = service.save(entity);
-		Assert.assertTrue(service.exists(saved.getId()));
-	}
+    @Test
+    public void findAllEntitiesTest() {
+        service.deleteAll();
+        Iterable<? extends T> saved = service.save(entities);
+        Iterable<T> found = service.findAll();
+        Assert.assertEquals(saved, found);
+    }
 
-	@Test
-	public void findAllEntitiesTest() {
-		service.deleteAll();
-		Iterable<? extends T> saved = service.save(entities);
-		Iterable<T> found = service.findAll();
-		Assert.assertEquals(saved, found);
-	}
+    @Test
+    public void findAllEntitiesByIds() {
+        Iterable<? extends T> saved = service.save(entities);
+        List<ID> ids = new ArrayList<>();
 
-	@Test
-	public void findAllEntitiesByIds() {
-		Iterable<? extends T> saved = service.save(entities);
-		List<ID> ids = new ArrayList<>();
+        for (T t : saved) {
+            ids.add(t.getId());
+        }
 
-		for (T t : saved) {
-			ids.add(t.getId());
-		}
+        Iterable<T> found = service.findAll(ids);
+        Assert.assertEquals(saved, found);
+    }
 
-		Iterable<T> found = service.findAll(ids);
-		Assert.assertEquals(saved, found);
-	}
+    @Test
+    public void findAllEntitiesByPageableTest() {
+        Iterable<T> found = service.findAll(sort);
+        service.delete(found);
+        Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(sort));
+    }
 
-	@Test
-	public void findAllEntitiesByPageableTest() {
-		Iterable<T> found = service.findAll(sort);
-		service.delete(found);
-		Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(sort));
-	}
+    @Test
+    public void findAllEntitiesBySortTest() {
+        Iterable<T> found = service.findAll(sort);
+        service.delete(found);
+        Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(sort));
+    }
 
-	@Test
-	public void findAllEntitiesBySortTest() {
-		Iterable<T> found = service.findAll(sort);
-		service.delete(found);
-		Assert.assertEquals(Collections.EMPTY_LIST, service.findAll(sort));
-	}
+    @Test
+    public void findOneEntityByIdTest() {
+        T found = service.findOne(id);
+        Assert.assertEquals(found == null, !service.exists(id));
+    }
 
-	@Test
-	public void findOneEntityByIdTest() {
-		T found = service.findOne(id);
-		Assert.assertEquals(found == null, !service.exists(id));
-	}
+    @Test
+    public void flushPendingChangesTest() {
+        // Just invoke this method
+        service.flush();
+    }
 
-	@Test
-	public void flushPendingChangesTest() {
-		// Just invoke this method
-		service.flush();
-	}
+    @Test
+    public void saveSequenceOfEntitiesTest() {
+        Iterable<? extends T> saved = service.save(entities);
 
-	@Test
-	public void saveSequenceOfEntitiesTest() {
-		Iterable<? extends T> saved = service.save(entities);
+        List<ID> ids = new ArrayList<>();
 
-		List<ID> ids = new ArrayList<>();
+        for (T t : saved) {
+            ids.add(t.getId());
+        }
 
-		for (T t : saved) {
-			ids.add(t.getId());
-		}
+        Assert.assertEquals(saved, service.findAll(ids));
+    }
 
-		Assert.assertEquals(saved, service.findAll(ids));
-	}
+    @Test
+    public void saveOneEntityTest() {
+        T saved = service.save(entity);
+        Assert.assertEquals(entity, service.findOne(saved.getId()));
+    }
 
-	@Test
-	public void saveOneEntityTest() {
-		T saved = service.save(entity);
-		Assert.assertEquals(entity, service.findOne(saved.getId()));
-	}
-
-	@Test
-	public void saveOneEntityAndFlushTest() {
-		T saved = service.save(entity);
-		Assert.assertEquals(entity, service.findOne(saved.getId()));
-	}
+    @Test
+    public void saveOneEntityAndFlushTest() {
+        T saved = service.save(entity);
+        Assert.assertEquals(entity, service.findOne(saved.getId()));
+    }
 
 }
