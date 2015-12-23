@@ -1,21 +1,18 @@
 package com.github.pixelase.webproject.dataaccess.repository;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Address;
 import com.github.pixelase.webproject.dataaccess.model.Tenant;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface TenantRepository extends JpaRepository<Tenant, Integer> {
+    Tenant findOneByAccount(Account account);
 
-    Tenant findOneByFirstNameAndLastName(String firstName, String lastName);
-
-    List<Tenant> findAllByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(String firstName,
-                                                                                       String lastName);
-
-    @Query(value = "DELETE FROM tenant WHERE first_name = ?1 AND last_name = ?2 RETURNING *", nativeQuery = true)
-    Tenant delete(String firstName, String lastName);
+    List<Tenant> deleteByAccount(Account account);
 
     List<Tenant> deleteAllByAddress(Address address);
+
+    List<Tenant> findAllByAddress(Address address);
 }

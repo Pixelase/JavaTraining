@@ -16,9 +16,8 @@ public class Employee implements Persistable<Integer> {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
+    private Account account;
     private WorkType workType;
-    private String firstName;
-    private String lastName;
     private Long salary;
     private Set<Brigade> brigades = new HashSet<Brigade>(0);
 
@@ -31,20 +30,18 @@ public class Employee implements Persistable<Integer> {
         this.id = id;
     }
 
-    public Employee(WorkType workType, String firstName, String lastName, Long salary) {
+    public Employee(Account account, WorkType workType, Long salary) {
         super();
+        this.account = account;
         this.workType = workType;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.salary = salary;
     }
 
-    public Employee(Integer id, WorkType workType, String firstName, String lastName, Long salary) {
+    public Employee(Integer id, Account account, WorkType workType, Long salary) {
         super();
         this.id = id;
+        this.account = account;
         this.workType = workType;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.salary = salary;
     }
 
@@ -59,6 +56,16 @@ public class Employee implements Persistable<Integer> {
         this.id = id;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    public Account getAccount() {
+        return this.account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_type_id")
     public WorkType getWorkType() {
@@ -67,24 +74,6 @@ public class Employee implements Persistable<Integer> {
 
     public void setWorkType(WorkType workType) {
         this.workType = workType;
-    }
-
-    @Column(name = "first_name")
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    @Column(name = "last_name")
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     @Column(name = "salary")
@@ -135,8 +124,7 @@ public class Employee implements Persistable<Integer> {
 
     @Override
     public String toString() {
-        return "Employee [id=" + id + ", workType=" + workType + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", salary=" + salary + "]";
+        return "Employee [id=" + id + ", account=" + account + ", workType=" + workType + ", salary=" + salary + "]";
     }
 
     @Override

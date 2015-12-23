@@ -37,15 +37,15 @@ public class BasicAuthenticationSession extends AuthenticatedWebSession {
         private final String userName = "admin";
         private final String password = "test";
 
+        public Account() {
+        }
+
         public String getUserName() {
             return userName;
         }
 
         public String getPassword() {
             return password;
-        }
-
-        public Account() {
         }
     }
 }

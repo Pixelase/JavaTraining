@@ -47,6 +47,7 @@ public class ManagerServiceImpl implements ManagerService {
                 result = new Brigade(request, date);
                 result.setEmployees(new HashSet<Employee>(brigadeMembers));
                 result = brigadeService.save(result);
+                request.setBrigade(result);
                 LOGGER.info("{} successfully registered", Brigade.class.getSimpleName());
             }
             LOGGER.info("{} doesn't exists in database", request);

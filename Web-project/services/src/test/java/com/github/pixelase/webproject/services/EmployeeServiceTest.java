@@ -1,5 +1,6 @@
 package com.github.pixelase.webproject.services;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Employee;
 import com.github.pixelase.webproject.dataaccess.model.WorkType;
 import com.github.pixelase.webproject.services.common.AbstractServiceTest;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -19,21 +21,29 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
 
     @Autowired
     WorkTypeService workTypeService;
+    @Autowired
+    private AccountService accountService;
 
     @Before
     public void before() {
+        final Account account = accountService.save(new Account(
+                RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH), new Date()));
+        entity.setAccount(account);
+
         final WorkType workType = workTypeService.save(new WorkType());
         entity.setWorkType(workType);
 
         for (Employee employee : entities) {
+            employee.setAccount(account);
             employee.setWorkType(workType);
         }
     }
 
     @Override
     protected Employee generateEntity() {
-        return new Employee(null, RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomUtils.nextLong(0, MAX_NUMBER + 1));
+        return new Employee(null, null, RandomUtils.nextLong(0, MAX_NUMBER + 1));
     }
 
     @Override
@@ -53,12 +63,20 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
     }
 
     @Test
+    public void deleteEmployeeByAccountTest() {
+        Employee saved = service.save(entity);
+        Employee deleted = service.delete(entity.getAccount());
+
+        Assert.assertEquals(saved, deleted);
+    }
+
+
+    @Test
     public void deleteAllEmployeesBySalaryTest() {
         List<Employee> employees = new ArrayList<>();
 
         for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(entity.getWorkType(), entity.getFirstName(), entity.getLastName(),
-                    entity.getSalary()));
+            employees.add(new Employee(entity.getAccount(), entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> savedEmployees = service.save(employees);
@@ -72,8 +90,7 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
         List<Employee> employees = new ArrayList<>();
 
         for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(entity.getWorkType(), entity.getFirstName(), entity.getLastName(),
-                    entity.getSalary()));
+            employees.add(new Employee(entity.getAccount(), entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> savedEmployees = service.save(employees);
@@ -83,35 +100,11 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
     }
 
     @Test
-    public void deleteEmployeeByFirstNameAndLastNameTest() {
-        Employee saved = service.save(entity);
-        Employee deleted = service.delete(entity.getFirstName(), entity.getLastName());
-
-        Assert.assertEquals(saved, deleted);
-    }
-
-    @Test
-    public void findAllEmployeesByPartialMatchingTest() {
-        List<Employee> employees = new ArrayList<>();
-
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(null, entity.getFirstName() + RandomStringUtils.random(5),
-                    entity.getLastName() + RandomStringUtils.random(5), entity.getSalary()));
-        }
-
-        List<Employee> saved = service.save(employees);
-        List<Employee> found = service.findAllByPartialMatching(entity.getFirstName(), entity.getLastName());
-
-        Assert.assertEquals(saved, found);
-    }
-
-    @Test
     public void findAllEmployeesByWorkTypeTest() {
         List<Employee> employees = new ArrayList<>();
 
         for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(entity.getWorkType(), entity.getFirstName() + RandomStringUtils.random(5),
-                    entity.getLastName() + RandomStringUtils.random(5), entity.getSalary()));
+            employees.add(new Employee(entity.getAccount(), entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> saved = service.save(employees);
@@ -121,9 +114,9 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
     }
 
     @Test
-    public void findOneEmployeeByFirstNameAndLastNameTest() {
+    public void findOneEmployeeByAccountTest() {
         Employee saved = service.save(entity);
-        Employee found = service.findOne(entity.getFirstName(), entity.getLastName());
+        Employee found = service.findOne(entity.getAccount());
 
         Assert.assertEquals(saved, found);
     }

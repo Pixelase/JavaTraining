@@ -54,8 +54,8 @@ public class Brigade implements Persistable<Integer> {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_request_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "work_request_id", nullable = false)
     public WorkRequest getWorkRequest() {
         return this.workRequest;
     }

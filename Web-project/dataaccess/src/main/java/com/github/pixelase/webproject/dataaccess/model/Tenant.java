@@ -16,9 +16,8 @@ public class Tenant implements Persistable<Integer> {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
+    private Account account;
     private Address address;
-    private String firstName;
-    private String lastName;
     private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
 
     public Tenant() {
@@ -30,19 +29,17 @@ public class Tenant implements Persistable<Integer> {
         this.id = id;
     }
 
-    public Tenant(Address address, String firstName, String lastName) {
+    public Tenant(Account account, Address address) {
         super();
+        this.account = account;
         this.address = address;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
-    public Tenant(Integer id, Address address, String firstName, String lastName) {
+    public Tenant(Integer id, Account account, Address address) {
         super();
         this.id = id;
+        this.account = account;
         this.address = address;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     @Id
@@ -56,6 +53,16 @@ public class Tenant implements Persistable<Integer> {
         this.id = id;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    public Account getAccount() {
+        return this.account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     public Address getAddress() {
@@ -64,24 +71,6 @@ public class Tenant implements Persistable<Integer> {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    @Column(name = "first_name")
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    @Column(name = "last_name")
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")
@@ -120,8 +109,7 @@ public class Tenant implements Persistable<Integer> {
 
     @Override
     public String toString() {
-        return "Tenant [id=" + id + ", address=" + address + ", firstName=" + firstName + ", lastName=" + lastName
-                + "]";
+        return "Tenant [id=" + id + ", account=" + account + ", address=" + address + "]";
     }
 
     @Override

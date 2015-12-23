@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -15,13 +16,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>> extends AbstractSpringTest {
+
+@Transactional
+public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>>
+        extends AbstractSpringTest {
     protected final T entity;
     protected final Iterable<? extends T> entities;
     protected final ID id;
     protected final Sort sort;
     protected final Pageable pageable;
     protected final List<String> columnNames;
+
     @Autowired
     protected SERVICE service;
 

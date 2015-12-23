@@ -8,12 +8,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@Transactional
 public class ManagerServiceTest extends AbstractSpringTest {
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private AddressService addressService;
 
     @Autowired
     private TenantService tenantService;
@@ -25,13 +33,13 @@ public class ManagerServiceTest extends AbstractSpringTest {
     private WorkScopeService workScopeService;
 
     @Autowired
+    private WorkRequestService requestService;
+
+    @Autowired
     private EmployeeService employeeService;
 
     @Autowired
     private BrigadeService brigadeService;
-
-    @Autowired
-    private WorkRequestService requestService;
 
     @Autowired
     private ManagerService managerService;
@@ -40,18 +48,32 @@ public class ManagerServiceTest extends AbstractSpringTest {
 
     @Before
     public void before() {
+        final Account tenantAccount = accountService.save(new Account(
+                RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH), new Date()));
+
+        final Address address = addressService.save(new Address(RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH)));
+
+        final Tenant tenant = tenantService.save(new Tenant(tenantAccount, address));
+
         final WorkScope workScope = workScopeService.save(
                 new WorkScope(RandomStringUtils.random(MAX_STRING_LENGTH), RandomUtils.nextInt(1, MAX_ENTITIES_COUNT)));
         final WorkType workType = workTypeService.save(new WorkType(RandomStringUtils.random(MAX_STRING_LENGTH)));
 
-        Tenant savedTenant = tenantService.save(new Tenant());
         workRequest = requestService
-                .save(new WorkRequest(savedTenant, workScope, workType, new Date(System.currentTimeMillis())));
+                .save(new WorkRequest(tenant, workScope, workType, new Date(System.currentTimeMillis())));
 
         Set<Employee> employees = new HashSet<>();
         for (int i = 0; i < workScope.getEmployeesCount(); i++) {
-            employees.add(new Employee(workType, RandomStringUtils.random(MAX_STRING_LENGTH),
-                    RandomStringUtils.random(MAX_STRING_LENGTH), RandomUtils.nextLong(1, MAX_NUMBER)));
+            final Account newEmployeeAccount = accountService
+                    .save(new Account(RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
+                            RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
+                            RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
+                            new Date()));
+
+            employees.add(new Employee(newEmployeeAccount, workType, RandomUtils.nextLong(1, MAX_NUMBER)));
         }
         employeeService.save(employees);
     }
@@ -71,5 +93,4 @@ public class ManagerServiceTest extends AbstractSpringTest {
 
         Assert.assertTrue(result);
     }
-
 }

@@ -1,10 +1,8 @@
 package com.github.pixelase.webproject.services;
 
-import com.github.pixelase.webproject.dataaccess.model.Tenant;
-import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
-import com.github.pixelase.webproject.dataaccess.model.WorkScope;
-import com.github.pixelase.webproject.dataaccess.model.WorkType;
+import com.github.pixelase.webproject.dataaccess.model.*;
 import com.github.pixelase.webproject.services.common.AbstractServiceTest;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,19 +18,34 @@ import java.util.List;
 public class WorkRequestServiceTest extends AbstractServiceTest<WorkRequest, Integer, WorkRequestService> {
 
     @Autowired
-    TenantService tenantService;
+    private AccountService accountService;
 
     @Autowired
-    WorkScopeService workScopeService;
+    private AddressService addressService;
 
     @Autowired
-    WorkTypeService workTypeService;
+    private TenantService tenantService;
+
+    @Autowired
+    private WorkScopeService workScopeService;
+
+    @Autowired
+    private WorkTypeService workTypeService;
 
     @Before
     public void before() {
-        final Tenant tenant = tenantService.save(new Tenant());
-        final WorkScope workScope = workScopeService.save(new WorkScope());
-        final WorkType workType = workTypeService.save(new WorkType());
+        final Account tenantAccount = accountService.save(new Account(
+                RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH), new Date()));
+
+        final Address address = addressService.save(new Address(RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH)));
+
+        final Tenant tenant = tenantService.save(new Tenant(tenantAccount, address));
+        final WorkScope workScope = workScopeService.save(
+                new WorkScope(RandomStringUtils.random(MAX_STRING_LENGTH), RandomUtils.nextInt(1, MAX_ENTITIES_COUNT)));
+        final WorkType workType = workTypeService.save(new WorkType(RandomStringUtils.random(MAX_STRING_LENGTH)));
 
         entity.setTenant(tenant);
         entity.setWorkScope(workScope);

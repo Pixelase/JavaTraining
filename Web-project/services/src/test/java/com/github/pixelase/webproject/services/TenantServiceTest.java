@@ -1,5 +1,6 @@
 package com.github.pixelase.webproject.services;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Address;
 import com.github.pixelase.webproject.dataaccess.model.Tenant;
 import com.github.pixelase.webproject.services.common.AbstractServiceTest;
@@ -12,28 +13,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
 public class TenantServiceTest extends AbstractServiceTest<Tenant, Integer, TenantService> {
 
     @Autowired
-    AddressService addressService;
+    private AccountService accountService;
+
+    @Autowired
+    private AddressService addressService;
 
     @Before
     public void before() {
-        final Address address = addressService.save(new Address());
+        final Account account = accountService.save(new Account(
+                RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH), new Date()));
+        entity.setAccount(account);
+
+        final Address address = addressService.save(new Address(RandomStringUtils.random(MAX_STRING_LENGTH),
+                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH)));
         entity.setAddress(address);
 
         for (Tenant tenant : entities) {
+            tenant.setAccount(account);
             tenant.setAddress(address);
         }
     }
 
     @Override
     protected Tenant generateEntity() {
-        return new Tenant(null, RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH));
+        return new Tenant();
     }
 
     @Override
@@ -53,47 +65,45 @@ public class TenantServiceTest extends AbstractServiceTest<Tenant, Integer, Tena
     }
 
     @Test
-    public void deleteAllTenantsByAddress() {
-        List<Tenant> tenants = new ArrayList<>();
-        Address savedAddress = addressService.save(new Address());
-
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            tenants.add(new Tenant(savedAddress, entity.getFirstName(), entity.getLastName()));
-        }
-
-        List<Tenant> savedTenants = service.save(tenants);
-        List<Tenant> deletedTenants = service.deleteAll(savedAddress);
-
-        Assert.assertEquals(savedTenants, deletedTenants);
-    }
-
-    @Test
-    public void deleteTenantByFirstNameAndLastNameTest() {
+    public void deleteTenantByAccountTest() {
         Tenant saved = service.save(entity);
-        Tenant deleted = service.delete(entity.getFirstName(), entity.getLastName());
+        Tenant deleted = service.delete(entity.getAccount());
 
         Assert.assertEquals(saved, deleted);
     }
 
     @Test
-    public void findAllTenantsByPartialMatchingTest() {
+    public void deleteAllTenantsByAddress() {
         List<Tenant> tenants = new ArrayList<>();
 
         for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            tenants.add(new Tenant(null, entity.getFirstName() + RandomStringUtils.random(5),
-                    entity.getLastName() + RandomStringUtils.random(5)));
+            tenants.add(new Tenant(entity.getAccount(), entity.getAddress()));
+        }
+
+        List<Tenant> savedTenants = service.save(tenants);
+        List<Tenant> deletedTenants = service.deleteAll(entity.getAddress());
+
+        Assert.assertEquals(savedTenants, deletedTenants);
+    }
+
+    @Test
+    public void findAllTenantsByAddressTest() {
+        List<Tenant> tenants = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            tenants.add(new Tenant(entity.getAccount(), entity.getAddress()));
         }
 
         List<Tenant> saved = service.save(tenants);
-        List<Tenant> found = service.findAllByPartialMatching(entity.getFirstName(), entity.getLastName());
+        List<Tenant> found = service.findAll(entity.getAddress());
 
         Assert.assertEquals(saved, found);
     }
 
     @Test
-    public void findOneTenantByFirstNameAndLastNameTest() {
+    public void findOneTenantByAccountTest() {
         Tenant saved = service.save(entity);
-        Tenant found = service.findOne(entity.getFirstName(), entity.getLastName());
+        Tenant found = service.findOne(entity.getAccount());
 
         Assert.assertEquals(saved, found);
     }

@@ -1,5 +1,6 @@
 package com.github.pixelase.webproject.services.impl;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Employee;
 import com.github.pixelase.webproject.dataaccess.model.WorkType;
 import com.github.pixelase.webproject.dataaccess.repository.EmployeeRepository;
@@ -20,9 +21,10 @@ public class EmployeeServiceImpl extends AbstractGenericService<Employee, Intege
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     @Override
-    public Employee delete(String firstName, String lastName) {
-        LOGGER.info("Deleting {} with firstName= \"{}\" and lastName= \"{}\"", simpleTypeName, firstName, lastName);
-        return repository.delete(firstName, lastName);
+    public Employee delete(Account account) {
+        LOGGER.info("Deleting {} with {}", simpleTypeName, account);
+        List<Employee> deleted = repository.deleteByAccount(account);
+        return (deleted.isEmpty()) ? new Employee() : deleted.get(0);
     }
 
     @Override
@@ -38,17 +40,6 @@ public class EmployeeServiceImpl extends AbstractGenericService<Employee, Intege
     }
 
     @Override
-    public List<Employee> findAllByPartialMatching(String firstName, String lastName) {
-        LOGGER.debug("Finding all {} entities by partial matching (firstName= \"{}\" and lastName= \"{}\")",
-                simpleTypeName, firstName, lastName);
-        List<Employee> found = repository
-                .findAllByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase(firstName, lastName);
-        LOGGER.trace("Search results: {}", found);
-
-        return found;
-    }
-
-    @Override
     public List<Employee> findAll(WorkType workType) {
         LOGGER.debug("Finding all {} entities with {}", simpleTypeName, workType);
         List<Employee> found = repository.findAllByWorkType(workType);
@@ -58,10 +49,9 @@ public class EmployeeServiceImpl extends AbstractGenericService<Employee, Intege
     }
 
     @Override
-    public Employee findOne(String firstName, String lastName) {
-        LOGGER.debug("Finding {} entity with firstName= \"{}\" and lastName= \"{}\"", simpleTypeName, firstName,
-                lastName);
-        Employee found = repository.findOneByFirstNameAndLastName(firstName, lastName);
+    public Employee findOne(Account account) {
+        LOGGER.debug("Finding {} entity with login= {}", simpleTypeName, account);
+        Employee found = repository.findOneByAccount(account);
         LOGGER.trace("Search results: {}", found);
 
         return found;
