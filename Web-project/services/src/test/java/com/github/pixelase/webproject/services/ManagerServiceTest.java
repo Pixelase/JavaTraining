@@ -1,16 +1,16 @@
 package com.github.pixelase.webproject.services;
 
-import com.github.pixelase.webproject.dataaccess.model.*;
+import com.github.pixelase.webproject.dataaccess.model.Brigade;
+import com.github.pixelase.webproject.dataaccess.model.Employee;
+import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
 import com.github.pixelase.webproject.services.common.AbstractSpringTest;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
+import com.github.pixelase.webproject.services.common.EntityUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,19 +18,7 @@ import java.util.Set;
 public class ManagerServiceTest extends AbstractSpringTest {
 
     @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private AddressService addressService;
-
-    @Autowired
-    private TenantService tenantService;
-
-    @Autowired
-    private WorkTypeService workTypeService;
-
-    @Autowired
-    private WorkScopeService workScopeService;
+    protected EntityUtils entityUtils;
 
     @Autowired
     private WorkRequestService requestService;
@@ -48,32 +36,14 @@ public class ManagerServiceTest extends AbstractSpringTest {
 
     @Before
     public void before() {
-        final Account tenantAccount = accountService.save(new Account(
-                RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH), new Date()));
-
-        final Address address = addressService.save(new Address(RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH)));
-
-        final Tenant tenant = tenantService.save(new Tenant(tenantAccount, address));
-
-        final WorkScope workScope = workScopeService.save(
-                new WorkScope(RandomStringUtils.random(MAX_STRING_LENGTH), RandomUtils.nextInt(1, MAX_ENTITIES_COUNT)));
-        final WorkType workType = workTypeService.save(new WorkType(RandomStringUtils.random(MAX_STRING_LENGTH)));
-
-        workRequest = requestService
-                .save(new WorkRequest(tenant, workScope, workType, new Date(System.currentTimeMillis())));
+        workRequest = requestService.save(entityUtils.generateWorkRequest());
 
         Set<Employee> employees = new HashSet<>();
-        for (int i = 0; i < workScope.getEmployeesCount(); i++) {
-            final Account newEmployeeAccount = accountService
-                    .save(new Account(RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
-                            RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
-                            RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
-                            new Date()));
+        for (int i = 0; i < workRequest.getWorkScope().getEmployeesCount(); i++) {
+            Employee employee = entityUtils.generateEmployee();
+            employee.setWorkType(workRequest.getWorkType());
 
-            employees.add(new Employee(newEmployeeAccount, workType, RandomUtils.nextLong(1, MAX_NUMBER)));
+            employees.add(employee);
         }
         employeeService.save(employees);
     }

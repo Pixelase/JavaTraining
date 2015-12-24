@@ -1,65 +1,32 @@
 package com.github.pixelase.webproject.services;
 
-import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Employee;
-import com.github.pixelase.webproject.dataaccess.model.WorkType;
-import com.github.pixelase.webproject.services.common.AbstractServiceTest;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
+import com.github.pixelase.webproject.services.common.EntityUtils;
+import com.github.pixelase.webproject.services.common.GenericServiceTest;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Transactional
-public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, EmployeeService> {
-
-    @Autowired
-    WorkTypeService workTypeService;
-    @Autowired
-    private AccountService accountService;
-
-    @Before
-    public void before() {
-        final Account account = accountService.save(new Account(
-                RandomStringUtils.random(AccountServiceTest.MAX_LOGIN_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH), new Date()));
-        entity.setAccount(account);
-
-        final WorkType workType = workTypeService.save(new WorkType());
-        entity.setWorkType(workType);
-
-        for (Employee employee : entities) {
-            employee.setAccount(account);
-            employee.setWorkType(workType);
-        }
-    }
+public class EmployeeServiceTest extends GenericServiceTest<Employee, Integer, EmployeeService> {
 
     @Override
     protected Employee generateEntity() {
-        return new Employee(null, null, RandomUtils.nextLong(0, MAX_NUMBER + 1));
+        return entityUtils.generateEmployee();
     }
 
     @Override
-    protected Iterable<? extends Employee> generateEntities(int entitieCount) {
+    protected Iterable<? extends Employee> generateEntities(int entitiesCount) {
         List<Employee> list = new ArrayList<>();
 
-        for (int i = 0; i < MAX_ENTITIES_COUNT; i++) {
+        for (int i = 0; i < entitiesCount; i++) {
             list.add(generateEntity());
         }
 
         return list;
-    }
-
-    @Override
-    protected Integer generateId() {
-        return RandomUtils.nextInt(1, MAX_NUMBER);
     }
 
     @Test
@@ -75,8 +42,8 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
     public void deleteAllEmployeesBySalaryTest() {
         List<Employee> employees = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(entity.getAccount(), entity.getWorkType(), entity.getSalary()));
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+            employees.add(new Employee(entityUtils.generateAccount(), entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> savedEmployees = service.save(employees);
@@ -89,8 +56,8 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
     public void deleteAllEmployeesByWorkTypeTest() {
         List<Employee> employees = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(entity.getAccount(), entity.getWorkType(), entity.getSalary()));
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+            employees.add(new Employee(entityUtils.generateAccount(), entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> savedEmployees = service.save(employees);
@@ -103,8 +70,8 @@ public class EmployeeServiceTest extends AbstractServiceTest<Employee, Integer, 
     public void findAllEmployeesByWorkTypeTest() {
         List<Employee> employees = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            employees.add(new Employee(entity.getAccount(), entity.getWorkType(), entity.getSalary()));
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+            employees.add(new Employee(entityUtils.generateAccount(), entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> saved = service.save(employees);

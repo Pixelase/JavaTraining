@@ -56,7 +56,7 @@ public class Employee implements Persistable<Integer> {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", nullable = false)
     public Account getAccount() {
         return this.account;
@@ -64,6 +64,9 @@ public class Employee implements Persistable<Integer> {
 
     public void setAccount(Account account) {
         this.account = account;
+        if (account.getEmployee() != this) {
+            account.setEmployee(this);
+        }
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,6 +77,9 @@ public class Employee implements Persistable<Integer> {
 
     public void setWorkType(WorkType workType) {
         this.workType = workType;
+        if (!workType.getEmployees().contains(this)) {
+            workType.getEmployees().add(this);
+        }
     }
 
     @Column(name = "salary")

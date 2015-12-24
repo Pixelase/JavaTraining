@@ -1,7 +1,8 @@
 package com.github.pixelase.webproject.services;
 
 import com.github.pixelase.webproject.dataaccess.model.WorkScope;
-import com.github.pixelase.webproject.services.common.AbstractServiceTest;
+import com.github.pixelase.webproject.services.common.EntityUtils;
+import com.github.pixelase.webproject.services.common.GenericServiceTest;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
@@ -12,27 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
-public class WorkScopeServiceTest extends AbstractServiceTest<WorkScope, Integer, WorkScopeService> {
+public class WorkScopeServiceTest extends GenericServiceTest<WorkScope, Integer, WorkScopeService> {
 
     @Override
     protected WorkScope generateEntity() {
-        return new WorkScope(RandomStringUtils.random(MAX_STRING_LENGTH), RandomUtils.nextInt(1, MAX_NUMBER + 1));
+        return entityUtils.generateWorkScope();
     }
 
     @Override
-    protected Iterable<? extends WorkScope> generateEntities(int entitieCount) {
+    protected Iterable<? extends WorkScope> generateEntities(int entitiesCount) {
         List<WorkScope> list = new ArrayList<>();
 
-        for (int i = 0; i < MAX_ENTITIES_COUNT; i++) {
+        for (int i = 0; i < entitiesCount; i++) {
             list.add(generateEntity());
         }
 
         return list;
-    }
-
-    @Override
-    protected Integer generateId() {
-        return RandomUtils.nextInt(1, MAX_NUMBER);
     }
 
     @Test
@@ -47,9 +43,9 @@ public class WorkScopeServiceTest extends AbstractServiceTest<WorkScope, Integer
     public void findAllWorkScopesByEmployeesCountGteTest() {
         List<WorkScope> workScopes = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
             workScopes.add(
-                    new WorkScope(entity.getName(), entity.getEmployeesCount() + RandomUtils.nextInt(1, MAX_NUMBER)));
+                    new WorkScope(entity.getName(), entity.getEmployeesCount() + RandomUtils.nextInt(1, EntityUtils.MAX_NUMBER)));
         }
 
         List<WorkScope> saved = service.save(workScopes);
@@ -62,7 +58,7 @@ public class WorkScopeServiceTest extends AbstractServiceTest<WorkScope, Integer
     public void findAllWorkScopesByEmployeesCountLteTest() {
         List<WorkScope> workScopes = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
             workScopes.add(new WorkScope(entity.getName(), entity.getEmployeesCount()));
         }
 
@@ -77,7 +73,7 @@ public class WorkScopeServiceTest extends AbstractServiceTest<WorkScope, Integer
     public void findAllWorkScopesByPartialMatchingTest() {
         List<WorkScope> workScopes = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
             workScopes.add(new WorkScope(entity.getName() + RandomStringUtils.random(5), entity.getEmployeesCount()));
         }
 

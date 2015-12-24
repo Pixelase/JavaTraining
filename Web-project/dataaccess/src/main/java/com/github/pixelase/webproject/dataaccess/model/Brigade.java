@@ -62,6 +62,9 @@ public class Brigade implements Persistable<Integer> {
 
     public void setWorkRequest(WorkRequest workRequest) {
         this.workRequest = workRequest;
+        if (workRequest.getBrigade() != this) {
+            workRequest.setBrigade(this);
+        }
     }
 
     @Temporal(TemporalType.DATE)

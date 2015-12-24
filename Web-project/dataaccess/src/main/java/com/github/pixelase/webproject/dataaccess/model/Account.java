@@ -136,7 +136,7 @@ public class Account implements Persistable<Integer> {
         this.roles = roles;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "account")
     public Employee getEmployee() {
         return this.employee;
     }
@@ -145,7 +145,7 @@ public class Account implements Persistable<Integer> {
         this.employee = employee;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "account")
     public Tenant getTenant() {
         return this.tenant;
     }

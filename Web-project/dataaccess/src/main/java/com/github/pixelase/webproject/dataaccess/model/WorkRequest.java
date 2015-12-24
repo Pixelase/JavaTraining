@@ -66,6 +66,9 @@ public class WorkRequest implements Persistable<Integer> {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+        if (!tenant.getWorkRequests().contains(this)) {
+            tenant.getWorkRequests().add(this);
+        }
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -76,6 +79,9 @@ public class WorkRequest implements Persistable<Integer> {
 
     public void setWorkScope(WorkScope workScope) {
         this.workScope = workScope;
+        if (!workScope.getWorkRequests().contains(this)) {
+            workScope.getWorkRequests().add(this);
+        }
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -86,6 +92,9 @@ public class WorkRequest implements Persistable<Integer> {
 
     public void setWorkType(WorkType workType) {
         this.workType = workType;
+        if (!workType.getWorkRequests().contains(this)) {
+            workType.getWorkRequests().add(this);
+        }
     }
 
     @Temporal(TemporalType.DATE)

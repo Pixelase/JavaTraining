@@ -53,7 +53,7 @@ public class Tenant implements Persistable<Integer> {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", nullable = false)
     public Account getAccount() {
         return this.account;
@@ -61,6 +61,9 @@ public class Tenant implements Persistable<Integer> {
 
     public void setAccount(Account account) {
         this.account = account;
+        if (account.getTenant() != this) {
+            account.setTenant(this);
+        }
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -71,6 +74,9 @@ public class Tenant implements Persistable<Integer> {
 
     public void setAddress(Address address) {
         this.address = address;
+        if (!address.getTenants().contains(this)) {
+            address.getTenants().add(this);
+        }
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tenant")

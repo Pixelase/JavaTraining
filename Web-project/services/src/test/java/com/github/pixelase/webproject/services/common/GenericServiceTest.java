@@ -2,6 +2,7 @@ package com.github.pixelase.webproject.services.common;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -18,22 +19,25 @@ import java.util.List;
 
 
 @Transactional
-public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>>
+public abstract class GenericServiceTest<T extends Persistable<ID>, ID extends Serializable, SERVICE extends GenericService<T, ID>>
         extends AbstractSpringTest {
-    protected final T entity;
-    protected final Iterable<? extends T> entities;
-    protected final ID id;
-    protected final Sort sort;
-    protected final Pageable pageable;
-    protected final List<String> columnNames;
+
+    protected T entity;
+    protected Iterable<? extends T> entities;
+    protected Sort sort;
+    protected Pageable pageable;
+    protected List<String> columnNames;
 
     @Autowired
     protected SERVICE service;
 
-    public AbstractServiceTest() {
+    @Autowired
+    protected EntityUtils entityUtils;
+
+    @Before
+    public void initialization() {
         this.entity = generateEntity();
-        this.entities = generateEntities(MAX_ENTITIES_COUNT);
-        this.id = generateId();
+        this.entities = generateEntities(EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT));
         this.sort = generateSort();
         this.pageable = generatePageable();
         this.columnNames = getFieldsNames();
@@ -43,14 +47,12 @@ public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends 
 
     protected abstract Iterable<? extends T> generateEntities(int maxEntitiesCount);
 
-    protected abstract ID generateId();
-
     protected Sort generateSort() {
         return new Sort(getRandomFieldName());
     }
 
     protected Pageable generatePageable() {
-        return new PageRequest(1, RandomUtils.nextInt(1, MAX_ENTITIES_COUNT));
+        return new PageRequest(1, EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT));
     }
 
     protected List<String> getFieldsNames() {
@@ -175,8 +177,9 @@ public abstract class AbstractServiceTest<T extends Persistable<ID>, ID extends 
 
     @Test
     public void findOneEntityByIdTest() {
-        T found = service.findOne(id);
-        Assert.assertEquals(found == null, !service.exists(id));
+        service.save(entity);
+        T found = service.findOne(entity.getId());
+        Assert.assertEquals(found == null, !service.exists(entity.getId()));
     }
 
     @Test

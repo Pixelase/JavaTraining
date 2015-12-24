@@ -1,9 +1,9 @@
 package com.github.pixelase.webproject.services;
 
 import com.github.pixelase.webproject.dataaccess.model.Role;
-import com.github.pixelase.webproject.services.common.AbstractServiceTest;
+import com.github.pixelase.webproject.services.common.EntityUtils;
+import com.github.pixelase.webproject.services.common.GenericServiceTest;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,27 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
-public class RoleServiceTest extends AbstractServiceTest<Role, Integer, RoleService> {
+public class RoleServiceTest extends GenericServiceTest<Role, Integer, RoleService> {
 
     @Override
     protected Role generateEntity() {
-        return new Role(RandomStringUtils.random(MAX_STRING_LENGTH));
+        return entityUtils.generateRole();
     }
 
     @Override
-    protected Iterable<? extends Role> generateEntities(int entitieCount) {
+    protected Iterable<? extends Role> generateEntities(int entitiesCount) {
         List<Role> list = new ArrayList<>();
 
-        for (int i = 0; i < MAX_ENTITIES_COUNT; i++) {
+        for (int i = 0; i < entitiesCount; i++) {
             list.add(generateEntity());
         }
 
         return list;
-    }
-
-    @Override
-    protected Integer generateId() {
-        return RandomUtils.nextInt(1, MAX_NUMBER);
     }
 
     @Test
@@ -47,7 +42,7 @@ public class RoleServiceTest extends AbstractServiceTest<Role, Integer, RoleServ
     public void findAllRolesByPartialMatchingTest() {
         List<Role> workTypes = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
             workTypes.add(new Role(entity.getName() + RandomStringUtils.random(5)));
         }
 

@@ -1,9 +1,8 @@
 package com.github.pixelase.webproject.services;
 
 import com.github.pixelase.webproject.dataaccess.model.Account;
-import com.github.pixelase.webproject.services.common.AbstractServiceTest;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
+import com.github.pixelase.webproject.services.common.EntityUtils;
+import com.github.pixelase.webproject.services.common.GenericServiceTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,31 +12,22 @@ import java.util.Date;
 import java.util.List;
 
 @Transactional
-public class AccountServiceTest extends AbstractServiceTest<Account, Integer, AccountService> {
-
-    public final static int MAX_LOGIN_LENGTH = 19;
+public class AccountServiceTest extends GenericServiceTest<Account, Integer, AccountService> {
 
     @Override
     protected Account generateEntity() {
-        return new Account(RandomStringUtils.random(MAX_LOGIN_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), RandomStringUtils.random(MAX_STRING_LENGTH),
-                RandomStringUtils.random(MAX_STRING_LENGTH), new Date());
+        return entityUtils.generateAccount();
     }
 
     @Override
-    protected Iterable<? extends Account> generateEntities(int entitieCount) {
+    protected Iterable<? extends Account> generateEntities(int entitiesCount) {
         List<Account> list = new ArrayList<>();
 
-        for (int i = 0; i < MAX_ENTITIES_COUNT; i++) {
+        for (int i = 0; i < entitiesCount; i++) {
             list.add(generateEntity());
         }
 
         return list;
-    }
-
-    @Override
-    protected Integer generateId() {
-        return RandomUtils.nextInt(1, MAX_NUMBER);
     }
 
     @Test
@@ -69,8 +59,8 @@ public class AccountServiceTest extends AbstractServiceTest<Account, Integer, Ac
         List<Account> accounts = new ArrayList<>();
         Date birthDate = new Date(System.currentTimeMillis());
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            accounts.add(new Account(RandomStringUtils.random(MAX_LOGIN_LENGTH), entity.getEmail(),
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+            accounts.add(new Account(entity.getLogin() + i, entity.getEmail() + i,
                     entity.getCryptedPassword(), entity.getFirstName(), entity.getLastName(), birthDate));
         }
 
@@ -84,8 +74,8 @@ public class AccountServiceTest extends AbstractServiceTest<Account, Integer, Ac
     public void findAllAccountsByEmailPartialMatchingTest() {
         List<Account> accounts = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            accounts.add(new Account(RandomStringUtils.random(MAX_LOGIN_LENGTH), entity.getEmail(),
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+            accounts.add(new Account(entity.getLogin() + i, entity.getEmail() + i,
                     entity.getCryptedPassword(), entity.getFirstName(), entity.getLastName(), entity.getBirthDate()));
         }
 
@@ -99,8 +89,9 @@ public class AccountServiceTest extends AbstractServiceTest<Account, Integer, Ac
     public void findAllAccountsByLoginPartialMatchingTest() {
         List<Account> accounts = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            accounts.add(new Account(entity.getLogin(), RandomStringUtils.random(MAX_STRING_LENGTH),
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+
+            accounts.add(new Account(entity.getLogin() + i, entity.getEmail() + i,
                     entity.getCryptedPassword(), entity.getFirstName(), entity.getLastName(), entity.getBirthDate()));
         }
 
@@ -114,9 +105,9 @@ public class AccountServiceTest extends AbstractServiceTest<Account, Integer, Ac
     public void findAllAccountsByPartialMatchingTest() {
         List<Account> accounts = new ArrayList<>();
 
-        for (int i = 0; i < RandomUtils.nextInt(1, MAX_ENTITIES_COUNT + 1); i++) {
-            accounts.add(new Account(RandomStringUtils.random(MAX_LOGIN_LENGTH), entity.getEmail(),
-                    entity.getCryptedPassword(), entity.getFirstName(), entity.getLastName(), entity.getBirthDate()));
+        for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
+            accounts.add(new Account(entity.getLogin() + i, entity.getEmail() + i,
+                    entity.getCryptedPassword(), entity.getFirstName() + i, entity.getLastName() + i, entity.getBirthDate()));
         }
 
         List<Account> saved = service.save(accounts);
