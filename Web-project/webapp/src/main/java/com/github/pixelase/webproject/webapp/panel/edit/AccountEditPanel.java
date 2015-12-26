@@ -4,6 +4,7 @@ import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Role;
 import com.github.pixelase.webproject.services.AccountService;
 import com.github.pixelase.webproject.services.RoleService;
+import com.github.pixelase.webproject.webapp.page.register.RegisterPage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import org.apache.wicket.markup.html.form.*;
@@ -26,6 +27,8 @@ public class AccountEditPanel extends EditPanel<Account> {
     public static final String TENANT_RADIO_BUTTON_ID = "tenantRadioButton";
     public static final String EMPLOYEE_RADIO_BUTTON_ID = "employeeRadioButton";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
+    public static final String TENANT_ROLE = "tenant";
+    public static final String EMPLOYEE_ROLE = "employee";
     @SpringBean
     AccountService accountService;
 
@@ -60,6 +63,7 @@ public class AccountEditPanel extends EditPanel<Account> {
             }
         };
         passwordTextField.setRequired(true);
+        passwordTextField.add(StringValidator.minimumLength(5));
         passwordTextField.setOutputMarkupId(true);
         form.add(passwordTextField);
 
@@ -75,13 +79,22 @@ public class AccountEditPanel extends EditPanel<Account> {
         final DatePicker datePicker = new DatePicker(BIRTH_DATE_ID, pattern);
         form.add(datePicker);
 
-		//TODO Hide it, if current page class don't equals to RegisterPage;
         final RadioGroup<String> radioGroup = new RadioGroup<>(RADIO_GROUP_ID, Model.of(""));
-        final Radio<String> tenantRadioButton = new Radio<>(TENANT_RADIO_BUTTON_ID, Model.of(""));
+        final Radio<String> tenantRadioButton = new Radio<>(TENANT_RADIO_BUTTON_ID, Model.of(TENANT_ROLE));
+        tenantRadioButton.setOutputMarkupId(true);
         radioGroup.add(tenantRadioButton);
 
-        final Radio<String> employeeRadioButton = new Radio<>(EMPLOYEE_RADIO_BUTTON_ID, Model.of(""));
+        final Radio<String> employeeRadioButton = new Radio<>(EMPLOYEE_RADIO_BUTTON_ID, Model.of(EMPLOYEE_ROLE));
+        employeeRadioButton.setOutputMarkupId(true);
         radioGroup.add(employeeRadioButton);
+
+        if (getPage().getClass().equals(RegisterPage.class)) {
+            radioGroup.setVisible(true);
+            radioGroup.setRequired(true);
+        } else {
+            radioGroup.setVisible(false);
+            radioGroup.setRequired(false);
+        }
 
         form.add(radioGroup);
 
@@ -91,18 +104,23 @@ public class AccountEditPanel extends EditPanel<Account> {
                 super.onSubmit();
                 Account account = form.getModelObject();
                 if (accountService.findOneByLogin(account.getLogin()) == null) {
-                    accountService.save(account);
                     Role role = roleService.findOne(radioGroup.getModelObject());
 
                     if (role != null) {
                         account.getRoles().add(role);
                     }
+                    else {
+                        error("Role not found");
+                        setResponsePage(getPage().getPageClass());
+                    }
+                    accountService.save(account);
 
                     //TODO next registration page;
                     //Use events
-                    //setResponsePage();
+                    setResponsePage(getPage().getPageClass());
                 } else {
                     //TODO user already registered
+                    //May be JS alert
                 }
             }
         });
