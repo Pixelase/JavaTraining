@@ -22,6 +22,12 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
+        <!-- Other dependencies -->
+        <dependency>
+            <groupId>de.svenkubiak</groupId>
+            <artifactId>jBCrypt</artifactId>
+        </dependency>
+
         <!-- WICKET DEPENDENCIES -->
         <dependency>
             <groupId>org.apache.wicket</groupId>
@@ -35,6 +41,34 @@
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-auth-roles</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-datetime</artifactId>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.googlecode.wicket-jquery-ui</groupId>-->
+            <!--<artifactId>wicket-jquery-ui</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.googlecode.wicket-jquery-ui</groupId>-->
+            <!--<artifactId>wicket-jquery-ui-theme-uilightness</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-kendo-ui</artifactId>
+            <version>7.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.wicket-jquery-ui</groupId>
+            <artifactId>wicket-kendo-ui-theme-default</artifactId>
+            <version>7.1.0</version>
+        </dependency>
+
 
         <!-- JETTY DEPENDENCIES FOR TESTING -->
         <dependency>
@@ -130,7 +164,6 @@
                 <version>2.9</version>
                 <configuration>
                     <downloadSources>true</downloadSources>
-                    <wtpversion>${wtp.version}</wtpversion>
                 </configuration>
             </plugin>
         </plugins>

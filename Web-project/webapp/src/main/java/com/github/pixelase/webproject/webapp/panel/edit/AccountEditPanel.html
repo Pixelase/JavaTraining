@@ -1,0 +1,64 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <style>
+        .mdl-radio {
+            margin-right: 15px;
+        }
+
+        .mdl-button {
+            margin-right: 15px;
+        }
+    </style>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="login" type="text">
+        <label class="mdl-textfield__label" wicket:for="login">Login...</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="email" type="text">
+        <label class="mdl-textfield__label" wicket:for="email">Email...</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="cryptedPassword" type="password">
+        <label class="mdl-textfield__label" wicket:for="cryptedPassword">Password...</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="firstName" type="text">
+        <label class="mdl-textfield__label" wicket:for="firstName">First name...</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="lastName" type="text">
+        <label class="mdl-textfield__label" wicket:for="lastName">Last name...</label>
+    </div>
+    <br>
+    <input class="mdl-textfield__input" wicket:id="birthDate" type="text">
+    <br>
+    <div class="flex-centered">
+        <wicket:container wicket:id="radioGroup">
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" wicket:for="tenantRadioButton">
+                <input type="radio" wicket:id="tenantRadioButton" class="mdl-radio__button" value="Tenant">
+                <span class="mdl-radio__label">Tenant</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" wicket:for="employeeRadioButton">
+                <input type="radio" wicket:id="employeeRadioButton" class="mdl-radio__button" value="Employee">
+                <span class="mdl-radio__label">Employee</span>
+            </label>
+        </wicket:container>
+    </div>
+    <br>
+    <div class="flex-centered">
+        <button type="submit"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                wicket:id="submitButton">
+            Submit
+        </button>
+        <button type="reset"
+                class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            Reset
+        </button>
+    </div>
+
+</wicket:extend>

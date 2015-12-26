@@ -59,14 +59,15 @@
         class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700
 	mdl-base">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <wicket:container wicket:id="headerPanel"/>
-    <wicket:container wicket:id="drawerPanel"/>
+    <wicket:container wicket:id="header-panel"/>
+    <wicket:container wicket:id="drawer-panel"/>
     <main class="mdl-layout__content">
         <div class="page-content">
             <wicket:child/>
         </div>
+        <wicket:container wicket:id="feed-back-panel"/>
     </main>
-    <wicket:container wicket:id="footerPanel"/>
+    <wicket:container wicket:id="footer-panel"/>
 </div>
 </body>
 </html>

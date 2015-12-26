@@ -7,30 +7,33 @@ import com.github.pixelase.webproject.webapp.panel.layout.common.HeaderPanel;
 import com.github.pixelase.webproject.webapp.panel.layout.header.HeaderPanelForAnonymousUser;
 import com.github.pixelase.webproject.webapp.panel.layout.header.HeaderPanelForRegisteredUser;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class BasePage extends WebPage {
+public abstract class BasePage extends WebPage {
 
-
-    protected static final String HEADER_PANEL_ID = "headerPanel";
-    protected static final String DRAWER_PANEL_ID = "drawerPanel";
-    protected static final String FOOTER_PANEL_ID = "footerPanel";
+    public static final String HEADER_PANEL_ID = "header-panel";
+    public static final String DRAWER_PANEL_ID = "drawer-panel";
+    public static final String FOOTER_PANEL_ID = "footer-panel";
+    public static final String FEED_BACK_PANEL_ID = "feed-back-panel";
 
     protected HeaderPanel headerPanel;
     protected DrawerPanel drawerPanel;
     protected FooterPanel footerPanel;
+    protected FeedbackPanel feedbackPanel;
 
     public BasePage() {
         super();
-        initialize();
     }
 
     public BasePage(PageParameters parameters) {
         super(parameters);
-        initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+
         if (BasicAuthenticationSession.get().isSignedIn()) {
             headerPanel = new HeaderPanelForRegisteredUser(HEADER_PANEL_ID);
         } else {
@@ -39,10 +42,12 @@ public class BasePage extends WebPage {
 
         drawerPanel = new DrawerPanel(DRAWER_PANEL_ID);
         footerPanel = new FooterPanel(FOOTER_PANEL_ID);
+        feedbackPanel = new FeedbackPanel(FEED_BACK_PANEL_ID);
 
         add(headerPanel);
         add(drawerPanel);
         add(footerPanel);
+        add(feedbackPanel);
     }
 
     public HeaderPanel getHeaderPanel() {

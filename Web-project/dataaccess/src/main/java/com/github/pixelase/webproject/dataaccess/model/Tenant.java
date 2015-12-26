@@ -53,7 +53,7 @@ public class Tenant implements Persistable<Integer> {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "account_id", nullable = false)
     public Account getAccount() {
         return this.account;
