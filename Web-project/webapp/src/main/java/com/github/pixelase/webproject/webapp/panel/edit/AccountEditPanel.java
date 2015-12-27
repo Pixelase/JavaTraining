@@ -29,6 +29,7 @@ public class AccountEditPanel extends EditPanel<Account> {
     public static final String SUBMIT_BUTTON_ID = "submitButton";
     public static final String TENANT_ROLE = "tenant";
     public static final String EMPLOYEE_ROLE = "employee";
+
     @SpringBean
     AccountService accountService;
 
@@ -36,7 +37,11 @@ public class AccountEditPanel extends EditPanel<Account> {
     RoleService roleService;
 
     public AccountEditPanel(String id) {
-        super(id);
+        super(id, new Account());
+    }
+
+    public AccountEditPanel(String id, Account account) {
+        super(id, account);
     }
 
     @Override
@@ -103,34 +108,31 @@ public class AccountEditPanel extends EditPanel<Account> {
             public void onSubmit() {
                 super.onSubmit();
                 Account account = form.getModelObject();
-                if (accountService.findOneByLogin(account.getLogin()) == null) {
-                    Role role = roleService.findOne(radioGroup.getModelObject());
+                if (radioGroup.isRequired()) {
+                    if (accountService.findOneByLogin(account.getLogin()) == null) {
+                        Role role = roleService.findOne(radioGroup.getModelObject());
 
-                    if (role != null) {
-                        account.getRoles().add(role);
-                    }
-                    else {
-                        error("Role not found");
+                        if (role != null) {
+                            account.getRoles().add(role);
+                        } else {
+                            error("Role not found");
+                            setResponsePage(getPage().getPageClass());
+                        }
+                        accountService.save(account);
+
+                        //TODO next registration page;
+                        //Use events
                         setResponsePage(getPage().getPageClass());
+                    } else {
+                        //TODO user already registered
+                        //May be JS alert
                     }
-                    accountService.save(account);
-
-                    //TODO next registration page;
-                    //Use events
-                    setResponsePage(getPage().getPageClass());
                 } else {
-                    //TODO user already registered
-                    //May be JS alert
+                    //TODO account edition
+                    //Get account from session
                 }
             }
         });
-        add(form);
 
-
-    }
-
-    @Override
-    protected Account getModelObject() {
-        return new Account();
     }
 }

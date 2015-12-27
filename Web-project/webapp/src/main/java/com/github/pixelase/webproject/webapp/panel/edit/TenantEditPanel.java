@@ -6,12 +6,11 @@ import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 public class TenantEditPanel extends EditPanel<Tenant> {
 
     public TenantEditPanel(String id) {
-        super(id);
+        super(id, new Tenant());
     }
 
-    @Override
-    protected Tenant getModelObject() {
-        return null;
+    public TenantEditPanel(String id, Tenant tenant) {
+        super(id, tenant);
     }
 
 }

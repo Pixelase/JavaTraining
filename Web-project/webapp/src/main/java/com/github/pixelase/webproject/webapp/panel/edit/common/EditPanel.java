@@ -6,18 +6,16 @@ import org.apache.wicket.model.CompoundPropertyModel;
 
 public abstract class EditPanel<T> extends Panel {
 
-    protected Form<T> form;
+    protected final Form<T> form;
 
-    public EditPanel(String id) {
+    public EditPanel(String id, T formModelObject) {
         super(id);
+        form = new Form<>("form", new CompoundPropertyModel<>(formModelObject));
     }
 
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        form = new Form<>("form", new CompoundPropertyModel<>(getModelObject()));
         add(form);
     }
-
-    protected abstract T getModelObject();
 }
