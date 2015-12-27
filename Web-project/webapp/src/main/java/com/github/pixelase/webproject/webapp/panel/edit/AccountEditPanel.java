@@ -120,7 +120,7 @@ public class AccountEditPanel extends EditPanel<Account> {
                             account.getRoles().add(role);
                             account = accountService.save(account);
 
-                            BasicAuthenticationSession.get().setMetaData(BasicAuthenticationSession.ACCOUNT_KEY, account);
+                            BasicAuthenticationSession.get().setMetaData(AccountRegisterPage.REGISTERED_ACCOUNT_KEY, account);
 
                             switch (role.getName()) {
                                 case TENANT_ROLE: {

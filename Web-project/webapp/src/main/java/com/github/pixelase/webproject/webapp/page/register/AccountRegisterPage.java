@@ -11,7 +11,7 @@ import org.apache.wicket.MetaDataKey;
 public class AccountRegisterPage extends RegisterPage {
 
 
-    public static final MetaDataKey<Account> TEMP_ACCOUNT_KEY = new MetaDataKey<Account>() {
+    public static final MetaDataKey<Account> REGISTERED_ACCOUNT_KEY = new MetaDataKey<Account>() {
     };
 
     public AccountRegisterPage() {
