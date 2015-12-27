@@ -1,6 +1,6 @@
 package com.github.pixelase.webproject.webapp.panel.layout.header;
 
-import com.github.pixelase.webproject.webapp.page.register.RegisterPage;
+import com.github.pixelase.webproject.webapp.page.register.AccountRegisterPage;
 import com.github.pixelase.webproject.webapp.page.signin.SignInPage;
 import com.github.pixelase.webproject.webapp.panel.layout.common.HeaderPanel;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -13,6 +13,6 @@ public class HeaderPanelForAnonymousUser extends HeaderPanel {
         super(id);
 
         add(new BookmarkablePageLink<Void>("sign-in-page-link", SignInPage.class));
-        add(new BookmarkablePageLink<Void>("register-page-link", RegisterPage.class));
+        add(new BookmarkablePageLink<Void>("register-page-link", AccountRegisterPage.class));
     }
 }

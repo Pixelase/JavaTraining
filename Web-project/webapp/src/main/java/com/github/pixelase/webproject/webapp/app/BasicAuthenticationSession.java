@@ -11,7 +11,7 @@ import org.apache.wicket.request.Request;
  */
 public class BasicAuthenticationSession extends AuthenticatedWebSession {
 
-    public static final MetaDataKey<Account> KEY = new MetaDataKey<Account>() {
+    public static final MetaDataKey<Account> ACCOUNT_KEY = new MetaDataKey<Account>() {
     };
 
     public BasicAuthenticationSession(Request request) {
@@ -20,14 +20,14 @@ public class BasicAuthenticationSession extends AuthenticatedWebSession {
 
     @Override
     protected boolean authenticate(String login, String cryptedPassword) {
-        Account account = getMetaData(KEY);
+        Account account = getMetaData(ACCOUNT_KEY);
 
         return login.equals(account.getLogin()) && cryptedPassword.equals(account.getCryptedPassword());
     }
 
     @Override
     public Roles getRoles() {
-        return new Roles(getMetaData(KEY).getRoles().toArray(new String[0]));
+        return new Roles(getMetaData(ACCOUNT_KEY).getRoles().toArray(new String[0]));
     }
 
 }

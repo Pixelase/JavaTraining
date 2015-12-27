@@ -4,7 +4,10 @@ import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Role;
 import com.github.pixelase.webproject.services.AccountService;
 import com.github.pixelase.webproject.services.RoleService;
-import com.github.pixelase.webproject.webapp.page.register.RegisterPage;
+import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
+import com.github.pixelase.webproject.webapp.page.register.AccountRegisterPage;
+import com.github.pixelase.webproject.webapp.page.register.EmployeeRegisterPage;
+import com.github.pixelase.webproject.webapp.page.register.TenantRegisterPage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import org.apache.wicket.markup.html.form.*;
@@ -51,7 +54,7 @@ public class AccountEditPanel extends EditPanel<Account> {
         final TextField<String> loginTextField = new TextField<>(LOGIN_ID);
         loginTextField.setRequired(true);
         loginTextField.setOutputMarkupId(true);
-        loginTextField.add(StringValidator.lengthBetween(5, 20));
+        loginTextField.add(StringValidator.lengthBetween(3, 20));
         form.add(loginTextField);
 
         final TextField<String> emailTextField = new TextField<>(EMAIL_ID);
@@ -93,7 +96,7 @@ public class AccountEditPanel extends EditPanel<Account> {
         employeeRadioButton.setOutputMarkupId(true);
         radioGroup.add(employeeRadioButton);
 
-        if (getPage().getClass().equals(RegisterPage.class)) {
+        if (getPage().getClass().equals(AccountRegisterPage.class)) {
             radioGroup.setVisible(true);
             radioGroup.setRequired(true);
         } else {
@@ -113,16 +116,27 @@ public class AccountEditPanel extends EditPanel<Account> {
                         Role role = roleService.findOne(radioGroup.getModelObject());
 
                         if (role != null) {
+
                             account.getRoles().add(role);
+                            account = accountService.save(account);
+
+                            BasicAuthenticationSession.get().setMetaData(BasicAuthenticationSession.ACCOUNT_KEY, account);
+
+                            switch (role.getName()) {
+                                case TENANT_ROLE: {
+                                    setResponsePage(TenantRegisterPage.class);
+                                    break;
+                                }
+                                case EMPLOYEE_ROLE: {
+                                    setResponsePage(EmployeeRegisterPage.class);
+                                    break;
+                                }
+                            }
+
                         } else {
                             error("Role not found");
-                            setResponsePage(getPage().getPageClass());
+                            //TODO process this situation
                         }
-                        accountService.save(account);
-
-                        //TODO next registration page;
-                        //Use events
-                        setResponsePage(getPage().getPageClass());
                     } else {
                         //TODO user already registered
                         //May be JS alert

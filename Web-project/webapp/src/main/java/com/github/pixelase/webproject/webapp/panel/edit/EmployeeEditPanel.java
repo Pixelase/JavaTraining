@@ -1,6 +1,8 @@
 package com.github.pixelase.webproject.webapp.panel.edit;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Employee;
+import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 
 public class EmployeeEditPanel extends EditPanel<Employee> {
@@ -13,4 +15,10 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
         super(id, employee);
     }
 
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+
+        Account account = BasicAuthenticationSession.get().getMetaData(BasicAuthenticationSession.ACCOUNT_KEY);
+    }
 }
