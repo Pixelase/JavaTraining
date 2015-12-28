@@ -1,3 +1,39 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <style>
+        .mdl-radio {
+            margin-right: 15px;
+        }
 
+        .mdl-button {
+            margin-right: 15px;
+        }
+    </style>
+    <h3>Set up your address</h3>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="street-text-field" type="text">
+        <label class="mdl-textfield__label" wicket:for="street-text-field">Street...</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="house-text-field" type="text">
+        <label class="mdl-textfield__label" wicket:for="house-text-field">House...</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" wicket:id="apartment-text-field" type="text">
+        <label class="mdl-textfield__label" wicket:for="apartment-text-field">Apartment...</label>
+    </div>
+    <br>
+    <div class="flex-centered">
+        <button type="submit"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                wicket:id="submit-button">
+            Submit
+        </button>
+        <button type="reset"
+                class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            Reset
+        </button>
+    </div>
 </wicket:extend>

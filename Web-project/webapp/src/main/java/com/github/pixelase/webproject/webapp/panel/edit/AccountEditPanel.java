@@ -34,10 +34,10 @@ public class AccountEditPanel extends EditPanel<Account> {
     public static final String EMPLOYEE_ROLE = "employee";
 
     @SpringBean
-    AccountService accountService;
+    private AccountService accountService;
 
     @SpringBean
-    RoleService roleService;
+    private RoleService roleService;
 
     public AccountEditPanel(String id) {
         super(id, new Account());
@@ -96,7 +96,7 @@ public class AccountEditPanel extends EditPanel<Account> {
         employeeRadioButton.setOutputMarkupId(true);
         radioGroup.add(employeeRadioButton);
 
-        if (getPage().getClass().equals(AccountRegisterPage.class)) {
+        if (getPage().getPageClass().equals(AccountRegisterPage.class)) {
             radioGroup.setVisible(true);
             radioGroup.setRequired(true);
         } else {
