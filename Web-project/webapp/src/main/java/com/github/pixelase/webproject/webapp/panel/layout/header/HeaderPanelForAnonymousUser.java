@@ -9,10 +9,21 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
  * Created by Alexander Babai on 20.12.2015.
  */
 public class HeaderPanelForAnonymousUser extends HeaderPanel {
+
+    public static final String SIGN_IN_PAGE_LINK_ID = "sign-in-page-link";
+    public static final String REGISTER_PAGE_LINK_ID = "register-page-link";
+    public static final String SMALL_SIGN_IN_PAGE_LINK_ID = "small-sign-in-page-link";
+    public static final String SMALL_REGISTER_PAGE_LINK_ID = "small-register-page-link";
+
     public HeaderPanelForAnonymousUser(String id) {
         super(id);
 
-        add(new BookmarkablePageLink<Void>("sign-in-page-link", SignInPage.class));
-        add(new BookmarkablePageLink<Void>("register-page-link", AccountRegisterPage.class));
+        //For large screens
+        add(new BookmarkablePageLink<Void>(SIGN_IN_PAGE_LINK_ID, SignInPage.class));
+        add(new BookmarkablePageLink<Void>(REGISTER_PAGE_LINK_ID, AccountRegisterPage.class));
+
+        //For small screens
+        add(new BookmarkablePageLink<Void>(SMALL_SIGN_IN_PAGE_LINK_ID, SignInPage.class));
+        add(new BookmarkablePageLink<Void>(SMALL_REGISTER_PAGE_LINK_ID, AccountRegisterPage.class));
     }
 }

@@ -13,17 +13,26 @@ public class HeaderPanelForRegisteredUser extends HeaderPanel {
     public HeaderPanelForRegisteredUser(String id) {
         super(id);
 
+        //For large screens
         add(new BookmarkablePageLink<Void>("profile-page-link", ProfilePage.class));
+        add(new SignOutLink("sign-out-link"));
 
-        add(new Link("sign-out-link") {
+        //For small screens
+        add(new BookmarkablePageLink<Void>("small-profile-page-link", ProfilePage.class));
+        add(new SignOutLink("small-sign-out-link"));
+    }
 
-            @Override
-            public void onClick() {
-                BasicAuthenticationSession.get().signOut();
-                setResponsePage(getPage());
+    private class SignOutLink extends Link<Void> {
 
-            }
+        public SignOutLink(String id) {
+            super(id);
+        }
 
-        });
+        @Override
+        public void onClick() {
+            BasicAuthenticationSession.get().signOut();
+            setResponsePage(getPage());
+
+        }
     }
 }

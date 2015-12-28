@@ -1,11 +1,29 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--light-green-500 mdl-color-text--white"
-            wicket:id="register-page-link">
-        Register
-    </button>
+    <!-- Hide it in small screens. -->
+    <div class="mdl-layout--large-screen-only">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--light-green-500 mdl-color-text--white"
+                wicket:id="register-page-link">
+            Register
+        </button>
 
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--white"
-            wicket:id="sign-in-page-link">
-        Sign in
-    </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--white"
+                wicket:id="sign-in-page-link">
+            Sign in
+        </button>
+    </div>
+
+    <!-- Hide it in large screens. -->
+    <div class="mdl-layout--small-screen-only">
+        <!-- Right aligned menu below button -->
+        <button id="demo-menu-lower-right"
+                class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+        </button>
+
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="demo-menu-lower-right">
+            <li class="mdl-menu__item" wicket:id="small-sign-in-page-link">Sign in</li>
+            <li class="mdl-menu__item" wicket:id="small-register-page-link">Register</li>
+        </ul>
+    </div>
 </wicket:extend>
