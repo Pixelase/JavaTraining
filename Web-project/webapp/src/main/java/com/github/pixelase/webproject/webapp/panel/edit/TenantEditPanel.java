@@ -18,6 +18,11 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 public class TenantEditPanel extends EditPanel<Tenant> {
 
+    public static final String STREET_TEXT_FIELD_ID = "street-text-field";
+    public static final String HOUSE_TEXT_FIELD_ID = "house-text-field";
+    public static final String APARTMENT_TEXT_FIELD_ID = "apartment-text-field";
+    public static final String SUBMIT_BUTTON_ID = "submit-button";
+
     @SpringBean
     private AddressService addressService;
 
@@ -41,19 +46,19 @@ public class TenantEditPanel extends EditPanel<Tenant> {
         }
         final Address address = form.getModelObject().getAddress();
 
-        final TextField<String> streetTextField = new TextField<>("street-text-field", Model.of(address.getStreet()));
+        final TextField<String> streetTextField = new TextField<>(STREET_TEXT_FIELD_ID, Model.of(address.getStreet()));
         streetTextField.setOutputMarkupId(true);
         form.add(streetTextField);
 
-        final TextField<String> houseTextField = new TextField<>("house-text-field", Model.of(address.getHouse()));
+        final TextField<String> houseTextField = new TextField<>(HOUSE_TEXT_FIELD_ID, Model.of(address.getHouse()));
         houseTextField.setOutputMarkupId(true);
         form.add(houseTextField);
 
-        final TextField<String> apartmentTextField = new TextField<>("apartment-text-field", Model.of(address.getApartment()));
+        final TextField<String> apartmentTextField = new TextField<>(APARTMENT_TEXT_FIELD_ID, Model.of(address.getApartment()));
         apartmentTextField.setOutputMarkupId(true);
         form.add(apartmentTextField);
 
-        form.add(new Button("submit-button") {
+        form.add(new Button(SUBMIT_BUTTON_ID) {
             @Override
             public void onSubmit() {
                 super.onSubmit();
@@ -69,9 +74,10 @@ public class TenantEditPanel extends EditPanel<Tenant> {
 
                 if (getPage().getPageClass().equals(TenantRegisterPage.class)) {
                     setResponsePage(RegisterCompletePage.class);
+                } else {
+                    //TODO setResponsePage in other situations
+                    setResponsePage(ProfilePage.class);
                 }
-                //TODO setResponsePage in other situations
-                setResponsePage(ProfilePage.class);
             }
         });
     }

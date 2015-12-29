@@ -8,9 +8,3 @@
     justify-content: center;
     height: 100%;
 }
-
-.feedbackPanel{
-    float: left;
-    position: absolute;
-    bottom: 100px;
-}
