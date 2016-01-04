@@ -18,7 +18,7 @@ public class Tenant implements Persistable<Integer> {
     private Integer id;
     private Account account;
     private Address address;
-    private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
+    private Set<WorkRequest> workRequests = new HashSet<>(0);
 
     public Tenant() {
         super();

@@ -19,7 +19,7 @@ public class Address implements Persistable<Integer> {
     private String street;
     private String house;
     private String apartment;
-    private Set<Tenant> tenants = new HashSet<Tenant>(0);
+    private Set<Tenant> tenants = new HashSet<>(0);
 
     public Address() {
         super();

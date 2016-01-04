@@ -6,10 +6,8 @@ import com.github.pixelase.webproject.dataaccess.model.WorkType;
 import com.github.pixelase.webproject.services.EmployeeService;
 import com.github.pixelase.webproject.services.WorkTypeService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
+import com.github.pixelase.webproject.webapp.page.edit.register.RegisterCompletePage;
 import com.github.pixelase.webproject.webapp.page.profile.ProfilePage;
-import com.github.pixelase.webproject.webapp.page.register.AccountRegisterPage;
-import com.github.pixelase.webproject.webapp.page.register.EmployeeRegisterPage;
-import com.github.pixelase.webproject.webapp.page.register.RegisterCompletePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import com.googlecode.wicket.kendo.ui.form.dropdown.DropDownList;
 import org.apache.wicket.markup.html.form.Button;
@@ -24,7 +22,7 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
 
     public static final String WORK_TYPE_SELECT_ID = "workType";
     public static final String SALARY_TEXT_FIELD_ID = "salary";
-    public static final String SUBMIT_BUTTON_ID = "submit-button";
+    public static final String SUBMIT_BUTTON_ID = "submitButton";
 
     @SpringBean
     private EmployeeService employeeService;
@@ -69,14 +67,14 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
             public void onSubmit() {
                 super.onSubmit();
 
-                final Account account = BasicAuthenticationSession.get().getMetaData(AccountRegisterPage.REGISTERED_ACCOUNT_KEY);
+                final Account account = BasicAuthenticationSession.get().getMetaData(BasicAuthenticationSession.REGISTERED_ACCOUNT_KEY);
                 final Employee employee = form.getModelObject();
 
                 employee.setAccount(account);
 
                 employeeService.save(employee);
 
-                if (getPage().getPageClass().equals(EmployeeRegisterPage.class)) {
+                if (getPage().isBookmarkable()) {
                     setResponsePage(RegisterCompletePage.class);
                 } else {
                     //TODO setResponsePage in other situations

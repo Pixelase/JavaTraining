@@ -1,7 +1,7 @@
 package com.github.pixelase.webproject.webapp.app;
 
 import com.github.pixelase.webproject.webapp.page.home.HomePage;
-import com.github.pixelase.webproject.webapp.page.signin.SignInPage;
+import com.github.pixelase.webproject.webapp.page.edit.signin.SignInPage;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;

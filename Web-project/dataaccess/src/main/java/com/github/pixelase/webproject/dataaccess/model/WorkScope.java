@@ -18,7 +18,7 @@ public class WorkScope implements Persistable<Integer> {
     private Integer id;
     private String name;
     private Integer employeesCount;
-    private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
+    private Set<WorkRequest> workRequests = new HashSet<>(0);
 
     public WorkScope() {
         super();

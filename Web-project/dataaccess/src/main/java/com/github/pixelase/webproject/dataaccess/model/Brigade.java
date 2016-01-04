@@ -19,7 +19,7 @@ public class Brigade implements Persistable<Integer> {
     private Integer id;
     private WorkRequest workRequest;
     private Date realDate;
-    private Set<Employee> employees = new HashSet<Employee>(0);
+    private Set<Employee> employees = new HashSet<>(0);
 
     public Brigade() {
         super();

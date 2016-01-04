@@ -17,8 +17,8 @@ public class WorkType implements Persistable<Integer> {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
-    private Set<Employee> employees = new HashSet<Employee>(0);
-    private Set<WorkRequest> workRequests = new HashSet<WorkRequest>(0);
+    private Set<Employee> employees = new HashSet<>(0);
+    private Set<WorkRequest> workRequests = new HashSet<>(0);
 
     public WorkType() {
         super();

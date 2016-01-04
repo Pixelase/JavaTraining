@@ -8,6 +8,11 @@ public abstract class EditPanel<T> extends Panel {
 
     protected final Form<T> form;
 
+    public EditPanel(String id) {
+        super(id);
+        form = new Form<>("form");
+    }
+
     public EditPanel(String id, T formModelObject) {
         super(id);
         form = new Form<>("form", new CompoundPropertyModel<>(formModelObject));

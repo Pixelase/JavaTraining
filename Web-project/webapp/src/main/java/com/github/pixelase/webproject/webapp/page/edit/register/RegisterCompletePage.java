@@ -1,4 +1,4 @@
-package com.github.pixelase.webproject.webapp.page.register;
+package com.github.pixelase.webproject.webapp.page.edit.register;
 
 import com.github.pixelase.webproject.webapp.page.base.BasePage;
 

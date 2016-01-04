@@ -19,7 +19,7 @@ public class Employee implements Persistable<Integer> {
     private Account account;
     private WorkType workType;
     private Long salary;
-    private Set<Brigade> brigades = new HashSet<Brigade>(0);
+    private Set<Brigade> brigades = new HashSet<>(0);
 
     public Employee() {
         super();

@@ -16,7 +16,7 @@ public class Role implements Persistable<Integer> {
 
     private Integer id;
     private String name;
-    private Set<Account> accounts = new HashSet<Account>(0);
+    private Set<Account> accounts = new HashSet<>(0);
 
     public Role() {
         super();

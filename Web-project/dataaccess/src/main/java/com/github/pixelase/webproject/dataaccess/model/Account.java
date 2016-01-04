@@ -22,7 +22,7 @@ public class Account implements Persistable<Integer> {
     private String firstName;
     private String lastName;
     private Date birthDate;
-    private Set<Role> roles = new HashSet<Role>(0);
+    private Set<Role> roles = new HashSet<>(0);
     private Employee employee;
     private Tenant tenant;
 

@@ -1,7 +1,7 @@
 package com.github.pixelase.webproject.webapp.panel.layout.header;
 
-import com.github.pixelase.webproject.webapp.page.register.AccountRegisterPage;
-import com.github.pixelase.webproject.webapp.page.signin.SignInPage;
+import com.github.pixelase.webproject.webapp.page.edit.register.AccountRegisterPage;
+import com.github.pixelase.webproject.webapp.page.edit.signin.SignInPage;
 import com.github.pixelase.webproject.webapp.panel.layout.common.HeaderPanel;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
