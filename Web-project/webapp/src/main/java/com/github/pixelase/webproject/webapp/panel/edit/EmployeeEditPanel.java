@@ -10,6 +10,7 @@ import com.github.pixelase.webproject.webapp.page.edit.register.RegisterComplete
 import com.github.pixelase.webproject.webapp.page.profile.ProfilePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import com.googlecode.wicket.kendo.ui.form.dropdown.DropDownList;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.NumberTextField;
@@ -67,19 +68,25 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
             public void onSubmit() {
                 super.onSubmit();
 
-                final Account account = BasicAuthenticationSession.get().getMetaData(BasicAuthenticationSession.REGISTERED_ACCOUNT_KEY);
                 final Employee employee = form.getModelObject();
 
-                employee.setAccount(account);
+                if (getPage().wasCreatedBookmarkable()) {
+                    final AuthenticatedWebSession session = BasicAuthenticationSession.get();
+                    final Integer accountId = session.getMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY);
+                    final Account account = new Account(accountId);
 
-                employeeService.save(employee);
+                    employee.setAccount(account);
 
-                if (getPage().isBookmarkable()) {
                     setResponsePage(RegisterCompletePage.class);
+
+                    //Clear metadata when registration is complete
+                    session.setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, null);
                 } else {
                     //TODO setResponsePage in other situations
-                    setResponsePage(ProfilePage.class);
+                    setResponsePage(ProfilePage.class);//Temporary solution
                 }
+
+                employeeService.save(employee);
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.github.pixelase.webproject.webapp.page.edit.common;
 
+import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.page.base.BasePage;
+import com.github.pixelase.webproject.webapp.page.home.HomePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import com.googlecode.wicket.kendo.ui.panel.KendoFeedbackPanel;
 
@@ -25,5 +27,11 @@ public abstract class EditPage extends BasePage {
         super.onInitialize();
         add(editPanel);
         add(feedbackPanel);
+    }
+
+    protected void denyAccessForSignedUser(){
+        if(BasicAuthenticationSession.get().isSignedIn()) {
+            setResponsePage(HomePage.class);
+        }
     }
 }

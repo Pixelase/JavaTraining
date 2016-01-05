@@ -1,6 +1,7 @@
 package com.github.pixelase.webproject.webapp.panel.layout.header;
 
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
+import com.github.pixelase.webproject.webapp.page.home.HomePage;
 import com.github.pixelase.webproject.webapp.page.profile.ProfilePage;
 import com.github.pixelase.webproject.webapp.panel.layout.common.HeaderPanel;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -31,8 +32,7 @@ public class HeaderPanelForRegisteredUser extends HeaderPanel {
         @Override
         public void onClick() {
             BasicAuthenticationSession.get().signOut();
-            setResponsePage(getPage());
-
+            setResponsePage(HomePage.class);
         }
     }
 }

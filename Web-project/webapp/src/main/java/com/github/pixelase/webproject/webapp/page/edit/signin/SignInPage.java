@@ -9,5 +9,6 @@ import com.github.pixelase.webproject.webapp.panel.edit.SignInEditPanel;
 public class SignInPage extends EditPage {
     public SignInPage() {
         super(new SignInEditPanel(EDIT_PANEL_ID));
+        denyAccessForSignedUser();
     }
 }

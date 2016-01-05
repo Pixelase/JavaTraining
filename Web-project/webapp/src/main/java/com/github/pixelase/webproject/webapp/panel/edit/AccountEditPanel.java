@@ -7,7 +7,9 @@ import com.github.pixelase.webproject.services.RoleService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.page.edit.register.EmployeeRegisterPage;
 import com.github.pixelase.webproject.webapp.page.edit.register.TenantRegisterPage;
+import com.github.pixelase.webproject.webapp.page.profile.ProfilePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
+import com.github.pixelase.webproject.webapp.utils.RoleUtils;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.model.Model;
@@ -29,8 +31,6 @@ public class AccountEditPanel extends EditPanel<Account> {
     public static final String TENANT_RADIO_BUTTON_ID = "tenantRadioButton";
     public static final String EMPLOYEE_RADIO_BUTTON_ID = "employeeRadioButton";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
-    public static final String TENANT_ROLE = "tenant";
-    public static final String EMPLOYEE_ROLE = "employee";
 
     @SpringBean
     private AccountService accountService;
@@ -87,15 +87,16 @@ public class AccountEditPanel extends EditPanel<Account> {
         form.add(datePicker);
 
         final RadioGroup<String> radioGroup = new RadioGroup<>(RADIO_GROUP_ID, Model.of(""));
-        final Radio<String> tenantRadioButton = new Radio<>(TENANT_RADIO_BUTTON_ID, Model.of(TENANT_ROLE));
+        final Radio<String> tenantRadioButton = new Radio<>(TENANT_RADIO_BUTTON_ID, Model.of(RoleUtils.TENANT_ROLE));
         tenantRadioButton.setOutputMarkupId(true);
         radioGroup.add(tenantRadioButton);
 
-        final Radio<String> employeeRadioButton = new Radio<>(EMPLOYEE_RADIO_BUTTON_ID, Model.of(EMPLOYEE_ROLE));
+        final Radio<String> employeeRadioButton = new Radio<>(EMPLOYEE_RADIO_BUTTON_ID, Model.of(RoleUtils.EMPLOYEE_ROLE));
         employeeRadioButton.setOutputMarkupId(true);
         radioGroup.add(employeeRadioButton);
 
-        if (getPage().isBookmarkable()) {
+        final boolean wasCreatedBookmarkable = getPage().wasCreatedBookmarkable();
+        if (wasCreatedBookmarkable) {
             radioGroup.setVisible(true);
             radioGroup.setRequired(true);
         } else {
@@ -109,8 +110,10 @@ public class AccountEditPanel extends EditPanel<Account> {
             @Override
             public void onSubmit() {
                 super.onSubmit();
+
                 Account account = form.getModelObject();
-                if (radioGroup.isRequired()) {
+
+                if (wasCreatedBookmarkable) {
                     if (accountService.findOneByLogin(account.getLogin()) == null) {
                         Role role = roleService.findOne(radioGroup.getModelObject());
 
@@ -119,14 +122,14 @@ public class AccountEditPanel extends EditPanel<Account> {
                             account.getRoles().add(role);
                             account = accountService.save(account);
 
-                            BasicAuthenticationSession.get().setMetaData(BasicAuthenticationSession.REGISTERED_ACCOUNT_KEY, account);
+                            BasicAuthenticationSession.get().setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, account.getId());
 
                             switch (role.getName()) {
-                                case TENANT_ROLE: {
+                                case RoleUtils.TENANT_ROLE: {
                                     setResponsePage(TenantRegisterPage.class);
                                     break;
                                 }
-                                case EMPLOYEE_ROLE: {
+                                case RoleUtils.EMPLOYEE_ROLE: {
                                     setResponsePage(EmployeeRegisterPage.class);
                                     break;
                                 }
@@ -137,15 +140,15 @@ public class AccountEditPanel extends EditPanel<Account> {
                             //TODO process this situation
                         }
                     } else {
-                        //TODO user already registered
-                        //May be JS alert
+                        //TODO user with this login already exists (localization)
+                        error("user with this login already exists");
                     }
                 } else {
                     //TODO account edition
-                    //Get account from session
+                    accountService.save(account);
+                    setResponsePage(ProfilePage.class); //Temporary solution
                 }
             }
         });
-
     }
 }

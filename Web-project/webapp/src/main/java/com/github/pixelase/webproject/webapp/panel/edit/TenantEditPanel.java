@@ -9,6 +9,7 @@ import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.page.edit.register.RegisterCompletePage;
 import com.github.pixelase.webproject.webapp.page.profile.ProfilePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
@@ -61,21 +62,28 @@ public class TenantEditPanel extends EditPanel<Tenant> {
             public void onSubmit() {
                 super.onSubmit();
 
-                final Account account = BasicAuthenticationSession.get().getMetaData(BasicAuthenticationSession.REGISTERED_ACCOUNT_KEY);
                 final Tenant tenant = form.getModelObject();
-                final Address savedAddress = addressService.save(address);
 
-                tenant.setAccount(account);
-                tenant.setAddress(savedAddress);
+                if (getPage().wasCreatedBookmarkable()) {
+                    final AuthenticatedWebSession session = BasicAuthenticationSession.get();
 
-                tenantService.save(tenant);
+                    final Integer accountId = session.getMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY);
+                    final Account account = new Account(accountId);
+                    final Address savedAddress = addressService.save(address);
 
-                if (getPage().isBookmarkable()) {
+                    tenant.setAccount(account);
+                    tenant.setAddress(savedAddress);
+
                     setResponsePage(RegisterCompletePage.class);
+
+                    //Clear metadata when registration is complete
+                    session.setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, null);
                 } else {
                     //TODO setResponsePage in other situations
-                    setResponsePage(ProfilePage.class);
+                    setResponsePage(ProfilePage.class);//Temporary solution
                 }
+
+                tenantService.save(tenant);
             }
         });
     }

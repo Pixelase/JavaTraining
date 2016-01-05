@@ -3,7 +3,7 @@ package com.github.pixelase.webproject.webapp.panel.edit;
 import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.services.AccountService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
-import com.github.pixelase.webproject.webapp.page.profile.ProfilePage;
+import com.github.pixelase.webproject.webapp.page.home.HomePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.form.Button;
@@ -58,9 +58,9 @@ public class SignInEditPanel extends EditPanel {
                 final boolean isSuccess = session.signIn(login, password);
 
                 if (isSuccess) {
-                    setResponsePage(ProfilePage.class);
+                    setResponsePage(HomePage.class);
                     final Account loggedAccount = accountService.findOneByLogin(login);
-                    session.setMetaData(BasicAuthenticationSession.LOGGED_ACCOUNT_KEY, loggedAccount);
+                    session.setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, loggedAccount.getId());
                 } else {
                     error("Incorrect login or password");
                     setResponsePage(getPage());

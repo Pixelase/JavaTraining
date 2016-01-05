@@ -1,10 +1,26 @@
-.mdl-navigation .mdl-button {
-    margin-left: 15px;
-}
-
 .flex-centered {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+
+/*Menu buttons*/
+.mdl-navigation .mdl-button {
+    margin-left: 15px;
+}
+
+/*Form buttons*/
+.flex-centered .mdl-button {
+    margin-right: 15px;
+}
+
+/*Form radio-buttons*/
+.flex-centered .mdl-radio {
+    margin-right: 15px;
+}
+
+/*Notification from feedback-panel*/
+.k-notification{
+    margin-bottom: 10px;
 }

@@ -1,6 +1,7 @@
 package com.github.pixelase.webproject.webapp.app;
 
 import com.github.pixelase.webproject.dataaccess.model.Account;
+import com.github.pixelase.webproject.dataaccess.model.Role;
 import com.github.pixelase.webproject.services.AccountService;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
@@ -15,10 +16,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class BasicAuthenticationSession extends AuthenticatedWebSession {
 
-    public static final MetaDataKey<Account> LOGGED_ACCOUNT_KEY = new MetaDataKey<Account>() {
-    };
-
-    public static final MetaDataKey<Account> REGISTERED_ACCOUNT_KEY = new MetaDataKey<Account>() {
+    public static final MetaDataKey<Integer> ACCOUNT_ID_KEY = new MetaDataKey<Integer>() {
     };
 
     @SpringBean
@@ -35,15 +33,34 @@ public class BasicAuthenticationSession extends AuthenticatedWebSession {
             throw new IllegalArgumentException("service is null");
         }
 
-        final String cryptedPassword = accountService.findOneByLogin(login).getCryptedPassword();
-        final boolean result = BCrypt.checkpw(password, cryptedPassword);
+        final Account account = accountService.findOneByLogin(login);
 
-        return result;
+        return account != null && BCrypt.checkpw(password, account.getCryptedPassword());
     }
 
     @Override
     public Roles getRoles() {
-        return new Roles(getMetaData(LOGGED_ACCOUNT_KEY).getRoles().toArray(new String[0]));
+
+        final Roles roles = new Roles();
+        final Integer id = getMetaData(ACCOUNT_ID_KEY);
+
+        if(id != null) {
+            final Account account = accountService.findOne(id);
+
+            if (account != null) {
+                for (Role role : account.getRoles()) {
+                    roles.add(role.getName());
+                }
+            }
+        }
+
+        return roles;
+    }
+
+    @Override
+    public void signOut() {
+        super.signOut();
+        setMetaData(ACCOUNT_ID_KEY, null);
     }
 
 }
