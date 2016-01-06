@@ -21,6 +21,7 @@ public class SignInEditPanel extends EditPanel {
     public static final String LOGIN_TEXT_FIELD_ID = "login";
     public static final String PASSWORD_TEXT_FIELD_ID = "password";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
+    public static final String RESET_BUTTON_ID = "resetButton";
 
     @SpringBean
     private AccountService accountService;
@@ -68,5 +69,7 @@ public class SignInEditPanel extends EditPanel {
 
             }
         });
+
+        form.add(new ResetFormLink(RESET_BUTTON_ID));
     }
 }

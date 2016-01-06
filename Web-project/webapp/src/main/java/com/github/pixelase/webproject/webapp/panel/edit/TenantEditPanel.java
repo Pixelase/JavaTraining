@@ -21,6 +21,7 @@ public class TenantEditPanel extends EditPanel<Tenant> {
     public static final String HOUSE_TEXT_FIELD_ID = "house";
     public static final String APARTMENT_TEXT_FIELD_ID = "apartment";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
+    public static final String RESET_BUTTON_ID = "resetButton";
 
     @SpringBean
     private AddressService addressService;
@@ -86,5 +87,7 @@ public class TenantEditPanel extends EditPanel<Tenant> {
                 tenantService.save(tenant);
             }
         });
+
+        form.add(new ResetFormLink(RESET_BUTTON_ID));
     }
 }

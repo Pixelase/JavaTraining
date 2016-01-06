@@ -24,6 +24,7 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
     public static final String WORK_TYPE_SELECT_ID = "workType";
     public static final String SALARY_TEXT_FIELD_ID = "salary";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
+    public static final String RESET_BUTTON_ID = "resetButton";
 
     @SpringBean
     private EmployeeService employeeService;
@@ -89,5 +90,7 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
                 employeeService.save(employee);
             }
         });
+
+        form.add(new ResetFormLink(RESET_BUTTON_ID));
     }
 }

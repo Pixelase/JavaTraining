@@ -31,6 +31,7 @@ public class AccountEditPanel extends EditPanel<Account> {
     public static final String TENANT_RADIO_BUTTON_ID = "tenantRadioButton";
     public static final String EMPLOYEE_RADIO_BUTTON_ID = "employeeRadioButton";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
+    public static final String RESET_BUTTON_ID = "resetButton";
 
     @SpringBean
     private AccountService accountService;
@@ -150,5 +151,7 @@ public class AccountEditPanel extends EditPanel<Account> {
                 }
             }
         });
+
+        form.add(new ResetFormLink(RESET_BUTTON_ID));
     }
 }
