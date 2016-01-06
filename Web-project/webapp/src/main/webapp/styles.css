@@ -21,10 +21,16 @@
 }
 
 /*Notification from feedback-panel*/
-.k-notification{
+.k-notification {
     margin-bottom: 10px;
 }
 
+/*language-selection-panel on footer*/
 .language-selection-panel {
-    margin-bottom: 10px;
+    margin-bottom: 13px;
+}
+
+/*Drawer links*/
+.mdl-layout__drawer .mdl-navigation__link {
+    font-size: medium;
 }
