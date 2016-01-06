@@ -4,6 +4,7 @@ import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.panel.layout.common.DrawerPanel;
 import com.github.pixelase.webproject.webapp.panel.layout.common.FooterPanel;
 import com.github.pixelase.webproject.webapp.panel.layout.common.HeaderPanel;
+import com.github.pixelase.webproject.webapp.panel.layout.footer.DefaultFooterPanel;
 import com.github.pixelase.webproject.webapp.panel.layout.header.HeaderPanelForAnonymousUser;
 import com.github.pixelase.webproject.webapp.panel.layout.header.HeaderPanelForRegisteredUser;
 import org.apache.wicket.markup.html.WebPage;
@@ -38,7 +39,7 @@ public abstract class BasePage extends WebPage {
         }
 
         drawerPanel = new DrawerPanel(DRAWER_PANEL_ID);
-        footerPanel = new FooterPanel(FOOTER_PANEL_ID);
+        footerPanel = new DefaultFooterPanel(FOOTER_PANEL_ID);
 
         add(headerPanel);
         add(drawerPanel);
