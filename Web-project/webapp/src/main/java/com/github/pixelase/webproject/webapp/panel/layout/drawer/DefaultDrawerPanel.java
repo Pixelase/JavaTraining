@@ -1,5 +1,6 @@
 package com.github.pixelase.webproject.webapp.panel.layout.drawer;
 
+import com.github.pixelase.webproject.webapp.page.view.many.RequestsPage;
 import com.github.pixelase.webproject.webapp.panel.layout.common.DrawerPanel;
 import com.github.pixelase.webproject.webapp.utils.RoleUtils;
 import org.apache.wicket.authorization.Action;
@@ -53,7 +54,7 @@ public class DefaultDrawerPanel extends DrawerPanel {
 
         @Override
         public void onClick() {
-
+            setResponsePage(RequestsPage.class);
         }
     }
 

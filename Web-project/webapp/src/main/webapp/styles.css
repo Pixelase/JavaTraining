@@ -6,17 +6,17 @@
 }
 
 /*Menu buttons*/
-.mdl-navigation .mdl-button {
+header .mdl-navigation .mdl-button {
     margin-left: 15px;
 }
 
 /*Form buttons*/
-.flex-centered .mdl-button {
+form .flex-centered .mdl-button {
     margin-right: 15px;
 }
 
 /*Form radio-buttons*/
-.flex-centered .mdl-radio {
+form .flex-centered .mdl-radio {
     margin-right: 15px;
 }
 
@@ -33,4 +33,28 @@
 /*Drawer links*/
 .mdl-layout__drawer .mdl-navigation__link {
     font-size: medium;
+}
+
+/*Text in td mdl table*/
+.mdl-data-table td {
+    text-align: center;
+}
+
+/*mdl-button in table*/
+td .mdl-button {
+    margin-top: -6px;
+}
+
+/*Some mdl css magic*/
+.mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {
+    text-align: center;
+}
+
+.table-panel {
+    margin-top: 20px;
+}
+
+.table-panel .pagination {
+    padding: 20px;
+    margin-bottom: 20px;
 }
