@@ -5,14 +5,13 @@ import com.github.pixelase.webproject.dataaccess.model.Tenant;
 import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
 import com.github.pixelase.webproject.services.AccountService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
+import com.github.pixelase.webproject.webapp.panel.view.table.common.TablePanel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -24,7 +23,7 @@ import java.util.Iterator;
 /**
  * Created by Alexander Babai on 07.01.2016.
  */
-public class RequestsTablePanel extends Panel {
+public class RequestsTablePanel extends TablePanel {
 
     public static final String ID_LABEL_ID = "id-label";
     public static final String WORK_TYPE_LABEL_ID = "work-type-label";
@@ -32,6 +31,7 @@ public class RequestsTablePanel extends Panel {
     public static final String DESIRED_DATE_LABEL_ID = "desired-date-label";
     public static final String BRIGADE_ID_LABEL_ID = "brigade-Id-label";
     public static final String OPEN_BUTTON_ID = "open-button";
+
     @SpringBean
     private AccountService accountService;
 
@@ -40,11 +40,8 @@ public class RequestsTablePanel extends Panel {
     }
 
     @Override
-    protected void onInitialize() {
-        super.onInitialize();
-
-        final WorkRequestDataProvider requestDataProvider = new WorkRequestDataProvider();
-        final DataView<WorkRequest> dataView = new DataView<WorkRequest>("requests-list", requestDataProvider, 3) {
+    protected DataView<?> createDataView(String id, int itemsPerPage) {
+        return new DataView<WorkRequest>(id, new WorkRequestDataProvider(), itemsPerPage) {
             @Override
             protected void populateItem(Item<WorkRequest> item) {
                 final WorkRequest request = item.getModelObject();
@@ -60,12 +57,9 @@ public class RequestsTablePanel extends Panel {
                         //TODO open detail info about request
                     }
                 });
-
             }
         };
 
-        add(dataView);
-        add(new PagingNavigator("paging", dataView));
     }
 
     private class WorkRequestDataProvider extends SortableDataProvider<WorkRequest, Object> {
@@ -102,6 +96,8 @@ public class RequestsTablePanel extends Panel {
         @Override
         public IModel<WorkRequest> model(WorkRequest object) {
             return new CompoundPropertyModel<>(object);
+
+
         }
 
     }

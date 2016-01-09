@@ -5,6 +5,8 @@ import com.github.pixelase.webproject.webapp.panel.layout.footer.i18n.LanguageSe
 
 public class DefaultFooterPanel extends FooterPanel {
 
+    public static final String LANGUAGE_SELECTION_PANEL_ID = "language-selection-panel";
+
     public DefaultFooterPanel(String id) {
         super(id);
     }
@@ -13,6 +15,6 @@ public class DefaultFooterPanel extends FooterPanel {
     protected void onInitialize() {
         super.onInitialize();
 
-        add(new LanguageSelectionPanel("language-selection-panel"));
+        add(new LanguageSelectionPanel(LANGUAGE_SELECTION_PANEL_ID));
     }
 }
