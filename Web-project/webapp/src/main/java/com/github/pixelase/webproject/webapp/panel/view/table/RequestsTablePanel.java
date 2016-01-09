@@ -4,6 +4,7 @@ import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Tenant;
 import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
 import com.github.pixelase.webproject.services.AccountService;
+import com.github.pixelase.webproject.services.WorkRequestService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.panel.view.table.common.TablePanel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
@@ -17,6 +18,9 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.Iterator;
 
@@ -34,6 +38,9 @@ public class RequestsTablePanel extends TablePanel {
 
     @SpringBean
     private AccountService accountService;
+
+    @SpringBean
+    private WorkRequestService requestService;
 
     public RequestsTablePanel(String id) {
         super(id);
@@ -78,14 +85,25 @@ public class RequestsTablePanel extends TablePanel {
 
         @Override
         public Iterator<? extends WorkRequest> iterator(long first, long count) {
+            final SortParam<Object> sort = getSort();
+            final ISortState<Object> sortState = getSortState();
+            final SortOrder wicketSort = sortState.getPropertySortOrder(sort.getProperty());
+            Sort springSort = null;
 
-            SortParam<Object> sort = getSort();
-            ISortState<Object> sortState = getSortState();
-            SortOrder currentSort = sortState.getPropertySortOrder(sort.getProperty());
+            switch (wicketSort) {
+                case ASCENDING:
+                    springSort = new Sort(Sort.Direction.ASC, sort.getProperty().toString());
+                    break;
+                case DESCENDING:
+                    springSort = new Sort(Sort.Direction.DESC, sort.getProperty().toString());
+                    break;
+            }
 
-            //TODO sorting and paging via request service
-            //Find all request by tenant + Pageable and Sort methods
-            return tenant.getWorkRequests().iterator();
+            final int pageNumber = (int) first / (int) count;
+            final PageRequest pageRequest = new PageRequest(pageNumber, (int) count, springSort);
+            final Page<WorkRequest> page = requestService.findAll(tenant, pageRequest);
+
+            return page.iterator();
         }
 
         @Override

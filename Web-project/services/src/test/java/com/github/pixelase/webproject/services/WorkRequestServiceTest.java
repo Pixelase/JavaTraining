@@ -148,4 +148,9 @@ public class WorkRequestServiceTest extends GenericServiceTest<WorkRequest, Inte
 
         Assert.assertEquals(saved, found);
     }
+
+    @Test
+    public void findAllWorkRequestsByTenantWithPageable() {
+        //For good times;
+    }
 }

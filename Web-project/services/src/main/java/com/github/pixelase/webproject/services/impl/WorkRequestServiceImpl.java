@@ -9,6 +9,9 @@ import com.github.pixelase.webproject.services.WorkRequestService;
 import com.github.pixelase.webproject.services.common.AbstractGenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +53,24 @@ public class WorkRequestServiceImpl extends AbstractGenericService<WorkRequest, 
     public List<WorkRequest> findAll(Date desiredDate) {
         LOGGER.debug("Finding all {} entities with desiredDate= {}", simpleTypeName, desiredDate);
         List<WorkRequest> found = repository.findAllByDesiredDate(desiredDate);
+        LOGGER.trace("Search results: {}", found);
+
+        return found;
+    }
+
+    @Override
+    public List<WorkRequest> findAll(Tenant tenant, Sort sort) {
+        LOGGER.debug("Finding all {} entities with {} and sort={}", simpleTypeName, tenant, sort);
+        final List<WorkRequest> found = repository.findAllByTenant(tenant, sort);
+        LOGGER.trace("Search results: {}", found);
+
+        return found;
+    }
+
+    @Override
+    public Page<WorkRequest> findAll(Tenant tenant, Pageable pageable) {
+        LOGGER.debug("Finding all {} entities with {} and pageable={}", simpleTypeName, tenant, pageable);
+        final Page<WorkRequest> found = repository.findAllByTenant(tenant, pageable);
         LOGGER.trace("Search results: {}", found);
 
         return found;
