@@ -1,10 +1,12 @@
 package com.github.pixelase.webproject.services;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Employee;
 import com.github.pixelase.webproject.services.common.EntityUtils;
 import com.github.pixelase.webproject.services.common.GenericServiceTest;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Transactional
 public class EmployeeServiceTest extends GenericServiceTest<Employee, Integer, EmployeeService> {
+
+    @Autowired
+    private AccountService accountService;
 
     @Override
     protected Employee generateEntity() {
@@ -43,7 +48,8 @@ public class EmployeeServiceTest extends GenericServiceTest<Employee, Integer, E
         List<Employee> employees = new ArrayList<>();
 
         for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
-            employees.add(new Employee(entityUtils.generateAccount(), entity.getWorkType(), entity.getSalary()));
+            final Account account = accountService.save(entityUtils.generateAccount());
+            employees.add(new Employee(account, entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> savedEmployees = service.save(employees);
@@ -57,7 +63,8 @@ public class EmployeeServiceTest extends GenericServiceTest<Employee, Integer, E
         List<Employee> employees = new ArrayList<>();
 
         for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
-            employees.add(new Employee(entityUtils.generateAccount(), entity.getWorkType(), entity.getSalary()));
+            final Account account = accountService.save(entityUtils.generateAccount());
+            employees.add(new Employee(account, entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> savedEmployees = service.save(employees);
@@ -71,7 +78,8 @@ public class EmployeeServiceTest extends GenericServiceTest<Employee, Integer, E
         List<Employee> employees = new ArrayList<>();
 
         for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
-            employees.add(new Employee(entityUtils.generateAccount(), entity.getWorkType(), entity.getSalary()));
+            final Account account = accountService.save(entityUtils.generateAccount());
+            employees.add(new Employee(account, entity.getWorkType(), entity.getSalary()));
         }
 
         List<Employee> saved = service.save(employees);

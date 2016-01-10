@@ -12,7 +12,7 @@ import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 public class TenantEditPanel extends EditPanel<Tenant> {
@@ -49,15 +49,19 @@ public class TenantEditPanel extends EditPanel<Tenant> {
         }
         final Address address = form.getModelObject().getAddress();
 
-        final TextField<String> streetTextField = new TextField<>(STREET_TEXT_FIELD_ID, Model.of(address.getStreet()));
+        final TextField<String> streetTextField = new TextField<String>(STREET_TEXT_FIELD_ID,
+                new PropertyModel<String>(address, STREET_TEXT_FIELD_ID));
         streetTextField.setOutputMarkupId(true);
         form.add(streetTextField);
 
-        final TextField<String> houseTextField = new TextField<>(HOUSE_TEXT_FIELD_ID, Model.of(address.getHouse()));
+        final TextField<String> houseTextField = new TextField<String>(HOUSE_TEXT_FIELD_ID,
+                new PropertyModel<String>(address, HOUSE_TEXT_FIELD_ID));
         houseTextField.setOutputMarkupId(true);
         form.add(houseTextField);
 
-        final TextField<String> apartmentTextField = new TextField<>(APARTMENT_TEXT_FIELD_ID, Model.of(address.getApartment()));
+        final TextField<String> apartmentTextField = new TextField<String>(APARTMENT_TEXT_FIELD_ID,
+                new PropertyModel<String>(address, APARTMENT_TEXT_FIELD_ID));
+
         apartmentTextField.setOutputMarkupId(true);
         form.add(apartmentTextField);
 

@@ -119,7 +119,9 @@ public class AccountEditPanel extends EditPanel<Account> {
                 Account account = form.getModelObject();
 
                 if (wasCreatedBookmarkable) {
-                    if (accountService.findOneByLogin(account.getLogin()) == null) {
+                    if (accountService.findOneByLogin(account.getLogin()) == null &&
+                            accountService.findOneByEmail(account.getEmail()) == null) {
+
                         Role role = roleService.findOne(radioGroup.getModelObject());
 
                         if (role != null) {
@@ -146,7 +148,7 @@ public class AccountEditPanel extends EditPanel<Account> {
                         }
                     } else {
                         //TODO user with this login already exists (localization)
-                        error("user with this login already exists");
+                        error("user with this login or email already exists");
                     }
                 } else {
                     //TODO account edition

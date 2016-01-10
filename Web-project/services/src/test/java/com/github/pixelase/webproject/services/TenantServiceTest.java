@@ -1,10 +1,12 @@
 package com.github.pixelase.webproject.services;
 
+import com.github.pixelase.webproject.dataaccess.model.Account;
 import com.github.pixelase.webproject.dataaccess.model.Tenant;
 import com.github.pixelase.webproject.services.common.EntityUtils;
 import com.github.pixelase.webproject.services.common.GenericServiceTest;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Transactional
 public class TenantServiceTest extends GenericServiceTest<Tenant, Integer, TenantService> {
+
+    @Autowired
+    private AccountService accountService;
 
     @Override
     protected Tenant generateEntity() {
@@ -42,7 +47,8 @@ public class TenantServiceTest extends GenericServiceTest<Tenant, Integer, Tenan
         List<Tenant> tenants = new ArrayList<>();
 
         for (int i = 0; i < EntityUtils.getRandomInteger(EntityUtils.MAX_ENTITIES_COUNT); i++) {
-            tenants.add(new Tenant(entityUtils.generateAccount(), entity.getAddress()));
+            final Account account = accountService.save(entityUtils.generateAccount());
+            tenants.add(new Tenant(account, entity.getAddress()));
         }
 
         List<Tenant> savedTenants = service.save(tenants);
