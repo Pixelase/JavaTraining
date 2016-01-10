@@ -1,6 +1,7 @@
 package com.github.pixelase.webproject.webapp.panel.layout.drawer;
 
 import com.github.pixelase.webproject.webapp.page.edit.request.CreateRequestPage;
+import com.github.pixelase.webproject.webapp.page.view.many.BrigadesPage;
 import com.github.pixelase.webproject.webapp.page.view.many.RequestsPage;
 import com.github.pixelase.webproject.webapp.panel.layout.common.DrawerPanel;
 import com.github.pixelase.webproject.webapp.utils.RoleUtils;
@@ -67,7 +68,7 @@ public class DefaultDrawerPanel extends DrawerPanel {
 
         @Override
         public void onClick() {
-
+            setResponsePage(BrigadesPage.class);
         }
     }
 }

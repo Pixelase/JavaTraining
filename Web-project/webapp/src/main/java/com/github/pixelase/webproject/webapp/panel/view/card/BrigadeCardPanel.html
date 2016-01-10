@@ -2,7 +2,7 @@
     <div class="request-card-wide">
         <div class="card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Request</h2>
+                <h2 class="mdl-card__title-text">Brigade</h2>
             </div>
             <div class="mdl-card__supporting-text">
                 <span>
@@ -11,29 +11,24 @@
                 </span>
                 <hr>
                 <span>
-                    <b>Work scope:</b>
-                    <span wicket:id="work-scope-text"/>
-                </span>
-                <hr>
-                <span>
-                    <b>Work type:</b>
-                    <span wicket:id="work-type-text"/>
-                </span>
-                <hr>
-                <span>
-                    <b>Desired date:</b>
-                    <span wicket:id="desired-date-text"/>
-                </span>
-                <hr>
-                <span>
-                    <b>Brigade ID:</b>
-                    <button id="brigade-button" class="mdl-button mdl-js-button mdl-js-ripple-effect"
-                            wicket:id="open-brigade-button">
-                        <span wicket:id="brigade-text"/>
+                    <b>Request ID:</b>
+                    <button id="request-button" class="mdl-button mdl-js-button mdl-js-ripple-effect"
+                            wicket:id="open-request-button">
+                        <span wicket:id="work-request-text"/>
                     </button>
-                    <div class="mdl-tooltip" for="brigade-button">
-                        Open brigade card
+                    <div class="mdl-tooltip" for="request-button">
+                        Open request card
                     </div>
+                </span>
+                <hr>
+                <span>
+                    <b>Date:</b>
+                    <span wicket:id="real-date-text"/>
+                </span>
+                <hr>
+                <span>
+                    <b>Employees count:</b>
+                    <span wicket:id="employees-count-text"/>
                 </span>
             </div>
             <div class="mdl-card__actions mdl-card--border">

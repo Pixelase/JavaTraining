@@ -1,7 +1,12 @@
 package com.github.pixelase.webproject.dataaccess.repository;
 
 import com.github.pixelase.webproject.dataaccess.model.Brigade;
+import com.github.pixelase.webproject.dataaccess.model.Employee;
+import com.github.pixelase.webproject.dataaccess.model.Tenant;
 import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,4 +22,8 @@ public interface BrigadeRepository extends JpaRepository<Brigade, Integer> {
     List<Brigade> findAllByRealDate(Date realDate);
 
     List<Brigade> deleteAllByRealDate(Date realDate);
+
+    List<Brigade> findAllByEmployees(Employee Employee, Sort sort);
+
+    Page<Brigade> findAllByEmployees(Employee Employee, Pageable pageable);
 }

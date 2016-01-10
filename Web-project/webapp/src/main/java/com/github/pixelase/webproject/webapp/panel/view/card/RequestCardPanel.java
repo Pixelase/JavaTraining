@@ -1,9 +1,14 @@
 package com.github.pixelase.webproject.webapp.panel.view.card;
 
-import com.github.pixelase.webproject.dataaccess.model.*;
+import com.github.pixelase.webproject.dataaccess.model.Brigade;
+import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
+import com.github.pixelase.webproject.dataaccess.model.WorkScope;
+import com.github.pixelase.webproject.dataaccess.model.WorkType;
+import com.github.pixelase.webproject.webapp.page.view.one.BrigadeViewPage;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
 /**
@@ -17,29 +22,31 @@ public class RequestCardPanel extends Panel {
     public static final String DESIRED_DATE_TEXT_ID = "desired-date-text";
     public static final String BRIGADE_TEXT_ID = "brigade-text";
     public static final String GO_BACK_BUTTON_ID = "go-back-button";
-    private final WorkRequest request;
+    public static final String OPEN_BRIGADE_BUTTON_ID = "open-brigade-button";
 
     public RequestCardPanel(String id, WorkRequest request) {
         super(id);
-        this.request = request;
-
-
-        final Label idText = new Label(ID_TEXT_ID, request.getId());
 
         final WorkScope workScope = (request.getWorkScope() != null) ?
                 request.getWorkScope() : new WorkScope();
-        final Label workScopeText = new Label(WORK_SCOPE_TEXT_ID, String.format("work scope name: %s, employee count: %s",
-                workScope.getName(), workScope.getEmployeesCount()));
-
         final WorkType workType = (request.getWorkType() != null) ?
                 request.getWorkType() : new WorkType();
+        final Brigade brigade = (request.getBrigade() != null) ?
+                request.getBrigade() : new Brigade();
+
+
+        final Label idText = new Label(ID_TEXT_ID, request.getId());
+        final Label workScopeText = new Label(WORK_SCOPE_TEXT_ID, String.format("work scope name: %s, employee count: %s",
+                workScope.getName(), workScope.getEmployeesCount()));
         final Label workTypeText = new Label(WORK_TYPE_TEXT_ID, workType.getName());
         final Label desiredDateText = new Label(DESIRED_DATE_TEXT_ID, request.getDesiredDate());
-
-        final StringBuilder employeesList = new StringBuilder();
-        final Brigade brigade = (request.getBrigade() != null) ? request.getBrigade() : new Brigade();
-        final Label brigadeText = new Label(BRIGADE_TEXT_ID, String.format("%s", brigade.getId()));
-
+        final Label brigadeText = new Label(BRIGADE_TEXT_ID, brigade.getId());
+        final Link<Void> openBrigadeButton = new Link<Void>(OPEN_BRIGADE_BUTTON_ID) {
+            @Override
+            public void onClick() {
+                setResponsePage(new BrigadeViewPage(brigade));
+            }
+        };
         final AjaxLink<Void> goBackButton = new AjaxLink<Void>(GO_BACK_BUTTON_ID) {
             @Override
             public void onClick(AjaxRequestTarget target) {
@@ -47,11 +54,16 @@ public class RequestCardPanel extends Panel {
             }
         };
 
+        if(brigade.isNew()) {
+            openBrigadeButton.setVisible(false);
+        }
+
+        openBrigadeButton.add(brigadeText);
         add(idText);
         add(workScopeText);
         add(workTypeText);
         add(desiredDateText);
-        add(brigadeText);
+        add(openBrigadeButton);
         add(goBackButton);
     }
 }

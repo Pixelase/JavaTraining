@@ -3,11 +3,13 @@ package com.github.pixelase.webproject.webapp.panel.view.table.common;
 import com.github.pixelase.webproject.webapp.panel.view.table.common.navigator.CustomAjaxPagingNavigator;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
+import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.markup.repeater.data.DataView;
+import org.springframework.data.domain.Sort;
 
 /**
  * Created by Alexander Babai on 07.01.2016.
@@ -29,14 +31,7 @@ public abstract class TablePanel extends Panel {
 
         dataContainer = new WebMarkupContainer(DATA_CONTAINER_ID);
         dataContainer.setOutputMarkupId(true);
-
         thListItems = new RepeatingView(TH_LIST_ITEMS_ID);
-        thListItems.add(new Label(thListItems.newChildId(), "ID"));
-        thListItems.add(new Label(thListItems.newChildId(), "Work type"));
-        thListItems.add(new Label(thListItems.newChildId(), "Work scope"));
-        thListItems.add(new Label(thListItems.newChildId(), "Desired date"));
-        thListItems.add(new Label(thListItems.newChildId(), "Brigade ID"));
-        thListItems.add(new Label(thListItems.newChildId(), "Actions"));
 
         final int itemsPerPage = 5;
         dataView = createDataView(DATA_VIEW_ID, itemsPerPage);
@@ -60,4 +55,19 @@ public abstract class TablePanel extends Panel {
     }
 
     protected abstract DataView<?> createDataView(String id, int itemsPerPage);
+
+    protected Sort convertWicketSortToSpringSort(SortParam<?> sort, SortOrder sortOrder) {
+        Sort springSort = null;
+
+        switch (sortOrder) {
+            case ASCENDING:
+                springSort = new Sort(Sort.Direction.ASC, sort.getProperty().toString());
+                break;
+            case DESCENDING:
+                springSort = new Sort(Sort.Direction.DESC, sort.getProperty().toString());
+                break;
+        }
+
+        return springSort;
+    }
 }
