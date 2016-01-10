@@ -49,6 +49,8 @@ public class ManagerServiceImpl implements ManagerService {
                 result = brigadeService.save(result);
                 LOGGER.info("{} successfully registered", Brigade.class.getSimpleName());
             }
+        }
+        else {
             LOGGER.info("{} doesn't exists in database", request);
         }
 

@@ -151,6 +151,15 @@ public class WorkRequestServiceTest extends GenericServiceTest<WorkRequest, Inte
 
     @Test
     public void findAllWorkRequestsByTenantWithPageable() {
+//        Tenant tenant = new Tenant(32);
+//        PageRequest pageRequest = new PageRequest(3, 5, Sort.Direction.ASC, "id");
+//
+//        final Page<WorkRequest> requests = service.findAll(tenant, pageRequest);
+//
+//        for(WorkRequest request : requests) {
+//            System.out.println(request.getId());
+//        }
+
         //For good times;
     }
 }

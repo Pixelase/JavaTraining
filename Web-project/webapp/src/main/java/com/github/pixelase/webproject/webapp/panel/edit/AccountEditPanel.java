@@ -88,6 +88,7 @@ public class AccountEditPanel extends EditPanel<Account> {
 
         final String pattern = "dd.MM.yy";
         final DatePicker datePicker = new DatePicker(BIRTH_DATE_PICKER_ID, pattern);
+        datePicker.setOutputMarkupId(true);
         form.add(datePicker);
 
         final RadioGroup<String> radioGroup = new RadioGroup<>(RADIO_GROUP_ID, Model.of(""));

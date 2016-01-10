@@ -34,4 +34,10 @@ public abstract class EditPage extends BasePage {
             setResponsePage(HomePage.class);
         }
     }
+
+    protected void denyAccessForAnonymousUser(){
+        if(!BasicAuthenticationSession.get().isSignedIn()) {
+            setResponsePage(HomePage.class);
+        }
+    }
 }

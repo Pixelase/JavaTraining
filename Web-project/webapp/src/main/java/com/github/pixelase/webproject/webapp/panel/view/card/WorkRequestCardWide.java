@@ -37,17 +37,8 @@ public class WorkRequestCardWide extends Panel {
         final Label desiredDateText = new Label(DESIRED_DATE_TEXT_ID, request.getDesiredDate());
 
         final StringBuilder employeesList = new StringBuilder();
-        final Brigade brigade = request.getBrigade();
-        if (brigade != null) {
-            for (Employee employee : brigade.getEmployees()) {
-                final Account account = employee.getAccount();
-                employeesList.append(String.format("%s %s", account.getFirstName(), account.getLastName()));
-            }
-        }
-        else {
-            employeesList.append("Empty");
-        }
-        final Label brigadeText = new Label(BRIGADE_TEXT_ID, String.format("Employees list: %s", employeesList.toString()));
+        final Brigade brigade = (request.getBrigade() != null) ? request.getBrigade() : new Brigade();
+        final Label brigadeText = new Label(BRIGADE_TEXT_ID, String.format("%s", brigade.getId()));
 
         final AjaxLink<Void> goBackButton = new AjaxLink<Void>(GO_BACK_BUTTON_ID) {
             @Override

@@ -1,12 +1,17 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
     <div class="mdl-textfield mdl-js-textfield">
+        <label wicket:for="workScope">Work scope:</label>
+        <select class="mdl-textfield__input" wicket:id="workScope"/>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield">
         <label wicket:for="workType">Work type:</label>
         <select class="mdl-textfield__input" wicket:id="workType"/>
     </div>
     <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" wicket:id="salary" type="number">
-        <label class="mdl-textfield__label" wicket:for="salary">Salary...</label>
+    <div class="mdl-textfield mdl-js-textfield">
+        <label wicket:for="desiredDate">Desired date:</label>
+        <input class="mdl-textfield__input" wicket:id="desiredDate" type="text">
     </div>
     <br>
     <div class="flex-centered">

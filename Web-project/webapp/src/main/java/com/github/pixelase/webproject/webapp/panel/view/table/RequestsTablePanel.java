@@ -12,6 +12,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
+import org.apache.wicket.injection.Injector;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
@@ -37,19 +38,13 @@ public class RequestsTablePanel extends TablePanel {
     public static final String BRIGADE_ID_LABEL_ID = "brigade-Id-label";
     public static final String OPEN_BUTTON_ID = "open-button";
 
-    @SpringBean
-    private AccountService accountService;
-
-    @SpringBean
-    private WorkRequestService requestService;
-
     public RequestsTablePanel(String id) {
         super(id);
     }
 
     @Override
     protected DataView<?> createDataView(String id, int itemsPerPage) {
-        return new DataView<WorkRequest>(id, new WorkRequestDataProvider(), itemsPerPage) {
+        return new DataView<WorkRequest>(id, new WorkRequestDataProvider(itemsPerPage), itemsPerPage) {
             @Override
             protected void populateItem(Item<WorkRequest> item) {
                 final WorkRequest request = item.getModelObject();
@@ -58,7 +53,7 @@ public class RequestsTablePanel extends TablePanel {
                 item.add(new Label(WORK_TYPE_LABEL_ID, request.getWorkType().getName()));
                 item.add(new Label(WORK_SCOPE_LAVE_ID, request.getWorkScope().getName()));
                 item.add(new Label(DESIRED_DATE_LABEL_ID, request.getDesiredDate()));
-                item.add(new Label(BRIGADE_ID_LABEL_ID, request.getBrigade()));
+                item.add(new Label(BRIGADE_ID_LABEL_ID, (request.getBrigade() != null) ? request.getBrigade().getId() : null));
                 item.add(new Link(OPEN_BUTTON_ID) {
                     @Override
                     public void onClick() {
@@ -72,14 +67,25 @@ public class RequestsTablePanel extends TablePanel {
 
     private class WorkRequestDataProvider extends SortableDataProvider<WorkRequest, Object> {
 
-        private final Tenant tenant;
+        @SpringBean
+        private AccountService accountService;
 
-        public WorkRequestDataProvider() {
+        @SpringBean
+        private WorkRequestService requestService;
+
+        private final Tenant tenant;
+        private final int itemsPerPage;
+
+        public WorkRequestDataProvider(int itemsPerPage) {
             super();
+
+            Injector.get().inject(this);
 
             final Integer accountId = BasicAuthenticationSession.get().getMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY);
             final Account account = accountService.findOne(accountId);
             tenant = account.getTenant();
+            this.itemsPerPage = itemsPerPage;
+
 
             setSort("id", SortOrder.ASCENDING);
         }
@@ -101,7 +107,7 @@ public class RequestsTablePanel extends TablePanel {
             }
 
             final int pageNumber = (int) first / (int) count;
-            final PageRequest pageRequest = new PageRequest(pageNumber, (int) count, springSort);
+            final PageRequest pageRequest = new PageRequest(pageNumber, itemsPerPage, springSort);
             final Page<WorkRequest> page = requestService.findAll(tenant, pageRequest);
 
             return page.iterator();
@@ -109,7 +115,7 @@ public class RequestsTablePanel extends TablePanel {
 
         @Override
         public long size() {
-            return tenant.getWorkRequests().size();
+            return requestService.findAll(tenant).size();
         }
 
         @Override
