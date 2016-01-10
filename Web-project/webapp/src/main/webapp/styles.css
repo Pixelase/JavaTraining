@@ -10,6 +10,37 @@ header .mdl-navigation .mdl-button {
     margin-left: 15px;
 }
 
+.mdl-mini-footer {
+    padding: 18px 16px;
+}
+
+.sign-in-edit-panel {
+    border: 1px solid #868686;
+    padding: 22px 20px 14px 20px;
+    border-radius: 20px;
+}
+
+.account-edit-panel {
+    margin: 8px 10px 8px 10px;
+    border: 1px solid #868686;
+    padding: 7px 35px 10px 35px;
+    border-radius: 20px;
+}
+
+.tenant-edit-panel {
+    margin: 8px 10px 8px 10px;
+    border: 1px solid #868686;
+    padding: 22px 20px 14px 20px;
+    border-radius: 20px;
+}
+
+.employee-edit-panel {
+    margin: 8px 10px 8px 10px;
+    border: 1px solid #868686;
+    padding: 22px 20px 14px 20px;
+    border-radius: 20px;
+}
+
 /*Form buttons*/
 form .flex-centered .mdl-button {
     margin-right: 15px;
@@ -57,4 +88,22 @@ td .mdl-button {
 .table-panel .pagination {
     padding: 20px;
     margin-bottom: 20px;
+}
+
+.card-wide {
+    margin: 20px;
+}
+
+.card-wide.mdl-card {
+    width: 512px;
+}
+
+.card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('images/backgrounds/welcome_card.jpg') center / cover;
+}
+
+.card-wide > .mdl-card__menu {
+    color: #fff;
 }

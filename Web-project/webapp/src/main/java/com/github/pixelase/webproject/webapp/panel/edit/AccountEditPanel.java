@@ -32,6 +32,7 @@ public class AccountEditPanel extends EditPanel<Account> {
     public static final String EMPLOYEE_RADIO_BUTTON_ID = "employeeRadioButton";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
     public static final String RESET_BUTTON_ID = "resetButton";
+    public static final String ACCOUNT_EDIT_PANEL_CSS_CLASS = "account-edit-panel";
 
     @SpringBean
     private AccountService accountService;
@@ -50,6 +51,8 @@ public class AccountEditPanel extends EditPanel<Account> {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        appendCssClass(ACCOUNT_EDIT_PANEL_CSS_CLASS);
 
         final TextField<String> loginTextField = new TextField<>(LOGIN_TEXT_FIELD_ID);
         loginTextField.setRequired(true);

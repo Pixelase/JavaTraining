@@ -1,0 +1,40 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <div class="request-card-wide">
+        <div class="card-wide mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Your request</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <h6>
+                    <b>ID:</b> <wicket:container wicket:id="id-text"/>
+                </h6>
+                <hr>
+                <h6>
+                    <b>Work scope:</b>
+                    <i><wicket:container wicket:id="work-scope-text"/></i>
+                </h6>
+                <hr>
+                <h6>
+                    <b>Work type:</b>
+                    <i><wicket:container wicket:id="work-type-text"/></i>
+                </h6>
+                <hr>
+                <h6>
+                    <b>Desired date:</b>
+                    <i><wicket:container wicket:id="desired-date-text"/></i>
+                </h6>
+                <hr>
+                <h6>
+                    <b>Brigade:</b>
+                    <i><wicket:container wicket:id="brigade-text"/></i>
+                </h6>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                   wicket:id="go-back-button">
+                    Go back
+                </a>
+            </div>
+        </div>
+    </div>
+</wicket:panel>

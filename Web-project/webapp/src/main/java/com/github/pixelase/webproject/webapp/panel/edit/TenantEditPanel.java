@@ -22,6 +22,7 @@ public class TenantEditPanel extends EditPanel<Tenant> {
     public static final String APARTMENT_TEXT_FIELD_ID = "apartment";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
     public static final String RESET_BUTTON_ID = "resetButton";
+    public static final String TENANT_EDIT_PANEL_CSS_CLASS = "tenant-edit-panel";
 
     @SpringBean
     private AddressService addressService;
@@ -40,6 +41,8 @@ public class TenantEditPanel extends EditPanel<Tenant> {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        appendCssClass(TENANT_EDIT_PANEL_CSS_CLASS);
 
         if (form.getModelObject().getAddress() == null) {
             form.getModelObject().setAddress(new Address());

@@ -6,6 +6,7 @@ import com.github.pixelase.webproject.dataaccess.model.WorkRequest;
 import com.github.pixelase.webproject.services.AccountService;
 import com.github.pixelase.webproject.services.WorkRequestService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
+import com.github.pixelase.webproject.webapp.page.view.one.WorkRequestViewPage;
 import com.github.pixelase.webproject.webapp.panel.view.table.common.TablePanel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
@@ -61,7 +62,7 @@ public class RequestsTablePanel extends TablePanel {
                 item.add(new Link(OPEN_BUTTON_ID) {
                     @Override
                     public void onClick() {
-                        //TODO open detail info about request
+                        setResponsePage(new WorkRequestViewPage(request));
                     }
                 });
             }
@@ -114,8 +115,6 @@ public class RequestsTablePanel extends TablePanel {
         @Override
         public IModel<WorkRequest> model(WorkRequest object) {
             return new CompoundPropertyModel<>(object);
-
-
         }
 
     }

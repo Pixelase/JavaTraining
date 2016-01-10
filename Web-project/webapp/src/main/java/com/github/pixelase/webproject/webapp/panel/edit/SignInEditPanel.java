@@ -5,6 +5,7 @@ import com.github.pixelase.webproject.services.AccountService;
 import com.github.pixelase.webproject.webapp.app.BasicAuthenticationSession;
 import com.github.pixelase.webproject.webapp.page.home.HomePage;
 import com.github.pixelase.webproject.webapp.panel.edit.common.EditPanel;
+import org.apache.wicket.ClassAttributeModifier;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -22,6 +23,7 @@ public class SignInEditPanel extends EditPanel {
     public static final String PASSWORD_TEXT_FIELD_ID = "password";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
     public static final String RESET_BUTTON_ID = "resetButton";
+    public static final String SIGN_IN_EDIT_PANEL_CSS_CLASS = "sign-in-edit-panel";
 
     @SpringBean
     private AccountService accountService;
@@ -34,6 +36,7 @@ public class SignInEditPanel extends EditPanel {
     protected void onInitialize() {
         super.onInitialize();
 
+        panelHolder.add(ClassAttributeModifier.append("class", SIGN_IN_EDIT_PANEL_CSS_CLASS));
         final TextField<String> loginTextField = new TextField<>(LOGIN_TEXT_FIELD_ID, Model.of(""));
         loginTextField.setRequired(true);
         loginTextField.setOutputMarkupId(true);

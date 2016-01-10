@@ -25,6 +25,7 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
     public static final String SALARY_TEXT_FIELD_ID = "salary";
     public static final String SUBMIT_BUTTON_ID = "submitButton";
     public static final String RESET_BUTTON_ID = "resetButton";
+    public static final String EMPLOYEE_EDIT_PANEL_CSS_CLASS = "employee-edit-panel";
 
     @SpringBean
     private EmployeeService employeeService;
@@ -43,6 +44,8 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
     @Override
     protected void onInitialize() {
         super.onInitialize();
+
+        appendCssClass(EMPLOYEE_EDIT_PANEL_CSS_CLASS);
 
         if (form.getModelObject().getWorkType() == null) {
             form.getModelObject().setWorkType(new WorkType());
