@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 /**
  * Created by Alexander Babai on 09.01.2016.
  */
-public class WorkRequestCardWide extends Panel {
+public class RequestCardPanel extends Panel {
 
     public static final String ID_TEXT_ID = "id-text";
     public static final String WORK_SCOPE_TEXT_ID = "work-scope-text";
@@ -19,7 +19,7 @@ public class WorkRequestCardWide extends Panel {
     public static final String GO_BACK_BUTTON_ID = "go-back-button";
     private final WorkRequest request;
 
-    public WorkRequestCardWide(String id, WorkRequest request) {
+    public RequestCardPanel(String id, WorkRequest request) {
         super(id);
         this.request = request;
 

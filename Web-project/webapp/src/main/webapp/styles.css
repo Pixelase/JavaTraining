@@ -65,7 +65,7 @@ form .flex-centered .mdl-radio {
 
 /*language-selection-panel on footer*/
 .language-selection-panel {
-    margin-bottom: 13px;
+    margin-bottom: 16px;
 }
 
 /*Drawer links*/
@@ -97,6 +97,9 @@ td .mdl-button {
     margin-bottom: 20px;
 }
 
+/*
+ Card wide styles
+*/
 .card-wide {
     margin: 20px;
 }
@@ -108,9 +111,67 @@ td .mdl-button {
 .card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
-    background: url('images/backgrounds/welcome_card.jpg') center / cover;
+    background: center / cover;
 }
 
 .card-wide > .mdl-card__menu {
     color: #fff;
+}
+
+/*Request card wide */
+.request-card-wide .mdl-card__title {
+    background: url('images/backgrounds/card_bg_2.jpg') center / cover;
+}
+
+/*
+  Card square styles
+*/
+.card-square.mdl-card {
+    width: 320px;
+    height: 320px;
+}
+.card-square > .mdl-card__title {
+    color: #fff;
+    background: bottom right 15% no-repeat #46B6AC;
+}
+
+/*
+ Profile cards styles
+*/
+.profile-cards .card-square.mdl-card {
+    width: 400px;
+    height: 400px;
+}
+
+/*
+ Account card square
+*/
+.account-card-square {
+    margin: 40px;
+}
+
+.account-card-square .mdl-card__title {
+    background:url('images/backgrounds/card_bg_3.png') center right 15% no-repeat #46B6AC;
+}
+
+/*
+ Tenant card square
+*/
+.tenant-card-square {
+    margin: 40px;
+}
+
+.tenant-card-square .mdl-card__title {
+    background:url('images/backgrounds/card_bg_1.jpg') center right 15% no-repeat #46B6AC;
+}
+
+/*
+ Employee card square
+*/
+.employee-card-square {
+    margin: 40px;
+}
+
+.employee-card-square .mdl-card__title {
+    background:url('images/backgrounds/card_bg_1.jpg') center right 15% no-repeat #46B6AC;
 }
