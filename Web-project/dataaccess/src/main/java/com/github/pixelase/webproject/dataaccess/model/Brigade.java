@@ -44,7 +44,8 @@ public class Brigade implements Persistable<Integer> {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "brigade_gen")
+    @SequenceGenerator(name = "brigade_gen", sequenceName = "brigade_id_seq", allocationSize = 1)
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;

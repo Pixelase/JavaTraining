@@ -41,7 +41,8 @@ public class WorkType implements Persistable<Integer> {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_type_gen")
+    @SequenceGenerator(name = "work_type_gen", sequenceName = "work_type_id_seq", allocationSize = 1)
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;

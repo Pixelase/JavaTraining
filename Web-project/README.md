@@ -10,8 +10,6 @@ _P.S. Better to use **demo(with users)**_
 
 **Restore procedure:**
 * Backup is in `.tar` format;
-* Please restore with options Pre-data, Data and Post-data;
-![text](https://cloud.githubusercontent.com/assets/6077922/12235583/be4a02de-b885-11e5-9251-9500d22c5565.png)
 * 1 ignored error during restore process is ok
  (_ERROR:  must be owner of extension plpgsql_)
 
@@ -23,4 +21,4 @@ _P.S. Better to use **demo(with users)**_
 * db.schema=public
 
 _________________________________
-> ##### Бабай Александр
+> ##### Babai Alexander

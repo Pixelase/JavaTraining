@@ -39,7 +39,8 @@ public class Role implements Persistable<Integer> {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_gen")
+    @SequenceGenerator(name = "role_gen", sequenceName = "role_id_seq", allocationSize = 1)
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;

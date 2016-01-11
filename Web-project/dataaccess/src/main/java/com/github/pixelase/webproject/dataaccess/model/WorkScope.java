@@ -43,7 +43,8 @@ public class WorkScope implements Persistable<Integer> {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "work_scope_gen")
+    @SequenceGenerator(name = "work_scope_gen", sequenceName = "work_scope_id_seq", allocationSize = 1)
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;
