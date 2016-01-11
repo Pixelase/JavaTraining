@@ -99,7 +99,7 @@ public class BrigadesTablePanel extends TablePanel {
             final SortParam<Object> sort = getSort();
             final ISortState<Object> sortState = getSortState();
             final SortOrder sortOrder = sortState.getPropertySortOrder(sort.getProperty());
-            Sort springSort = convertWicketSortToSpringSort(sort, sortOrder);
+            final Sort springSort = convertWicketSortToSpringSort(sort, sortOrder);
 
             final int pageNumber = (int) first / (int) count;
             final PageRequest pageRequest = new PageRequest(pageNumber, itemsPerPage, springSort);

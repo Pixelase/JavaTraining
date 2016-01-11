@@ -111,14 +111,14 @@ td .mdl-button {
 .card-wide > .mdl-card__title {
     color: #fff;
     height: 176px;
-    background: center / cover;
+    background: url('images/backgrounds/card_bg_4.jpg') center / cover;
 }
 
 .card-wide > .mdl-card__menu {
     color: #fff;
 }
 
-/*Request card wide */
+/*Request card wide*/
 .request-card-wide .mdl-card__title {
     background: url('images/backgrounds/card_bg_2.jpg') center / cover;
 }
@@ -130,6 +130,7 @@ td .mdl-button {
     width: 320px;
     height: 320px;
 }
+
 .card-square > .mdl-card__title {
     color: #fff;
     background: bottom right 15% no-repeat #46B6AC;
@@ -151,7 +152,7 @@ td .mdl-button {
 }
 
 .account-card-square .mdl-card__title {
-    background:url('images/backgrounds/card_bg_3.png') center right 15% no-repeat #46B6AC;
+    background: url('images/backgrounds/card_bg_3.png') center right 15% no-repeat #46B6AC;
 }
 
 /*
@@ -162,7 +163,7 @@ td .mdl-button {
 }
 
 .tenant-card-square .mdl-card__title {
-    background:url('images/backgrounds/card_bg_1.jpg') center right 15% no-repeat #46B6AC;
+    background: url('images/backgrounds/card_bg_1.jpg') center right 15% no-repeat #46B6AC;
 }
 
 /*
@@ -173,5 +174,33 @@ td .mdl-button {
 }
 
 .employee-card-square .mdl-card__title {
-    background:url('images/backgrounds/card_bg_1.jpg') center right 15% no-repeat #46B6AC;
+    background: url('images/backgrounds/card_bg_1.jpg') center right 15% no-repeat #46B6AC;
+}
+
+/*
+ About page cards
+*/
+.about-cards .card-square {
+    margin: 20px;
+}
+
+#contacts-card .mdl-card__title {
+    background: url('images/backgrounds/card_bg_4.jpg') bottom right 15% no-repeat #46B6AC;
+}
+
+#other-info-card .mdl-card__title {
+    background: url('images/backgrounds/card_bg_4.jpg') bottom right 15% no-repeat #46B6AC;
+}
+
+#our-clients-card .mdl-card__title {
+    background: url('images/backgrounds/card_bg_2.jpg') bottom right 15% no-repeat #46B6AC;
+}
+
+#info-card .mdl-card__title {
+    background: url('images/backgrounds/card_bg_2.jpg') bottom right 15% no-repeat #46B6AC;
+}
+
+/*Icon in drawer link*/
+.default-drawer-navigation .mdl-navigation__link .material-icons {
+    margin-right: 20px;
 }

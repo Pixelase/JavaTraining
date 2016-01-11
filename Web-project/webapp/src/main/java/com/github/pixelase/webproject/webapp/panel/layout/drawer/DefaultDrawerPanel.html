@@ -1,9 +1,12 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" wicket:id="create-request-page-link">Create request</a>
-        <a class="mdl-navigation__link" wicket:id="requests-page-link">My requests</a>
-        <a class="mdl-navigation__link" wicket:id="brigades-page-link">My brigades</a>
-        <a class="mdl-navigation__link" wicket:id="common-link">Some info</a>
+    <span class="mdl-layout-title">Menu</span>
+    <nav class="default-drawer-navigation mdl-navigation">
+        <a class="mdl-navigation__link" wicket:id="home-page-link"><i class="material-icons">home</i>Home</a>
+        <a class="mdl-navigation__link" wicket:id="create-request-page-link"><i class="material-icons">create</i>Create
+            request</a>
+        <a class="mdl-navigation__link" wicket:id="requests-page-link"><i class="material-icons">subject</i>My requests</a>
+        <a class="mdl-navigation__link" wicket:id="brigades-page-link"><i class="material-icons">group</i>My
+            brigades</a>
+        <a class="mdl-navigation__link" wicket:id="about-page-link"><i class="material-icons">info</i>About</a>
     </nav>
 </wicket:extend>
