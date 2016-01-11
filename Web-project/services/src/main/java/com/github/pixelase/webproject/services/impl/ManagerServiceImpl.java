@@ -40,12 +40,12 @@ public class ManagerServiceImpl implements ManagerService {
 
             if (!foundEmployees.isEmpty()) {
                 List<Employee> brigadeMembers = (foundEmployees.size() >= workScope.getEmployeesCount())
-                        ? foundEmployees.subList(0, workScope.getEmployeesCount() - 1) : foundEmployees;
+                        ? foundEmployees.subList(0, workScope.getEmployeesCount()) : foundEmployees;
 
                 LOGGER.debug("Found {} {} with {}", Employee.class.getSimpleName(), brigadeMembers.size(), workType);
 
                 result = new Brigade(request, date);
-                result.setEmployees(new HashSet<Employee>(brigadeMembers));
+                result.setEmployees(new HashSet<>(brigadeMembers));
                 result = brigadeService.save(result);
                 LOGGER.info("{} successfully registered", Brigade.class.getSimpleName());
             }
