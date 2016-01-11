@@ -40,10 +40,10 @@ public class BrigadesTablePanel extends TablePanel {
     public BrigadesTablePanel(String id) {
         super(id);
 
-        thListItems.add(new Label(thListItems.newChildId(), "ID"));
-        thListItems.add(new Label(thListItems.newChildId(), "Request ID"));
-        thListItems.add(new Label(thListItems.newChildId(), "Real date"));
-        thListItems.add(new Label(thListItems.newChildId(), "Actions"));
+        thListItems.add(new Label(thListItems.newChildId(), getString("brigades_table_panel_id_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("brigades_table_panel_request_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("brigades_table_panel_real_date_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("brigades_table_panel_actions_col")));
     }
 
     @Override

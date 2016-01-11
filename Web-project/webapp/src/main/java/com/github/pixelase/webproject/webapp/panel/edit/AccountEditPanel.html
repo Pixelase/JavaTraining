@@ -1,27 +1,37 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="login" type="text">
-        <label class="mdl-textfield__label" wicket:for="login">Login...</label>
+        <label class="mdl-textfield__label" wicket:for="login">
+            <wicket:message key="account_edit_panel_login_label"/>
+        </label>
     </div>
     <br>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="email" type="text">
-        <label class="mdl-textfield__label" wicket:for="email">Email...</label>
+        <label class="mdl-textfield__label" wicket:for="email">
+            <wicket:message key="account_edit_panel_email_label"/>
+        </label>
     </div>
     <br>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="cryptedPassword" type="password">
-        <label class="mdl-textfield__label" wicket:for="cryptedPassword">Password...</label>
+        <label class="mdl-textfield__label" wicket:for="cryptedPassword">
+            <wicket:message key="account_edit_panel_password_label"/>
+        </label>
     </div>
     <br>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="firstName" type="text">
-        <label class="mdl-textfield__label" wicket:for="firstName">First name...</label>
+        <label class="mdl-textfield__label" wicket:for="firstName">
+            <wicket:message key="account_edit_panel_first_name_label"/>
+        </label>
     </div>
     <br>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="lastName" type="text">
-        <label class="mdl-textfield__label" wicket:for="lastName">Last name...</label>
+        <label class="mdl-textfield__label" wicket:for="lastName">
+            <wicket:message key="account_edit_panel_last_name_label"/>
+        </label>
     </div>
     <br>
     <input class="mdl-textfield__input" wicket:id="birthDate" type="text">
@@ -30,11 +40,11 @@
         <wicket:container wicket:id="radioGroup">
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" wicket:for="tenantRadioButton">
                 <input type="radio" wicket:id="tenantRadioButton" class="mdl-radio__button">
-                <span class="mdl-radio__label">Tenant</span>
+                <span class="mdl-radio__label"><wicket:message key="account_edit_panel_tenant_radio_label"/></span>
             </label>
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" wicket:for="employeeRadioButton">
                 <input type="radio" wicket:id="employeeRadioButton" class="mdl-radio__button">
-                <span class="mdl-radio__label">Employee</span>
+                <span class="mdl-radio__label"><wicket:message key="account_edit_panel_employee_radio_label"/></span>
             </label>
         </wicket:container>
     </div>
@@ -43,12 +53,12 @@
         <button type="submit"
                 class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
                 wicket:id="submitButton">
-            Submit
+            <wicket:message key="account_edit_panel_submit_button"/>
         </button>
         <button type="reset"
                 class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                 wicket:id="resetButton">
-            Reset
+            <wicket:message key="account_edit_panel_reset_button"/>
         </button>
     </div>
 </wicket:extend>

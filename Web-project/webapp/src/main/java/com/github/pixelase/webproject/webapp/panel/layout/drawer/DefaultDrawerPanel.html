@@ -1,12 +1,10 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <span class="mdl-layout-title">Menu</span>
+    <span class="mdl-layout-title"><wicket:message key="drawer_menu_title"/></span>
     <nav class="default-drawer-navigation mdl-navigation">
-        <a class="mdl-navigation__link" wicket:id="home-page-link"><i class="material-icons">home</i>Home</a>
-        <a class="mdl-navigation__link" wicket:id="create-request-page-link"><i class="material-icons">create</i>Create
-            request</a>
-        <a class="mdl-navigation__link" wicket:id="requests-page-link"><i class="material-icons">subject</i>My requests</a>
-        <a class="mdl-navigation__link" wicket:id="brigades-page-link"><i class="material-icons">group</i>My
-            brigades</a>
-        <a class="mdl-navigation__link" wicket:id="about-page-link"><i class="material-icons">info</i>About</a>
+        <a class="mdl-navigation__link" wicket:id="home-page-link"><i class="material-icons">home</i><wicket:message key="drawer_home_link"/></a>
+        <a class="mdl-navigation__link" wicket:id="create-request-page-link"><i class="material-icons">create</i><wicket:message key="drawer_create_request_link"/></a>
+        <a class="mdl-navigation__link" wicket:id="requests-page-link"><i class="material-icons">subject</i><wicket:message key="drawer_requests_link"/></a>
+        <a class="mdl-navigation__link" wicket:id="brigades-page-link"><i class="material-icons">group</i><wicket:message key="drawer_brigades_link"/></a>
+        <a class="mdl-navigation__link" wicket:id="about-page-link"><i class="material-icons">info</i><wicket:message key="drawer_about_link"/></a>
     </nav>
 </wicket:extend>

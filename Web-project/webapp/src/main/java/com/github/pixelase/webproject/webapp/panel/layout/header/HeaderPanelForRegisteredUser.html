@@ -3,12 +3,12 @@
     <div class="mdl-layout--large-screen-only">
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--white"
                 wicket:id="profile-page-link">
-            Profile
+            <wicket:message key="header_registered_profile_link"/>
         </button>
 
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--white"
                 wicket:id="sign-out-link">
-            Sign out
+            <wicket:message key="header_registered_sign_out_link"/>
         </button>
     </div>
 
@@ -22,8 +22,12 @@
 
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
             for="demo-menu-lower-right">
-            <li class="mdl-menu__item" wicket:id="small-profile-page-link">Profile</li>
-            <li class="mdl-menu__item" wicket:id="small-sign-out-link">Sign out</li>
+            <li class="mdl-menu__item" wicket:id="small-profile-page-link">
+                <wicket:message key="header_registered_profile_link"/>
+            </li>
+            <li class="mdl-menu__item" wicket:id="small-sign-out-link">
+                <wicket:message key="header_registered_sign_out_link"/>
+            </li>
         </ul>
     </div>
 </wicket:extend>

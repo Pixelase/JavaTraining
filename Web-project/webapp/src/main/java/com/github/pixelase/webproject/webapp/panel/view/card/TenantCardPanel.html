@@ -2,28 +2,36 @@
     <div class="tenant-card-square">
         <div class="card-square mdl-card mdl-shadow--4dp">
             <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">Tenant</h2>
+                <h2 class="mdl-card__title-text">
+                    <wicket:message key="tenant_card_panel_title"/>
+                </h2>
             </div>
             <div class="mdl-card__supporting-text">
                 <span>
-                    <b>Street:</b>
+                    <b>
+                        <wicket:message key="tenant_card_panel_street_row"/>
+                    </b>
                     <span wicket:id="street-text"/>
                 </span>
                 <hr>
                 <span>
-                    <b>Email:</b>
+                    <b>
+                        <wicket:message key="tenant_card_panel_house_row"/>
+                    </b>
                     <span wicket:id="house-text"/>
                 </span>
                 <hr>
                 <span>
-                    <b>First name:</b>
+                    <b>
+                        <wicket:message key="tenant_card_panel_apartment_row"/>
+                    </b>
                     <span wicket:id="apartment-text"/>
                 </span>
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                    wicket:id="edit-info-button">
-                    Edit info
+                    <wicket:message key="tenant_card_panel_edit_button"/>
                 </a>
             </div>
         </div>

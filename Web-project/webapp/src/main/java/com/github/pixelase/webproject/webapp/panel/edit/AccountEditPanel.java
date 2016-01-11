@@ -143,17 +143,14 @@ public class AccountEditPanel extends EditPanel<Account> {
                             }
 
                         } else {
-                            error("Role not found");
-                            //TODO process this situation
+                            error(getString("account_edit_panel_role_not_found"));
                         }
                     } else {
-                        //TODO user with this login already exists (localization)
-                        error("user with this login or email already exists");
+                        error(getString("account_edit_panel_user_already_exists"));
                     }
                 } else {
-                    //TODO account edition
                     accountService.save(account);
-                    setResponsePage(ProfilePage.class); //Temporary solution
+                    setResponsePage(ProfilePage.class);
                 }
             }
         });

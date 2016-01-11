@@ -36,8 +36,9 @@ public class RequestCardPanel extends Panel {
 
 
         final Label idText = new Label(ID_TEXT_ID, request.getId());
-        final Label workScopeText = new Label(WORK_SCOPE_TEXT_ID, String.format("work scope name: %s, employee count: %s",
-                workScope.getName(), workScope.getEmployeesCount()));
+        final Label workScopeText = new Label(WORK_SCOPE_TEXT_ID, String.format("%s %s, %s %s",
+                getString("request_card_panel_w_scope_name"), workScope.getName(),
+                getString("request_card_panel_empl_count"), workScope.getEmployeesCount()));
         final Label workTypeText = new Label(WORK_TYPE_TEXT_ID, workType.getName());
         final Label desiredDateText = new Label(DESIRED_DATE_TEXT_ID, request.getDesiredDate());
         final Label brigadeText = new Label(BRIGADE_TEXT_ID, brigade.getId());
@@ -54,7 +55,7 @@ public class RequestCardPanel extends Panel {
             }
         };
 
-        if(brigade.isNew()) {
+        if (brigade.isNew()) {
             openBrigadeButton.setVisible(false);
         }
 

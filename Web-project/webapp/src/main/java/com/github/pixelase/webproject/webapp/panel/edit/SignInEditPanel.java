@@ -66,7 +66,7 @@ public class SignInEditPanel extends EditPanel {
                     final Account loggedAccount = accountService.findOneByLogin(login);
                     session.setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, loggedAccount.getId());
                 } else {
-                    error("Incorrect login or password");
+                    error(getString("sign_in_edit_panel_incorrect_input"));
                     setResponsePage(getPage());
                 }
 

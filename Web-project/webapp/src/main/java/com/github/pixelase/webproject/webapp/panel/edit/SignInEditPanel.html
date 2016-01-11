@@ -1,24 +1,28 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="login" type="text">
-        <label class="mdl-textfield__label" wicket:for="login">Login...</label>
+        <label class="mdl-textfield__label" wicket:for="login">
+            <wicket:message key="sign_in_edit_panel_login_label"/>
+        </label>
     </div>
     <br>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" wicket:id="password" type="password">
-        <label class="mdl-textfield__label" wicket:for="password">Password...</label>
+        <label class="mdl-textfield__label" wicket:for="password">
+            <wicket:message key="sign_in_edit_panel_password_label"/>
+        </label>
     </div>
     <br>
     <div class="flex-centered">
         <button type="submit"
                 class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
                 wicket:id="submitButton">
-            Submit
+            <wicket:message key="sign_in_edit_panel_submit_button"/>
         </button>
         <button type="reset"
                 class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
                 wicket:id="resetButton">
-            Reset
+            <wicket:message key="sign_in_edit_panel_reset_button"/>
         </button>
     </div>
 </wicket:extend>

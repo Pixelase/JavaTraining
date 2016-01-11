@@ -2,39 +2,49 @@
     <div class="request-card-wide">
         <div class="card-wide mdl-card mdl-shadow--4dp">
             <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Brigade</h2>
+                <h2 class="mdl-card__title-text">
+                    <wicket:message key="brigade_card_panel_title"/>
+                </h2>
             </div>
             <div class="mdl-card__supporting-text">
                 <span>
-                    <b>ID:</b>
+                    <b>
+                        <wicket:message key="brigade_card_panel_id_row"/>
+                    </b>
                     <span wicket:id="id-text"/>
                 </span>
                 <hr>
                 <span>
-                    <b>Request ID:</b>
+                    <b>
+                        <wicket:message key="brigade_card_panel_request_row"/>
+                    </b>
                     <button id="request-button" class="mdl-button mdl-js-button mdl-js-ripple-effect"
                             wicket:id="open-request-button">
                         <span wicket:id="work-request-text"/>
                     </button>
                     <div class="mdl-tooltip" for="request-button">
-                        Open request card
+                        <wicket:message key="brigade_card_panel_open_req_button"/>
                     </div>
                 </span>
                 <hr>
                 <span>
-                    <b>Date:</b>
+                    <b>
+                        <wicket:message key="brigade_card_panel_date_row"/>
+                    </b>
                     <span wicket:id="real-date-text"/>
                 </span>
                 <hr>
                 <span>
-                    <b>Employees count:</b>
+                    <b>
+                        <wicket:message key="brigade_card_panel_empl_count_row"/>
+                    </b>
                     <span wicket:id="employees-count-text"/>
                 </span>
             </div>
             <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                    wicket:id="go-back-button">
-                    Go back
+                    <wicket:message key="brigade_card_panel_back_button"/>
                 </a>
             </div>
         </div>

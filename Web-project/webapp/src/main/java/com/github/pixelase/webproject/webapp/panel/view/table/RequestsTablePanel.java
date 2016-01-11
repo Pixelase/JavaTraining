@@ -41,12 +41,12 @@ public class RequestsTablePanel extends TablePanel {
     public RequestsTablePanel(String id) {
         super(id);
 
-        thListItems.add(new Label(thListItems.newChildId(), "ID"));
-        thListItems.add(new Label(thListItems.newChildId(), "Work type"));
-        thListItems.add(new Label(thListItems.newChildId(), "Work scope"));
-        thListItems.add(new Label(thListItems.newChildId(), "Desired date"));
-        thListItems.add(new Label(thListItems.newChildId(), "Brigade ID"));
-        thListItems.add(new Label(thListItems.newChildId(), "Actions"));
+        thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_id_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_work_type_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_work_scope_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_desired_date_col")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_brigade_row")));
+        thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_actions_col")));
     }
 
     @Override

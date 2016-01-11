@@ -1,5 +1,181 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+    <!-- Base page -->
+    <entry key="page_title">Communal services</entry>
+
+    <!-- Default drawer -->
+    <entry key="drawer_menu_title">Menu</entry>
+    <entry key="drawer_home_link">Home</entry>
+    <entry key="drawer_create_request_link">Create request</entry>
+    <entry key="drawer_requests_link">My requests</entry>
+    <entry key="drawer_brigades_link">My brigades</entry>
+    <entry key="drawer_about_link">About</entry>
+
+    <!-- Common header -->
     <entry key="header_title">Communal services</entry>
+
+    <!-- Header for anonymous user -->
+    <entry key="header_anonymous_register_link">Register</entry>
+    <entry key="header_anonymous_sign_in_link">Sign in</entry>
+
+    <!-- Header for registered user -->
+    <entry key="header_registered_profile_link">Profile</entry>
+    <entry key="header_registered_sign_out_link">Sign out</entry>
+
+    <!-- Default footer -->
+    <entry key="footer_logo">Communal services ©</entry>
+    <entry key="footer_home_link">Home</entry>
+    <entry key="footer_about_link">About</entry>
+
+    <!-- Language selection panel -->
+    <entry key="lang_select_panel_en_tooltip">English</entry>
+    <entry key="lang_select_panel_ru_tooltip">Russian</entry>
+
+    <!-- Account edit panel -->
+    <entry key="account_edit_panel_login_label">Login...</entry>
+    <entry key="account_edit_panel_email_label">Email...</entry>
+    <entry key="account_edit_panel_password_label">Password...</entry>
+    <entry key="account_edit_panel_first_name_label">First name...</entry>
+    <entry key="account_edit_panel_last_name_label">Last name...</entry>
+    <entry key="account_edit_panel_tenant_radio_label">Tenant</entry>
+    <entry key="account_edit_panel_employee_radio_label">Employee</entry>
+    <entry key="account_edit_panel_submit_button">Next</entry>
+    <entry key="account_edit_panel_reset_button">Reset</entry>
+    <entry key="account_edit_panel_role_not_found">Role not found</entry>
+    <entry key="account_edit_panel_user_already_exists">User with this login or email already exists</entry>
+
+    <!-- Employee edit panel -->
+    <entry key="employee_edit_panel_work_type_label">Work type:</entry>
+    <entry key="employee_edit_panel_salary_label">Salary...</entry>
+    <entry key="employee_edit_panel_submit_button">Submit</entry>
+    <entry key="employee_edit_panel_reset_button">Reset</entry>
+
+    <!-- Request edit panel -->
+    <entry key="request_edit_panel_work_scope_label">Work scope:</entry>
+    <entry key="request_edit_panel_work_type_label">Work type:</entry>
+    <entry key="request_edit_panel_desired_date_label">Desired date:</entry>
+    <entry key="request_edit_panel_submit_button">Create</entry>
+    <entry key="request_edit_panel_reset_button">Reset</entry>
+
+    <!-- Sign in edit panel -->
+    <entry key="sign_in_edit_panel_login_label">Login...</entry>
+    <entry key="sign_in_edit_panel_password_label">Password...</entry>
+    <entry key="sign_in_edit_panel_submit_button">Sign in</entry>
+    <entry key="sign_in_edit_panel_reset_button">Reset</entry>
+    <entry key="sign_in_edit_panel_incorrect_input">Incorrect login or password</entry>
+
+    <!-- Tenant edit panel -->
+    <entry key="tenant_edit_panel_street_label">Street...</entry>
+    <entry key="tenant_edit_panel_house_label">House...</entry>
+    <entry key="tenant_edit_panel_apartment_label">Apartment...</entry>
+    <entry key="tenant_edit_panel_submit_button">Submit</entry>
+    <entry key="tenant_edit_panel_reset_button">Reset</entry>
+
+    <!-- Account card panel -->
+    <entry key="account_card_panel_title">Account</entry>
+    <entry key="account_card_panel_login_row">Login:</entry>
+    <entry key="account_card_panel_email_row">Email:</entry>
+    <entry key="account_card_panel_first_name_row">First name:</entry>
+    <entry key="account_card_panel_last_name_row">Last name:</entry>
+    <entry key="account_card_panel_birth_date_row">Birth date:</entry>
+    <entry key="account_card_panel_edit_button">Edit account</entry>
+
+    <!-- Brigade card panel -->
+    <entry key="brigade_card_panel_title">Brigade</entry>
+    <entry key="brigade_card_panel_id_row">ID:</entry>
+    <entry key="brigade_card_panel_request_row">Request ID:</entry>
+    <entry key="brigade_card_panel_open_req_button">Open request card</entry>
+    <entry key="brigade_card_panel_date_row">Date:</entry>
+    <entry key="brigade_card_panel_empl_count_row">Employees count:</entry>
+    <entry key="brigade_card_panel_back_button">Go back</entry>
+
+    <!-- Employee card panel -->
+    <entry key="employee_card_panel_title">Employee</entry>
+    <entry key="employee_card_panel_work_type_row">Work type:</entry>
+    <entry key="employee_card_panel_salary_row">Salary:</entry>
+    <entry key="employee_card_panel_edit_button">Edit info</entry>
+
+    <!-- Request card panel -->
+    <entry key="request_card_panel_title">Request</entry>
+    <entry key="request_card_panel_id_row">ID:</entry>
+    <entry key="request_card_panel_work_scope_row">Work scope:</entry>
+    <entry key="request_card_panel_w_scope_name">work scope name:</entry>
+    <entry key="request_card_panel_empl_count">employee count:</entry>
+    <entry key="request_card_panel_work_type_row">Work type:</entry>
+    <entry key="request_card_panel_desired_date_row">Desired date:</entry>
+    <entry key="request_card_panel_brigade_row">Brigade ID:</entry>
+    <entry key="request_card_panel_open_brigade_button">Open brigade card</entry>
+    <entry key="request_card_panel_back_button">Go back</entry>
+
+    <!-- Tenant card panel -->
+    <entry key="tenant_card_panel_title">Tenant</entry>
+    <entry key="tenant_card_panel_street_row">Street:</entry>
+    <entry key="tenant_card_panel_house_row">House:</entry>
+    <entry key="tenant_card_panel_apartment_row">Apartment:</entry>
+    <entry key="tenant_card_panel_edit_button">Edit info</entry>
+
+    <!-- Brigades table panel -->
+    <entry key="brigades_table_panel_id_col">ID</entry>
+    <entry key="brigades_table_panel_request_col">Request ID</entry>
+    <entry key="brigades_table_panel_real_date_col">Real date</entry>
+    <entry key="brigades_table_panel_actions_col">Actions</entry>
+    <entry key="brigades_table_panel_open_button">Open</entry>
+
+    <!-- Requests table panel -->
+    <entry key="requests_table_panel_id_col">ID</entry>
+    <entry key="requests_table_panel_work_type_col">Work type</entry>
+    <entry key="requests_table_panel_work_scope_col">Work scope</entry>
+    <entry key="requests_table_panel_desired_date_col">Desired date</entry>
+    <entry key="requests_table_panel_brigade_row">Brigade ID</entry>
+    <entry key="requests_table_panel_actions_col">Actions</entry>
+    <entry key="requests_table_panel_open_button">Open</entry>
+
+    <!-- About page -->
+    <entry key="info_card_title">About this company</entry>
+    <entry key="info_card_supporting_text_main">Communal services inc.</entry>
+    <entry key="info_card_supporting_text_what_we_do">What we do:</entry>
+    <entry key="info_card_supporting_text_plumbing">plumbing work</entry>
+    <entry key="info_card_supporting_text_repair">repair work</entry>
+    <entry key="info_card_supporting_text_painting">plumbing work</entry>
+    <entry key="info_card_supporting_text_building">plumbing work</entry>
+    <entry key="info_card_supporting_text_electrical">plumbing work</entry>
+    <entry key="info_card_supporting_text_cleaning">plumbing work</entry>
+    <entry key="contacts_card_title">Contacts</entry>
+    <entry key="clients_card_title">Our clients</entry>
+    <entry key="other_info_card_title">Other info</entry>
+
+    <!-- Employee register page -->
+    <entry key="employee_register_page_headline">Set up your work type and salary</entry>
+
+    <!-- Tenant register page -->
+    <entry key="tenant_register_page_headline">Set up your address</entry>
+
+    <!-- Create request page -->
+    <entry key="create_request_page_headline">Fill in all fields of the request</entry>
+
+    <!-- Sing in page -->
+    <entry key="sing_in_page_headline">Sign in to communal services</entry>
+
+    <!-- Register complete page -->
+    <entry key="register_complete_page_headline">Registration successfully completed!</entry>
+    <entry key="register_complete_page_additional">Sign in with your account</entry>
+
+    <!-- Request created page -->
+    <entry key="request_created_page_headline">Request successfully created!</entry>
+    <entry key="request_created_page_additional">You can see all requests on the page "My requests"</entry>
+
+    <!-- Home page -->
+    <entry key="home_page_slogan">Communal services never been so easy...</entry>
+    <entry key="home_page_sub_slogan">Welcome to our website. create request. check requests. see in which brigades you
+        participate.
+    </entry>
+    <entry key="home_page_join_button">Join to our community</entry>
+
+    <!-- Brigades page -->
+    <entry key="brigades_page_headline">Brigades</entry>
+
+    <!-- Requests page -->
+    <entry key="requests_page_headline">Requests</entry>
+
 </properties>

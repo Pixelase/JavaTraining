@@ -7,6 +7,8 @@ import org.apache.wicket.markup.html.link.Link;
 
 public class HomePage extends BasePage {
 
+    public static final String JOIN_BUTTON_ID = "join-button";
+
     public HomePage() {
         super();
     }
@@ -15,7 +17,7 @@ public class HomePage extends BasePage {
     protected void onInitialize() {
         super.onInitialize();
 
-        final Link<Void> joinButton = new Link<Void>("join-button") {
+        final Link<Void> joinButton = new Link<Void>(JOIN_BUTTON_ID) {
             @Override
             public void onClick() {
                 setResponsePage(AccountRegisterPage.class);

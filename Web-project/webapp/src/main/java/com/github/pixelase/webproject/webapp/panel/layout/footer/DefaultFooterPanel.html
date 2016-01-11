@@ -1,9 +1,13 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
     <div class="mdl-mini-footer__left-section">
-        <div class="mdl-logo">Communal services ©</div>
+        <div class="mdl-logo"><wicket:message key="footer_logo"/></div>
         <ul class="mdl-mini-footer__link-list">
-            <li><a wicket:id="home-page-link">Home</a></li>
-            <li><a wicket:id="about-page-link">About</a></li>
+            <li><a wicket:id="home-page-link">
+                <wicket:message key="footer_home_link"/>
+            </a></li>
+            <li><a wicket:id="about-page-link">
+                <wicket:message key="footer_about_link"/>
+            </a></li>
         </ul>
     </div>
     <div class="mdl-mini-footer__right-section">

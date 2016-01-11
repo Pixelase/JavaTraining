@@ -87,8 +87,7 @@ public class TenantEditPanel extends EditPanel<Tenant> {
                     //Clear metadata when registration is complete
                     session.setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, null);
                 } else {
-                    //TODO setResponsePage in other situations
-                    setResponsePage(ProfilePage.class);//Temporary solution
+                    setResponsePage(ProfilePage.class);
                 }
 
                 tenantService.save(tenant);
