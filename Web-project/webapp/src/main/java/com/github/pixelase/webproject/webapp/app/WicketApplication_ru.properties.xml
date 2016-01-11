@@ -1,5 +1,181 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+    <!-- Base page -->
+    <entry key="page_title">Коммунальные услуги</entry>
+
+    <!-- Default drawer -->
+    <entry key="drawer_menu_title">Меню</entry>
+    <entry key="drawer_home_link">Домой</entry>
+    <entry key="drawer_create_request_link">Создать заявку</entry>
+    <entry key="drawer_requests_link">Мои заявки</entry>
+    <entry key="drawer_brigades_link">Мои бригады</entry>
+    <entry key="drawer_about_link">О проекте</entry>
+
+    <!-- Common header -->
     <entry key="header_title">Коммунальные услуги</entry>
+
+    <!-- Header for anonymous user -->
+    <entry key="header_anonymous_register_link">Регистрация</entry>
+    <entry key="header_anonymous_sign_in_link">Вход</entry>
+
+    <!-- Header for registered user -->
+    <entry key="header_registered_profile_link">Профиль</entry>
+    <entry key="header_registered_sign_out_link">Выход</entry>
+
+    <!-- Default footer -->
+    <entry key="footer_logo">Коммунальные услуги ©</entry>
+    <entry key="footer_home_link">Домой</entry>
+    <entry key="footer_about_link">О проекте</entry>
+
+    <!-- Language selection panel -->
+    <entry key="lang_select_panel_en_tooltip">Английский</entry>
+    <entry key="lang_select_panel_ru_tooltip">Русский</entry>
+
+    <!-- Account edit panel -->
+    <entry key="account_edit_panel_login_label">Логин...</entry>
+    <entry key="account_edit_panel_email_label">E-mail...</entry>
+    <entry key="account_edit_panel_password_label">Пароль...</entry>
+    <entry key="account_edit_panel_first_name_label">Имя...</entry>
+    <entry key="account_edit_panel_last_name_label">Фамилия...</entry>
+    <entry key="account_edit_panel_tenant_radio_label">Жилец</entry>
+    <entry key="account_edit_panel_employee_radio_label">Работник</entry>
+    <entry key="account_edit_panel_submit_button">Далее</entry>
+    <entry key="account_edit_panel_reset_button">Сброс</entry>
+    <entry key="account_edit_panel_role_not_found">Роль не найдена</entry>
+    <entry key="account_edit_panel_user_already_exists">Пользователь с такм логином или email уже существует</entry>
+
+    <!-- Employee edit panel -->
+    <entry key="employee_edit_panel_work_type_label">Тип работ:</entry>
+    <entry key="employee_edit_panel_salary_label">Зарплата...</entry>
+    <entry key="employee_edit_panel_submit_button">Отправить</entry>
+    <entry key="employee_edit_panel_reset_button">Сброс</entry>
+
+    <!-- Request edit panel -->
+    <entry key="request_edit_panel_work_scope_label">Масштаб работ:</entry>
+    <entry key="request_edit_panel_work_type_label">Тип работ:</entry>
+    <entry key="request_edit_panel_desired_date_label">Желаемое время:</entry>
+    <entry key="request_edit_panel_submit_button">Создать</entry>
+    <entry key="request_edit_panel_reset_button">Сброс</entry>
+
+    <!-- Sign in edit panel -->
+    <entry key="sign_in_edit_panel_login_label">Логин...</entry>
+    <entry key="sign_in_edit_panel_password_label">Пароль...</entry>
+    <entry key="sign_in_edit_panel_submit_button">Войти</entry>
+    <entry key="sign_in_edit_panel_reset_button">Сброс</entry>
+    <entry key="sign_in_edit_panel_incorrect_input">Неверный логин или пароль</entry>
+
+    <!-- Tenant edit panel -->
+    <entry key="tenant_edit_panel_street_label">Улица...</entry>
+    <entry key="tenant_edit_panel_house_label">Дом...</entry>
+    <entry key="tenant_edit_panel_apartment_label">Квартира...</entry>
+    <entry key="tenant_edit_panel_submit_button">Отправить</entry>
+    <entry key="tenant_edit_panel_reset_button">Сброс</entry>
+
+    <!-- Account card panel -->
+    <entry key="account_card_panel_title">Учетная запись</entry>
+    <entry key="account_card_panel_login_row">Логин:</entry>
+    <entry key="account_card_panel_email_row">Email:</entry>
+    <entry key="account_card_panel_first_name_row">Имя:</entry>
+    <entry key="account_card_panel_last_name_row">Фамилия:</entry>
+    <entry key="account_card_panel_birth_date_row">Дата рождения:</entry>
+    <entry key="account_card_panel_edit_button">Изменить</entry>
+
+    <!-- Brigade card panel -->
+    <entry key="brigade_card_panel_title">Бригада</entry>
+    <entry key="brigade_card_panel_id_row">ID:</entry>
+    <entry key="brigade_card_panel_request_row">ID заявки:</entry>
+    <entry key="brigade_card_panel_open_req_button">Открыть карточку с заявкой</entry>
+    <entry key="brigade_card_panel_date_row">Дата:</entry>
+    <entry key="brigade_card_panel_empl_count_row">Количество работников:</entry>
+    <entry key="brigade_card_panel_back_button">Назад</entry>
+
+    <!-- Employee card panel -->
+    <entry key="employee_card_panel_title">Работник</entry>
+    <entry key="employee_card_panel_work_type_row">Тип работ:</entry>
+    <entry key="employee_card_panel_salary_row">Зарплата:</entry>
+    <entry key="employee_card_panel_edit_button">Изменить</entry>
+
+    <!-- Request card panel -->
+    <entry key="request_card_panel_title">Заявка</entry>
+    <entry key="request_card_panel_id_row">ID:</entry>
+    <entry key="request_card_panel_work_scope_row">Масштаб работ:</entry>
+    <entry key="request_card_panel_w_scope_name">тип:</entry>
+    <entry key="request_card_panel_empl_count">количество работников:</entry>
+    <entry key="request_card_panel_work_type_row">Тип работ:</entry>
+    <entry key="request_card_panel_desired_date_row">Желаемое время:</entry>
+    <entry key="request_card_panel_brigade_row">ID бригады:</entry>
+    <entry key="request_card_panel_open_brigade_button">Открыть карточку с бригадой</entry>
+    <entry key="request_card_panel_back_button">Назад</entry>
+
+    <!-- Tenant card panel -->
+    <entry key="tenant_card_panel_title">Жилец</entry>
+    <entry key="tenant_card_panel_street_row">Улица:</entry>
+    <entry key="tenant_card_panel_house_row">Дом:</entry>
+    <entry key="tenant_card_panel_apartment_row">Квартира:</entry>
+    <entry key="tenant_card_panel_edit_button">Изменить</entry>
+
+    <!-- Brigades table panel -->
+    <entry key="brigades_table_panel_id_col">ID</entry>
+    <entry key="brigades_table_panel_request_col">ID заявки</entry>
+    <entry key="brigades_table_panel_real_date_col">Финальное время</entry>
+    <entry key="brigades_table_panel_actions_col">Действия</entry>
+    <entry key="brigades_table_panel_open_button">Открыть</entry>
+
+    <!-- Requests table panel -->
+    <entry key="requests_table_panel_id_col">ID</entry>
+    <entry key="requests_table_panel_work_type_col">Тип работ</entry>
+    <entry key="requests_table_panel_work_scope_col">Масштаб работ</entry>
+    <entry key="requests_table_panel_desired_date_col">Желаемое время</entry>
+    <entry key="requests_table_panel_brigade_row">ID бригады</entry>
+    <entry key="requests_table_panel_actions_col">Действия</entry>
+    <entry key="requests_table_panel_open_button">Открыть</entry>
+
+    <!-- About page -->
+    <entry key="info_card_title">О компании</entry>
+    <entry key="info_card_supporting_text_main">Коммунальные услуги</entry>
+    <entry key="info_card_supporting_text_what_we_do">Чем мы занимаемся:</entry>
+    <entry key="info_card_supporting_text_plumbing">сантехнические работы</entry>
+    <entry key="info_card_supporting_text_repair">ремонтные работы</entry>
+    <entry key="info_card_supporting_text_painting">малярные работы</entry>
+    <entry key="info_card_supporting_text_building">строительные работы</entry>
+    <entry key="info_card_supporting_text_electrical">Электромонтажные работы</entry>
+    <entry key="info_card_supporting_text_cleaning">Уборочные работы</entry>
+    <entry key="contacts_card_title">Контакты</entry>
+    <entry key="clients_card_title">Наши клиенты</entry>
+    <entry key="other_info_card_title">Прочая информация</entry>
+
+    <!-- Employee register page -->
+    <entry key="employee_register_page_headline">Укажите ваш тип работ и зарплату</entry>
+
+    <!-- Tenant register page -->
+    <entry key="tenant_register_page_headline">Укажите ваш адрес</entry>
+
+    <!-- Create request page -->
+    <entry key="create_request_page_headline">Заполните все поля заявки</entry>
+
+    <!-- Sing in page -->
+    <entry key="sing_in_page_headline">Войти в систему</entry>
+
+    <!-- Register complete page -->
+    <entry key="register_complete_page_headline">Регистрация успешно завершена!</entry>
+    <entry key="register_complete_page_additional">Войдите под своей учетной</entry>
+
+    <!-- Request created page -->
+    <entry key="request_created_page_headline">Заявка успешно создана!</entry>
+    <entry key="request_created_page_additional">Вы можете посмотреть все заявки на странице "Мои заявки"</entry>
+
+    <!-- Home page -->
+    <entry key="home_page_slogan">Сервис коммунальных услуг.</entry>
+    <entry key="home_page_sub_slogan">Добро пожаловать на наш сайт. оставить заявку. просмотреть имеющиеся заявки.
+        посмотреть, в каких бригадах вы состоите.
+    </entry>
+    <entry key="home_page_join_button">Присоединиться к нашему сообществу</entry>
+
+    <!-- Brigades page -->
+    <entry key="brigades_page_headline">Бригады</entry>
+
+    <!-- Requests page -->
+    <entry key="requests_page_headline">Заявки</entry>
+
 </properties>

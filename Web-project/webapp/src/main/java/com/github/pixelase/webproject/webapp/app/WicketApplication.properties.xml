@@ -137,10 +137,10 @@
     <entry key="info_card_supporting_text_what_we_do">What we do:</entry>
     <entry key="info_card_supporting_text_plumbing">plumbing work</entry>
     <entry key="info_card_supporting_text_repair">repair work</entry>
-    <entry key="info_card_supporting_text_painting">plumbing work</entry>
-    <entry key="info_card_supporting_text_building">plumbing work</entry>
-    <entry key="info_card_supporting_text_electrical">plumbing work</entry>
-    <entry key="info_card_supporting_text_cleaning">plumbing work</entry>
+    <entry key="info_card_supporting_text_painting">painting work</entry>
+    <entry key="info_card_supporting_text_building">building work</entry>
+    <entry key="info_card_supporting_text_electrical">electrical work</entry>
+    <entry key="info_card_supporting_text_cleaning">cleaning work</entry>
     <entry key="contacts_card_title">Contacts</entry>
     <entry key="clients_card_title">Our clients</entry>
     <entry key="other_info_card_title">Other info</entry>

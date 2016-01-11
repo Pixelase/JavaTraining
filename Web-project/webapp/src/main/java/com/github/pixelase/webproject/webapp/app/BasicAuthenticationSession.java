@@ -11,6 +11,8 @@ import org.apache.wicket.request.Request;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.Locale;
+
 /**
  * Created by Alexander Babai on 21.12.2015.
  */
@@ -25,6 +27,7 @@ public class BasicAuthenticationSession extends AuthenticatedWebSession {
     public BasicAuthenticationSession(Request request) {
         super(request);
         Injector.get().inject(this);
+        setLocale(Locale.ENGLISH);
     }
 
     @Override
