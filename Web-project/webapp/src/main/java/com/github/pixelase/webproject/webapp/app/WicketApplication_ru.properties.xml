@@ -54,7 +54,7 @@
     <!-- Request edit panel -->
     <entry key="request_edit_panel_work_scope_label">Масштаб работ:</entry>
     <entry key="request_edit_panel_work_type_label">Тип работ:</entry>
-    <entry key="request_edit_panel_desired_date_label">Желаемое время:</entry>
+    <entry key="request_edit_panel_desired_date_label">Желаемая дата:</entry>
     <entry key="request_edit_panel_submit_button">Создать</entry>
     <entry key="request_edit_panel_reset_button">Сброс</entry>
 
@@ -103,7 +103,7 @@
     <entry key="request_card_panel_w_scope_name">тип:</entry>
     <entry key="request_card_panel_empl_count">количество работников:</entry>
     <entry key="request_card_panel_work_type_row">Тип работ:</entry>
-    <entry key="request_card_panel_desired_date_row">Желаемое время:</entry>
+    <entry key="request_card_panel_desired_date_row">Желаемая дата:</entry>
     <entry key="request_card_panel_brigade_row">ID бригады:</entry>
     <entry key="request_card_panel_open_brigade_button">Открыть карточку с бригадой</entry>
     <entry key="request_card_panel_back_button">Назад</entry>
@@ -118,7 +118,7 @@
     <!-- Brigades table panel -->
     <entry key="brigades_table_panel_id_col">ID</entry>
     <entry key="brigades_table_panel_request_col">ID заявки</entry>
-    <entry key="brigades_table_panel_real_date_col">Финальное время</entry>
+    <entry key="brigades_table_panel_real_date_col">Реальная дата</entry>
     <entry key="brigades_table_panel_actions_col">Действия</entry>
     <entry key="brigades_table_panel_open_button">Открыть</entry>
 
@@ -126,7 +126,7 @@
     <entry key="requests_table_panel_id_col">ID</entry>
     <entry key="requests_table_panel_work_type_col">Тип работ</entry>
     <entry key="requests_table_panel_work_scope_col">Масштаб работ</entry>
-    <entry key="requests_table_panel_desired_date_col">Желаемое время</entry>
+    <entry key="requests_table_panel_desired_date_col">Желаемая дата</entry>
     <entry key="requests_table_panel_brigade_row">ID бригады</entry>
     <entry key="requests_table_panel_actions_col">Действия</entry>
     <entry key="requests_table_panel_open_button">Открыть</entry>
@@ -159,7 +159,7 @@
 
     <!-- Register complete page -->
     <entry key="register_complete_page_headline">Регистрация успешно завершена!</entry>
-    <entry key="register_complete_page_additional">Войдите под своей учетной</entry>
+    <entry key="register_complete_page_additional">Войдите под своей учетной записью</entry>
 
     <!-- Request created page -->
     <entry key="request_created_page_headline">Заявка успешно создана!</entry>

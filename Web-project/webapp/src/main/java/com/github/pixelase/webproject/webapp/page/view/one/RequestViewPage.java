@@ -11,7 +11,7 @@ public class RequestViewPage extends BasePage {
 
     public static final String REQUEST_CARD_PANEL_ID = "request-card-panel";
 
-    public RequestViewPage(WorkRequest workRequest) {
+    public RequestViewPage(final WorkRequest workRequest) {
         add(new RequestCardPanel(REQUEST_CARD_PANEL_ID, workRequest));
     }
 }

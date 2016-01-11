@@ -28,7 +28,7 @@ public class SignInEditPanel extends EditPanel {
     @SpringBean
     private AccountService accountService;
 
-    public SignInEditPanel(String id) {
+    public SignInEditPanel(final String id) {
         super(id);
     }
 

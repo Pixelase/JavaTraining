@@ -17,7 +17,7 @@ public class EmployeeRegisterPage extends EditPage {
         denyAccessForSignedUser();
     }
 
-    public EmployeeRegisterPage(Employee employee) {
+    public EmployeeRegisterPage(final Employee employee) {
         super(new EmployeeEditPanel(EDIT_PANEL_ID, employee));
     }
 }

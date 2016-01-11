@@ -14,13 +14,13 @@ public abstract class EditPanel<T> extends Panel {
     protected final Form<T> form;
     protected final WebMarkupContainer panelHolder;
 
-    public EditPanel(String id) {
+    public EditPanel(final String id) {
         super(id);
         form = new Form<>(FORM_ID);
         panelHolder = new WebMarkupContainer(PANEL_HOLDER_ID);
     }
 
-    public EditPanel(String id, T formModelObject) {
+    public EditPanel(final String id, final T formModelObject) {
         super(id);
         form = new Form<>(FORM_ID, new CompoundPropertyModel<>(formModelObject));
         panelHolder = new WebMarkupContainer(PANEL_HOLDER_ID);
@@ -33,13 +33,13 @@ public abstract class EditPanel<T> extends Panel {
         add(panelHolder);
     }
 
-    public void appendCssClass(String className) {
+    public void appendCssClass(final String className) {
         panelHolder.add(ClassAttributeModifier.append("class", className));
     }
 
     protected class ResetFormLink extends Link<Void> {
 
-        public ResetFormLink(String id) {
+        public ResetFormLink(final String id) {
             super(id);
         }
 

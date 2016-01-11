@@ -12,7 +12,7 @@ public class DefaultFooterPanel extends FooterPanel {
     public static final String ABOUT_PAGE_LINK_ID = "about-page-link";
     public static final String LANGUAGE_SELECTION_PANEL_ID = "language-selection-panel";
 
-    public DefaultFooterPanel(String id) {
+    public DefaultFooterPanel(final String id) {
         super(id);
     }
 

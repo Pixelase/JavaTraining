@@ -17,8 +17,13 @@ public class HeaderPanelForRegisteredUser extends HeaderPanel {
     public static final String SMALL_PROFILE_PAGE_LINK_ID = "small-profile-page-link";
     public static final String SMALL_SIGN_OUT_LINK_ID = "small-sign-out-link";
 
-    public HeaderPanelForRegisteredUser(String id) {
+    public HeaderPanelForRegisteredUser(final String id) {
         super(id);
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         //For large screens
         add(new BookmarkablePageLink<Void>(PROFILE_PAGE_LINK_ID, ProfilePage.class));
@@ -31,7 +36,7 @@ public class HeaderPanelForRegisteredUser extends HeaderPanel {
 
     private class SignOutLink extends Link<Void> {
 
-        public SignOutLink(String id) {
+        public SignOutLink(final String id) {
             super(id);
         }
 

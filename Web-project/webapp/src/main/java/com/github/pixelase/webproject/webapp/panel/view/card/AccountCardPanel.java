@@ -24,8 +24,16 @@ public class AccountCardPanel extends Panel {
     public static final String BIRTH_DATE_TEXT_ID = "birth-date-text";
     public static final String EDIT_ACCOUNT_BUTTON_ID = "edit-account-button";
 
+    private final Account account;
+
     public AccountCardPanel(final String id, final Account account) {
         super(id);
+        this.account = account;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         add(new Label(LOGIN_TEXT_ID, account.getLogin()));
         add(new Label(EMAIL_TEXT_ID, account.getEmail()));

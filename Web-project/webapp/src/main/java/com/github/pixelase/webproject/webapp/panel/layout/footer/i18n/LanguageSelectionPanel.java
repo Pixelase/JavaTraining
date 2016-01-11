@@ -12,7 +12,8 @@ import java.util.Locale;
  * Created by Alexander Babai on 06.01.2016.
  */
 public class LanguageSelectionPanel extends Panel {
-    public LanguageSelectionPanel(String id) {
+
+    public LanguageSelectionPanel(final String id) {
         super(id);
     }
 

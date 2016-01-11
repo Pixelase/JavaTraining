@@ -37,8 +37,13 @@ public class BrigadesTablePanel extends TablePanel {
     public static final String WORK_REQUEST_LABEL_ID = "work-request-label";
     public static final String ID_LABEL_ID = "id-label";
 
-    public BrigadesTablePanel(String id) {
+    public BrigadesTablePanel(final String id) {
         super(id);
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         thListItems.add(new Label(thListItems.newChildId(), getString("brigades_table_panel_id_col")));
         thListItems.add(new Label(thListItems.newChildId(), getString("brigades_table_panel_request_col")));
@@ -47,10 +52,10 @@ public class BrigadesTablePanel extends TablePanel {
     }
 
     @Override
-    protected DataView<?> createDataView(String id, int itemsPerPage) {
+    protected DataView<?> createDataView(final String id, final int itemsPerPage) {
         return new DataView<Brigade>(id, new BrigadeDataProvider(itemsPerPage), itemsPerPage) {
             @Override
-            protected void populateItem(Item<Brigade> item) {
+            protected void populateItem(final Item<Brigade> item) {
                 final Brigade brigade = item.getModelObject();
                 final WorkRequest request = (brigade.getWorkRequest() != null) ?
                         brigade.getWorkRequest() : new WorkRequest();

@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.navigation.paging.IPageable;
  */
 public class CustomAjaxPagingNavigator extends AjaxPagingNavigator {
 
-    public CustomAjaxPagingNavigator(String id, IPageable pageable) {
+    public CustomAjaxPagingNavigator(final String id, final IPageable pageable) {
         super(id, pageable);
     }
 }

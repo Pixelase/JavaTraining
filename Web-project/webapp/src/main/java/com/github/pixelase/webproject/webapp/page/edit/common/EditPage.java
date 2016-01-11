@@ -17,7 +17,7 @@ public abstract class EditPage extends BasePage {
     protected final EditPanel<?> editPanel;
     protected final KendoFeedbackPanel feedbackPanel;
 
-    public EditPage(EditPanel<?> editPanel) {
+    public EditPage(final EditPanel<?> editPanel) {
         this.editPanel = editPanel;
         feedbackPanel = new KendoFeedbackPanel(FEED_BACK_PANEL_ID);
     }
@@ -29,14 +29,14 @@ public abstract class EditPage extends BasePage {
         add(feedbackPanel);
     }
 
-    protected void denyAccessForSignedUser(){
-        if(BasicAuthenticationSession.get().isSignedIn()) {
+    protected void denyAccessForSignedUser() {
+        if (BasicAuthenticationSession.get().isSignedIn()) {
             setResponsePage(HomePage.class);
         }
     }
 
-    protected void denyAccessForAnonymousUser(){
-        if(!BasicAuthenticationSession.get().isSignedIn()) {
+    protected void denyAccessForAnonymousUser() {
+        if (!BasicAuthenticationSession.get().isSignedIn()) {
             setResponsePage(HomePage.class);
         }
     }

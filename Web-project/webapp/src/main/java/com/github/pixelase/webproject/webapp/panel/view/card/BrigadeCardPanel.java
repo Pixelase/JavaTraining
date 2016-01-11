@@ -20,8 +20,16 @@ public class BrigadeCardPanel extends Panel {
     public static final String GO_BACK_BUTTON_ID = "go-back-button";
     public static final String OPEN_REQUEST_BUTTON_ID = "open-request-button";
 
-    public BrigadeCardPanel(String id, Brigade brigade) {
+    private final Brigade brigade;
+
+    public BrigadeCardPanel(final String id, final Brigade brigade) {
         super(id);
+        this.brigade = brigade;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         final WorkRequest request = (brigade.getWorkRequest() != null) ?
                 brigade.getWorkRequest() : new WorkRequest();
@@ -43,7 +51,7 @@ public class BrigadeCardPanel extends Panel {
             }
         };
 
-        if(request.isNew()) {
+        if (request.isNew()) {
             openRequestButton.setVisible(false);
         }
 

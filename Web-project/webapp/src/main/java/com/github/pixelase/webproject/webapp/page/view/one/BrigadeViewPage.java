@@ -10,7 +10,7 @@ import com.github.pixelase.webproject.webapp.panel.view.card.BrigadeCardPanel;
 public class BrigadeViewPage extends BasePage {
     public static final String BRIGADE_CARD_PANEL_ID = "brigade-card-panel";
 
-    public BrigadeViewPage(Brigade brigade) {
+    public BrigadeViewPage(final Brigade brigade) {
         add(new BrigadeCardPanel(BRIGADE_CARD_PANEL_ID, brigade));
     }
 }

@@ -4,7 +4,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 public abstract class DrawerPanel extends Panel {
 
-    public DrawerPanel(String id) {
+    public DrawerPanel(final String id) {
         super(id);
     }
 

@@ -26,7 +26,7 @@ public abstract class TablePanel extends Panel {
     protected final AjaxPagingNavigator pagingNavigator;
     protected final DataView<?> dataView;
 
-    public TablePanel(String id) {
+    public TablePanel(final String id) {
         super(id);
 
         dataContainer = new WebMarkupContainer(DATA_CONTAINER_ID);
@@ -54,9 +54,9 @@ public abstract class TablePanel extends Panel {
         dataContainer.add(thListItems);
     }
 
-    protected abstract DataView<?> createDataView(String id, int itemsPerPage);
+    protected abstract DataView<?> createDataView(final String id, final int itemsPerPage);
 
-    protected Sort convertWicketSortToSpringSort(SortParam<?> sort, SortOrder sortOrder) {
+    protected Sort convertWicketSortToSpringSort(final SortParam<?> sort, final SortOrder sortOrder) {
         Sort springSort = null;
 
         switch (sortOrder) {

@@ -24,8 +24,16 @@ public class RequestCardPanel extends Panel {
     public static final String GO_BACK_BUTTON_ID = "go-back-button";
     public static final String OPEN_BRIGADE_BUTTON_ID = "open-brigade-button";
 
-    public RequestCardPanel(String id, WorkRequest request) {
+    private final WorkRequest request;
+
+    public RequestCardPanel(final String id, final WorkRequest request) {
         super(id);
+        this.request = request;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         final WorkScope workScope = (request.getWorkScope() != null) ?
                 request.getWorkScope() : new WorkScope();

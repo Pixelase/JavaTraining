@@ -38,8 +38,13 @@ public class RequestsTablePanel extends TablePanel {
     public static final String BRIGADE_ID_LABEL_ID = "brigade-Id-label";
     public static final String OPEN_BUTTON_ID = "open-button";
 
-    public RequestsTablePanel(String id) {
+    public RequestsTablePanel(final String id) {
         super(id);
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_id_col")));
         thListItems.add(new Label(thListItems.newChildId(), getString("requests_table_panel_work_type_col")));
@@ -50,10 +55,10 @@ public class RequestsTablePanel extends TablePanel {
     }
 
     @Override
-    protected DataView<?> createDataView(String id, int itemsPerPage) {
+    protected DataView<?> createDataView(final String id, final int itemsPerPage) {
         return new DataView<WorkRequest>(id, new WorkRequestDataProvider(itemsPerPage), itemsPerPage) {
             @Override
-            protected void populateItem(Item<WorkRequest> item) {
+            protected void populateItem(final Item<WorkRequest> item) {
                 final WorkRequest request = item.getModelObject();
 
                 item.add(new Label(ID_LABEL_ID, request.getId()));
@@ -81,7 +86,7 @@ public class RequestsTablePanel extends TablePanel {
         @SpringBean
         private WorkRequestService requestService;
 
-        public WorkRequestDataProvider(int itemsPerPage) {
+        public WorkRequestDataProvider(final int itemsPerPage) {
             super();
 
             Injector.get().inject(this);

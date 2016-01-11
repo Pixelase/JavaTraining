@@ -43,11 +43,11 @@ public class RequestEditPanel extends EditPanel<WorkRequest> {
     @SpringBean
     private WorkTypeService workTypeService;
 
-    public RequestEditPanel(String id) {
+    public RequestEditPanel(final String id) {
         super(id, new WorkRequest());
     }
 
-    public RequestEditPanel(String id, WorkRequest formModelObject) {
+    public RequestEditPanel(final String id, final WorkRequest formModelObject) {
         super(id, formModelObject);
     }
 

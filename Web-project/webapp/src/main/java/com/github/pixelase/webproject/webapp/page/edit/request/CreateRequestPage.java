@@ -13,7 +13,7 @@ public class CreateRequestPage extends EditPage {
         denyAccessForAnonymousUser();
     }
 
-    public CreateRequestPage(WorkRequest workRequest) {
+    public CreateRequestPage(final WorkRequest workRequest) {
         super(new RequestEditPanel(EDIT_PANEL_ID, workRequest));
     }
 }

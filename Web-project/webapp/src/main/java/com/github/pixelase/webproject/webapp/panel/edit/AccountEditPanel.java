@@ -40,11 +40,11 @@ public class AccountEditPanel extends EditPanel<Account> {
     @SpringBean
     private RoleService roleService;
 
-    public AccountEditPanel(String id) {
+    public AccountEditPanel(final String id) {
         super(id, new Account());
     }
 
-    public AccountEditPanel(String id, Account account) {
+    public AccountEditPanel(final String id, final Account account) {
         super(id, account);
     }
 

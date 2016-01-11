@@ -17,7 +17,7 @@ public class TenantRegisterPage extends EditPage {
         denyAccessForSignedUser();
     }
 
-    public TenantRegisterPage(Tenant tenant) {
+    public TenantRegisterPage(final Tenant tenant) {
         super(new TenantEditPanel(EDIT_PANEL_ID, tenant));
     }
 }

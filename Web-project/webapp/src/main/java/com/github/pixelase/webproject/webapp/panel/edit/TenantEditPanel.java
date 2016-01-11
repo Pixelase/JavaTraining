@@ -30,11 +30,11 @@ public class TenantEditPanel extends EditPanel<Tenant> {
     @SpringBean
     private TenantService tenantService;
 
-    public TenantEditPanel(String id) {
+    public TenantEditPanel(final String id) {
         super(id, new Tenant());
     }
 
-    public TenantEditPanel(String id, Tenant tenant) {
+    public TenantEditPanel(final String id, final Tenant tenant) {
         super(id, tenant);
     }
 
@@ -88,6 +88,7 @@ public class TenantEditPanel extends EditPanel<Tenant> {
                     session.setMetaData(BasicAuthenticationSession.ACCOUNT_ID_KEY, null);
                 } else {
                     setResponsePage(ProfilePage.class);
+                    addressService.save(address);
                 }
 
                 tenantService.save(tenant);

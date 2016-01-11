@@ -33,11 +33,11 @@ public class EmployeeEditPanel extends EditPanel<Employee> {
     @SpringBean
     private WorkTypeService workTypeService;
 
-    public EmployeeEditPanel(String id) {
+    public EmployeeEditPanel(final String id) {
         super(id, new Employee());
     }
 
-    public EmployeeEditPanel(String id, Employee employee) {
+    public EmployeeEditPanel(final String id, final Employee employee) {
         super(id, employee);
     }
 

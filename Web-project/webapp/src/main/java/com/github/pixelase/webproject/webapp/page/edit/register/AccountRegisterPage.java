@@ -14,7 +14,7 @@ public class AccountRegisterPage extends EditPage {
         denyAccessForSignedUser();
     }
 
-    public AccountRegisterPage(Account account) {
+    public AccountRegisterPage(final Account account) {
         super(new AccountEditPanel(EDIT_PANEL_ID, account));
     }
 }

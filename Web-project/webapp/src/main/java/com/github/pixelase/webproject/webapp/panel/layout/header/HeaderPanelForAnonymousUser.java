@@ -15,8 +15,13 @@ public class HeaderPanelForAnonymousUser extends HeaderPanel {
     public static final String SMALL_SIGN_IN_PAGE_LINK_ID = "small-sign-in-page-link";
     public static final String SMALL_REGISTER_PAGE_LINK_ID = "small-register-page-link";
 
-    public HeaderPanelForAnonymousUser(String id) {
+    public HeaderPanelForAnonymousUser(final String id) {
         super(id);
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         //For large screens
         add(new BookmarkablePageLink<Void>(SIGN_IN_PAGE_LINK_ID, SignInPage.class));

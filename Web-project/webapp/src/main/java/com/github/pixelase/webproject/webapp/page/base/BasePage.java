@@ -25,7 +25,7 @@ public abstract class BasePage extends WebPage {
         super();
     }
 
-    public BasePage(PageParameters parameters) {
+    public BasePage(final PageParameters parameters) {
         super(parameters);
     }
 

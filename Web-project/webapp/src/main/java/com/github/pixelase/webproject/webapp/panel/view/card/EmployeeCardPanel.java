@@ -23,8 +23,16 @@ public class EmployeeCardPanel extends Panel {
     public static final String SALARY_TEXT_ID = "salary-text";
     public static final String EDIT_INFO_BUTTON_ID = "edit-info-button";
 
+    private final Employee employee;
+
     public EmployeeCardPanel(final String id, final Employee employee) {
         super(id);
+        this.employee = employee;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         final WorkType workType = (employee.getWorkType() != null) ?
                 employee.getWorkType() : new WorkType();
@@ -36,6 +44,5 @@ public class EmployeeCardPanel extends Panel {
                 setResponsePage(new EmployeeRegisterPage(employee));
             }
         });
-
     }
 }

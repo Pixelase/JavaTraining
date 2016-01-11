@@ -24,8 +24,17 @@ public class TenantCardPanel extends Panel {
     public static final String APARTMENT_TEXT_ID = "apartment-text";
     public static final String EDIT_INFO_BUTTON_ID = "edit-info-button";
 
+    private final Tenant tenant;
+
     public TenantCardPanel(final String id, final Tenant tenant) {
         super(id);
+        this.tenant = tenant;
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+
         final Address address = (tenant.getAddress() != null) ?
                 tenant.getAddress() : new Address();
 

@@ -31,7 +31,7 @@ public class BasicAuthenticationSession extends AuthenticatedWebSession {
     }
 
     @Override
-    protected boolean authenticate(String login, String password) {
+    protected boolean authenticate(final String login, final String password) {
         if (accountService == null) {
             throw new IllegalArgumentException("service is null");
         }
@@ -47,7 +47,7 @@ public class BasicAuthenticationSession extends AuthenticatedWebSession {
         final Roles roles = new Roles();
         final Integer id = getMetaData(ACCOUNT_ID_KEY);
 
-        if(id != null) {
+        if (id != null) {
             final Account account = accountService.findOne(id);
 
             if (account != null) {

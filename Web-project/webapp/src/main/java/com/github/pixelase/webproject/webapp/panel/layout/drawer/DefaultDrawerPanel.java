@@ -20,7 +20,7 @@ public class DefaultDrawerPanel extends DrawerPanel {
     public static final String ABOUT_PAGE_LINK_ID = "about-page-link";
     public static final String DEFAULT_DRAWER_CSS_CLASS = "default-drawer";
 
-    public DefaultDrawerPanel(String id) {
+    public DefaultDrawerPanel(final String id) {
         super(id);
     }
 
@@ -48,7 +48,7 @@ public class DefaultDrawerPanel extends DrawerPanel {
     @AuthorizeAction(roles = RoleUtils.TENANT_ROLE, action = Action.RENDER)
     private static class CreateRequestLink extends Link<Void> {
 
-        public CreateRequestLink(String id) {
+        public CreateRequestLink(final String id) {
             super(id);
         }
 
@@ -60,7 +60,7 @@ public class DefaultDrawerPanel extends DrawerPanel {
 
     @AuthorizeAction(roles = RoleUtils.TENANT_ROLE, action = Action.RENDER)
     private static class RequestsPageLink extends Link<Void> {
-        public RequestsPageLink(String id) {
+        public RequestsPageLink(final String id) {
             super(id);
         }
 
@@ -72,7 +72,7 @@ public class DefaultDrawerPanel extends DrawerPanel {
 
     @AuthorizeAction(roles = RoleUtils.EMPLOYEE_ROLE, action = Action.RENDER)
     private static class BrigadesPageLink extends Link<Void> {
-        public BrigadesPageLink(String id) {
+        public BrigadesPageLink(final String id) {
             super(id);
         }
 
